@@ -12,6 +12,7 @@ using Read.Management;
 
 namespace Web
 {
+
     /// <summary>
     /// Represents a middleware that is aware of tenancy in the URLs coming in
     /// </summary>
@@ -68,30 +69,25 @@ namespace Web
                 if (isGuid)
                 {
                     tenantId = (TenantId)Guid.Parse(tenantSegment);
-                    if (_tenantConfiguration.HasTenant(tenantId))
+                    if (!_tenantConfiguration.HasTenant(tenantId))
                     {
                         throw new ArgumentException("Tenant does not exist");
                         // Todo: redirect to error page with proper error 
                     }
-                }
-                else
-                {
-                    throw new ArgumentException("TenantId is not a valid guid");
-                    // Todo: redirect to error page with proper error 
-                }
 
-                var tenant = _tenantConfiguration.GetFor(tenantId);
-                var applicationName = segments[2];
-                if( tenant.HasApplication(applicationName))
-                {
-                    throw new ArgumentException($"Application '{applicationName}' does not exist in tenant '{tenantId.Value}'");
-                    // Todo: redirect to error page with proper error 
-                }
+                    var tenant = _tenantConfiguration.GetFor(tenantId);
+                    var applicationName = segments[2];
+                    if (!tenant.HasApplication(applicationName))
+                    {
+                        throw new ArgumentException($"Application '{applicationName}' does not exist in tenant '{tenantId.Value}'");
+                        // Todo: redirect to error page with proper error 
+                    }
 
-                context.Request.PathBase = new PathString($"/{tenantSegment}/{applicationName}");
-                var remainingSegments = new List<string>(segments);
-                remainingSegments.RemoveRange(0, 2);
-                context.Request.Path = $"/{string.Join('/',remainingSegments)}";
+                    context.Request.PathBase = new PathString($"/{tenantSegment}/{applicationName}");
+                    var remainingSegments = new List<string>(segments);
+                    remainingSegments.RemoveRange(0, 3);
+                    context.Request.Path = $"/{string.Join('/',remainingSegments)}";
+                }
             }
             else
             {
