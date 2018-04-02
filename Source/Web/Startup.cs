@@ -36,11 +36,7 @@ namespace Web
     /// </summary>
     public partial class Startup
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static IServiceProvider ServiceProvider { get; private set; }
+        static IServiceProvider ServiceProvider;
 
         BootResult _bootResult;
 
@@ -69,11 +65,13 @@ namespace Web
                 })
                 .AddDeveloperSigningCredential()
                 
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients())
+                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
+                //.AddInMemoryApiResources(Config.GetApiResources())
+                //.AddInMemoryClients(Config.GetClients())
                 .AddInMemoryPersistedGrants()
-                .AddProfileService<MyProfileService>();
+                .AddResourceStore<ResourceStore>()
+                .AddClientStore<ClientStore>()
+                .AddProfileService<ProfileService>();
                 
 
             services.Add(new ServiceDescriptor(typeof(IConsentMessageStore), typeof(InMemoryConsentMessageStore), ServiceLifetime.Transient));
@@ -158,7 +156,7 @@ namespace Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseMiddleware<TenantMiddleware>();
+            app.UseMiddleware<AuthContextMiddleware>();
             app.UseIdentityServer();
 
             app.UseMvc();
