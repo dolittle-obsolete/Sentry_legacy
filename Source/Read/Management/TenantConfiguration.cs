@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Concepts;
+using Dolittle.Execution;
 using Dolittle.Serialization.Json;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -17,6 +18,7 @@ namespace Read.Management
     /// <summary>
     /// Represents an implementation of <see cref="ITenantConfiguration"/>
     /// </summary>
+    [Singleton]
     public class TenantConfiguration : ITenantConfiguration
     {
         const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=dolittle;AccountKey=tDIrUNIT24APo6eKQwq0y1WDoT0wq+rqbbxUs+uVHxUi154+/XEgPfpU+DKrDjEm+WPEQ2Z3C3BsQjPLC9a83w==;EndpointSuffix=core.windows.net";
