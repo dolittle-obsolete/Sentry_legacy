@@ -25,5 +25,20 @@ namespace Read.Management
         /// Gets or sets the Identity resources available to be granted access to for the application
         /// </summary>
         public IEnumerable<string> IdentityResources { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Client">clients</see> of the application
+        /// </summary>
+        public IEnumerable<Client> Clients { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="ProfileClaim">profile claims</see> for the application
+        /// </summary>
+        public IEnumerable<ProfileClaim> ProfileClaims { get; set; }
+
+        /// <summary>
+        /// Gets or sets the allowed <see cref="ExternalAuthority">external authorities</see>
+        /// </summary>
+        public IEnumerable<ExternalAuthority> ExternalAuthorities { get; set; }
     }
 }
