@@ -10,4 +10,8 @@
     <PackageReference Include="IdentityServer4" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Read\Read.csproj" />
+  </ItemGroup>
+
 </Project>
