@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Concepts;
+using Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Read.Management;
 
@@ -37,9 +38,12 @@ namespace Web
     /// Tenant in this context is the tenant owning the application / client - this is a globally unique identifier
     /// Application is the Dolittle application registration reference for the tenant - this is unique per tenant
     /// </remarks>
-    public class TenantMiddleware
+    public class AuthContextMiddleware
     {
-        readonly Regex _guidRegex = new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$");
+        /// <summary>
+        /// Gets the key used to get the <see cref="AuthContext"/> from the current <see cref="HttpContext"/>
+        /// </summary>
+        public const string AuthContextItemKey = "AuthContext";
         readonly RequestDelegate _next;
         readonly ITenantConfiguration _tenantConfiguration;
 
@@ -48,7 +52,7 @@ namespace Web
         /// </summary>
         /// /// <param name="_next"></param>
         /// <param name="tenantConfiguration"></param>
-        public TenantMiddleware(RequestDelegate _next, ITenantConfiguration tenantConfiguration)
+        public AuthContextMiddleware(RequestDelegate _next, ITenantConfiguration tenantConfiguration)
         {
             this._next = _next;
             _tenantConfiguration = tenantConfiguration;
@@ -64,11 +68,14 @@ namespace Web
             if (segments.Length > 2)
             {
                 TenantId tenantId = null;
+                Guid tenantGuid = Guid.Empty;
                 var tenantSegment = segments[1];
-                var isGuid = _guidRegex.IsMatch(tenantSegment);
+
+
+                var isGuid = Guid.TryParse(tenantSegment, out tenantGuid);
                 if (isGuid)
                 {
-                    tenantId = (TenantId)Guid.Parse(tenantSegment);
+                    tenantId = tenantGuid;
                     if (!_tenantConfiguration.HasTenant(tenantId))
                     {
                         throw new ArgumentException("Tenant does not exist");
@@ -87,6 +94,10 @@ namespace Web
                     var remainingSegments = new List<string>(segments);
                     remainingSegments.RemoveRange(0, 3);
                     context.Request.Path = $"/{string.Join('/',remainingSegments)}";
+
+                    var authContext = new AuthContext(tenant, tenant.Applications[applicationName]);
+                    //context.Items[AuthContextItemKey] = authContext;
+                    AuthContextBindings.AuthContext = authContext;
                 }
             }
             else
