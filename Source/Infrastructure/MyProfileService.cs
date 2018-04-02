@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using Read.Management;
 
 namespace Web
 {
@@ -18,7 +19,8 @@ namespace Web
         /// <summary>
         /// 
         /// </summary>
-        public MyProfileService()
+        /// <param name="tenant"></param>
+        public MyProfileService(Tenant tenant)
         {
             var i=0;
             i++;
