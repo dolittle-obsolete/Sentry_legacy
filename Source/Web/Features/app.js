@@ -13,9 +13,9 @@ export class app {
         config.options.pushState = true;
         config.map([
             { route: ['', 'welcome'], name: 'welcome', moduleId: PLATFORM.moduleName('welcome') },
-            { route: ':tenant/Accounts/Login', name: 'Login', moduleId: PLATFORM.moduleName('Accounts/Login') },
-            { route: ':tenant/Accounts/Consent', name: 'Consent', moduleId: PLATFORM.moduleName('Accounts/Consent') },
-            { route: ['Registration/RequestAccessOidcCallback', ':tenant/:application/Registration/RequestAccess'], name: 'RequestAccess', moduleId: PLATFORM.moduleName('Registration/RequestAccess') },
+            { route: ':tenant/:application/Accounts/Login', name: 'Login', moduleId: PLATFORM.moduleName('Accounts/Login') },
+            { route: ':tenant/:application/Accounts/Consent', name: 'Consent', moduleId: PLATFORM.moduleName('Accounts/Consent') },
+            { route: ['Registration/RequestAccessOidcCallback', ':tenant/:application/:client/Registration/RequestAccess'], name: 'RequestAccess', moduleId: PLATFORM.moduleName('Registration/RequestAccess') },
         ]);
 
         this._openIdConnect.configure(config);
