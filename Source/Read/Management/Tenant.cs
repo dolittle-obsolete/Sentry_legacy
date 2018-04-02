@@ -34,5 +34,15 @@ namespace Read.Management
         /// Gets or sets the configuration of <see cref="Application">applications</see> 
         /// </summary>
         public Dictionary<string, Application> Applications { get; set; }
+
+        /// <summary>
+        /// Check if an application exists by name or not
+        /// </summary>
+        /// <param name="applicationName">Name of application to check for</param>
+        /// <returns>True if exists, false if not</returns>
+        public bool HasApplication(string applicationName)
+        {
+            return Applications.ContainsKey(applicationName);
+        }
     }
 }
