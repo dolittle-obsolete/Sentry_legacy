@@ -6,18 +6,26 @@ import { OpenIdConnect } from "aurelia-open-id-connect";
 import { OidcClient, UserManager, WebStorageStateStore } from 'oidc-client';
 import { inject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
+import { CommandCoordinator } from '../CommandCoordinator';
+import { RequestAccessWithEmail } from './RequestAccessWithEmail';
 
 const _tenant = new WeakMap();
 const _application = new WeakMap();
 const _client = new WeakMap();
 
-@inject(Router)
+@inject(Router, CommandCoordinator)
 export class RequestAccess {
     isLoggedIn = false;
     name = "";
 
-    constructor(router) {
+    constructor(router, commandCoordinator) {
         this.router = router;
+        this._commandCoordinator = commandCoordinator;
+    }
+
+    submitRequest() {
+        let command = new RequestAccessWithEmail();
+        this._commandCoordinator.handle(command);
     }
     
     activate(params, route, navigationInstruction) {
