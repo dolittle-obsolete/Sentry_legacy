@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-namespace Concepts.Resources
+namespace Concepts.Claims
 {
     /// <summary>
     /// Rerepsents the type of resource
     /// </summary>
-    public enum Type
+    public enum ClaimType
     {
         /// <summary>
         /// Value is of string type
