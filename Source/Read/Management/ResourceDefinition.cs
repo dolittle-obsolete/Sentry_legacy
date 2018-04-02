@@ -49,18 +49,5 @@ namespace Read.Management
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ClaimName> UserClaims { get; set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="Type"/> of the <see cref="ResourceDefinition"/>
-        /// </summary>
-        public Type Type { get; set; }
-
-        /// <summary>
-        /// Gets or sets the allowed <see cref="ClaimValue">claim values</see>
-        /// </summary>
-        /// <remarks>
-        /// This is typically used by <see cref="Type.Select"/> types
-        /// </remarks>
-        public IEnumerable<ClaimValue> AllowedValues { get; set; }
     }
 }
