@@ -14,6 +14,7 @@ const _client = new WeakMap();
 @inject(Router)
 export class RequestAccess {
     isLoggedIn = false;
+    name = "";
 
     constructor(router) {
         this.router = router;
@@ -54,15 +55,24 @@ export class RequestAccess {
                 post_logout_redirect_uri: '',
                 redirect_uri: `http://localhost:5000/Registration/RequestAccessOidcCallback`,
                 response_type: 'id_token',
-                scope: 'openid profile',
+                scope: 'openid email profile',
                 silentRequestTimeout: 10000,
                 silent_redirect_uri: '',
                 userStore: userStore
             });
 
             this._userManager.getUser().then(user => {
-                if( typeof user == "undefined" || user == null ) return;
+                if( typeof user == 'undefined' || user == null ) return;
                 this.isLoggedIn = true;
+                this.user = user;
+
+                if( Object.prototype.toString.call(user.profile.name) === '[object Array]' )
+                {
+                    this.name = user.profile.name[0];
+                } else 
+                {
+                    this.name = user.profile.name;
+                }
             });
         }
     }
