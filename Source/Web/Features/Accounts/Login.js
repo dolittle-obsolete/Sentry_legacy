@@ -28,9 +28,10 @@ export class Login {
     activate(params) {
         let self = this;
         this.tenant = params.tenant;
+        this.application = params.application;
 
         let client = new HttpClient();
-        client.get('/Accounts/Authorities')
+        client.get(`/${params.tenant}/${params.application}/Authorities`)
             .then(data => {
                 let authorities = JSON.parse(data.response);
                 authorities.forEach(authority => {
