@@ -5,6 +5,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dolittle.Commands.Coordination;
+using Dolittle.Runtime.Commands;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
@@ -25,6 +27,7 @@ namespace Web.Features.Accounts
         readonly IIdentityServerInteractionService _interaction;
         readonly IClientStore _clientStore;
         readonly IResourceStore _resourceStore;
+        private readonly ICommandCoordinator _commandCoordinator;
 
         /// <summary>
         /// 
@@ -32,14 +35,17 @@ namespace Web.Features.Accounts
         /// <param name="interaction"></param>
         /// <param name="clientStore"></param>
         /// <param name="resourceStore"></param>
+        /// <param name="commandCoordinator"></param>
         public ConsentController(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
-            IResourceStore resourceStore)
+            IResourceStore resourceStore,
+            ICommandCoordinator commandCoordinator)
         {
             _interaction = interaction;
             _clientStore = clientStore;
             _resourceStore = resourceStore;
+            _commandCoordinator = commandCoordinator;
         }
 
         /// <summary>
