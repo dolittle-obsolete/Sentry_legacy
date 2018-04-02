@@ -24,7 +24,7 @@ namespace Read.Management
         public ClaimDescription Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Type"/> of the <see cref="ResourceDefinition"/>
+        /// Gets or sets the <see cref="Type"/> of the <see cref="Resource"/>
         /// </summary>
         public ClaimType Type { get; set; }
 
