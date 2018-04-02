@@ -17,6 +17,8 @@ export class Consent {
     rememberConsent=false;
     scopes=[];
     returnUrl="";
+    tenant="";
+    application="";
 
     /**
      * Initializes a new instance of {Consent}
@@ -30,11 +32,13 @@ export class Consent {
     /**
      * Method that gets invoked when view and view model is activated
      */
-    activate() { 
+    activate(routeParams) { 
         let self = this;
         let client = new HttpClient();
         let params = parseQueryString(window.location.search.substr(1));
         this.returnUrl = params.returnUrl;
+        this.tenant = routeParams.tenant;
+        this.application = routeParams.application;
 
         let setupChecked = (scope) => {
             scope.checked = true;
@@ -43,7 +47,7 @@ export class Consent {
                 .subscribe(() => this.updateGrantedScopes());
         };
         
-        client.createRequest('/Consent')
+        client.createRequest(`/${routeParams.tenant}/${routeParams.application}/Consent`)
             .asGet()
             .withParams({returnUrl: params.returnUrl})
             .send()
