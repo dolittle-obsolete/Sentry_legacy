@@ -91,6 +91,7 @@ namespace Web
                     //options.Authority = "https://login.microsoftonline.com/381088c1-de08-4d18-9e60-bbe2c94eccb5/v2.0";
                     options.Authority = "https://login.microsoftonline.com/common";
                     options.ClientId = "Blah";
+                    options.Scope.Add(IdentityServerConstants.StandardScopes.Email);
 
                     options.Events.OnRedirectToIdentityProvider = async(context)=>
                     {
