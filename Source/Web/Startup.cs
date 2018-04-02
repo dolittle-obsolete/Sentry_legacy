@@ -36,6 +36,12 @@ namespace Web
     /// </summary>
     public partial class Startup
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         BootResult _bootResult;
 
         /// <summary>
@@ -63,7 +69,7 @@ namespace Web
                 })
                 .AddDeveloperSigningCredential()
                 
-                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
                 .AddInMemoryPersistedGrants()
@@ -120,12 +126,20 @@ namespace Web
         }
 
         /// <summary>
+        /// Gets the current <see cref="HttpContext"/>
+        /// </summary>
+        public static HttpContext HttpContext => ServiceProvider.GetService<IHttpContextAccessor>().HttpContext;
+        
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            ServiceProvider = app.ApplicationServices;
+
             var committedEventStreamCoordinator = app.ApplicationServices.GetService(typeof(ICommittedEventStreamCoordinator))as ICommittedEventStreamCoordinator;
             committedEventStreamCoordinator.Initialize();
 
