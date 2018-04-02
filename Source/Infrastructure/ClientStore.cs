@@ -12,19 +12,19 @@ using IdentityServer4.Stores;
 namespace Infrastructure
 {
     /// <summary>
-    /// 
+    /// Represents an implementation of <see cref="IClientStore"/>
     /// </summary>
     public class ClientStore : IClientStore
     {
-        readonly IContainer _container;
+        readonly IAuthContext _authContext;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="container"></param>
-        public ClientStore(IContainer container)
+        /// <param name="authContext"></param>
+        public ClientStore(IAuthContext authContext)
         {
-            _container = container;
+            _authContext = authContext;
         }
 
         /// <inheritdoc/>
@@ -37,8 +37,7 @@ namespace Infrastructure
                 // Todo: proper exception
             }
 
-            var authContext = _container.Get<AuthContext>();
-            var client = authContext.Application.Clients.FirstOrDefault(c => c.Id == clientId);
+            var client = _authContext.Application.Clients.FirstOrDefault(c => c.Id == clientId);
             if( client == null )
             {
                 throw new ArgumentException("Unknown client");

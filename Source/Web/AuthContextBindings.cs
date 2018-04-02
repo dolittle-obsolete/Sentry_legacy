@@ -2,10 +2,9 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-using System;
 using System.Threading;
-using Concepts;
 using Dolittle.DependencyInversion;
+using Dolittle.Execution;
 using Infrastructure;
 using Read.Management;
 
@@ -24,13 +23,18 @@ namespace Web
             set { _authContext.Value = value; }
         }
 
+        [Singleton]
+        class AuthContextProxy : IAuthContext
+        {
+            public Tenant Tenant => _authContext.Value.Tenant;
+
+            public Application Application => _authContext.Value.Application;
+        }
+
         /// <inheritdoc/>
         public void Provide(IBindingProviderBuilder builder)
         {
-            builder.Bind<AuthContext>().To(()=> {
-                var value = _authContext.Value;
-                return value;
-            });
+            builder.Bind<IAuthContext>().To<AuthContextProxy>();
         }
     }
 }

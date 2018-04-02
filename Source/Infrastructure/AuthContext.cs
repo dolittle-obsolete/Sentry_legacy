@@ -9,7 +9,7 @@ namespace Infrastructure
     /// <summary>
     /// Represents the context used throughout
     /// </summary>
-    public class AuthContext
+    public class AuthContext : IAuthContext
     {
         /// <summary>
         /// Initializes a new instance of <see cref="AuthContext"/>
@@ -22,14 +22,10 @@ namespace Infrastructure
             Application = application;
         }
 
-        /// <summary>
-        /// Gets the current <see cref="Tenant"/>
-        /// </summary>
+        /// <inheritdoc/>
         public Tenant Tenant { get; }
 
-        /// <summary>
-        /// Gets the current <see cref="Application"/>
-        /// </summary>
+        /// <inheritdoc/>
         public Application Application { get; }
     }
 }

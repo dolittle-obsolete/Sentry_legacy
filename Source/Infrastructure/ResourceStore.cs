@@ -17,22 +17,21 @@ namespace Infrastructure
     /// </summary>
     public class ResourceStore : IResourceStore
     {
-        readonly IContainer _container;
+        readonly IAuthContext _authContext;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="container"></param>
-        public ResourceStore(IContainer container)
+        /// <param name="authContext"></param>
+        public ResourceStore(IAuthContext authContext)
         {
-            _container = container;
+            _authContext = authContext;
         }
 
         /// <inheritdoc/>
         public Task<ApiResource> FindApiResourceAsync(string name)
         {
-            var authContext = _container.Get<AuthContext>();
-            var apiResource = authContext.Application.ApiResources.SingleOrDefault(_ => _.Name == name);
+            var apiResource = _authContext.Application.ApiResources.SingleOrDefault(_ => _.Name == name);
             if( apiResource == null ) return Task.FromResult((ApiResource)null);
             return Task.FromResult(ConvertToResource<ApiResource>(apiResource));
         }
@@ -40,8 +39,7 @@ namespace Infrastructure
         /// <inheritdoc/>
         public Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var authContext = _container.Get<AuthContext>();
-            var filtered = authContext.Application.ApiResources?.Where(_ => scopeNames.Contains(_.Name.Value)) ?? new Read.Management.Resource[0];
+            var filtered = _authContext.Application.ApiResources?.Where(_ => scopeNames.Contains(_.Name.Value)) ?? new Read.Management.Resource[0];
             var apiResources = filtered.Select(_ => ConvertToResource<ApiResource>(_));
             return Task.FromResult(apiResources);
         }
@@ -49,9 +47,7 @@ namespace Infrastructure
         /// <inheritdoc/>
         public Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var authContext = _container.Get<AuthContext>();
-
-            var identityResources = GetIdentityResourcesFrom(authContext);
+            var identityResources = GetIdentityResourcesFrom(_authContext);
             var filtered = identityResources.Where(_ => scopeNames.Contains(_.Name));
             return Task.FromResult(identityResources);
         }
@@ -59,16 +55,14 @@ namespace Infrastructure
         /// <inheritdoc/>
         public Task<Resources> GetAllResourcesAsync()
         {
-            var authContext = _container.Get<AuthContext>();
-
-            var apiResources = authContext.Application.ApiResources?.Select(_ => ConvertToResource<ApiResource>(_)) ?? new ApiResource[0];
-            var identityResources = GetIdentityResourcesFrom(authContext);
+            var apiResources = _authContext.Application.ApiResources?.Select(_ => ConvertToResource<ApiResource>(_)) ?? new ApiResource[0];
+            var identityResources = GetIdentityResourcesFrom(_authContext);
             var resources = new Resources(identityResources, apiResources);
 
             return Task.FromResult(resources);
         }
 
-        private IEnumerable<IdentityResource> GetIdentityResourcesFrom(AuthContext authContext)
+        private IEnumerable<IdentityResource> GetIdentityResourcesFrom(IAuthContext authContext)
         {
             var wellKnownIdentityResourceTypes = typeof(IdentityResources).GetNestedTypes();
 

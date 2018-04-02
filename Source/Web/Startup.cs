@@ -64,10 +64,6 @@ namespace Web
                     //options.Authentication.CheckSessionCookieName = "sentry.session";
                 })
                 .AddDeveloperSigningCredential()
-                
-                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
-                //.AddInMemoryApiResources(Config.GetApiResources())
-                //.AddInMemoryClients(Config.GetClients())
                 .AddInMemoryPersistedGrants()
                 .AddResourceStore<ResourceStore>()
                 .AddClientStore<ClientStore>()
