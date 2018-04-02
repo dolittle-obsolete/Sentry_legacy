@@ -13,6 +13,14 @@ namespace Read.Management
     public class Tenant
     {
         /// <summary>
+        /// Initializes a new instance of <see cref="Tenant"/>
+        /// </summary>
+        public Tenant() 
+        {
+            Applications = new Dictionary<string, Application>();
+        }
+
+        /// <summary>
         /// Gets or sets the unique identifier of the tenant
         /// </summary>
         public TenantId TenantId { get; set; }
