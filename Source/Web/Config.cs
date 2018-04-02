@@ -40,6 +40,7 @@ namespace Web
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
+                new IdentityResources.Email(),
                 new IdentityResources.Profile(),
                 new NationalSociety()
             };
@@ -112,6 +113,7 @@ namespace Web
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.Profile,
                         "nationalsociety"
                     }//,
