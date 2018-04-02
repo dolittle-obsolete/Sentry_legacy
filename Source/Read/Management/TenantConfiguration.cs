@@ -64,6 +64,7 @@ namespace Read.Management
             var blobName = GetTenantBlobNameFor(tenant.TenantId);
             var blob = _tenantsDirectory.GetBlockBlobReference(blobName);
             var jsonAsString = _serializer.ToJson(tenant);
+            blob.Properties.ContentType = "application/json";
             blob.UploadTextAsync(jsonAsString);
         }
 
