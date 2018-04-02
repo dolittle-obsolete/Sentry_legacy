@@ -43,6 +43,12 @@ namespace Read.Management
         }
 
         /// <inheritdoc/>
+        public bool HasTenant(TenantId tenantId)
+        {
+            return _tenants.ContainsKey(tenantId);
+        }
+
+        /// <inheritdoc/>
         public Tenant GetFor(TenantId tenantId)
         {
             return _tenants[tenantId];
