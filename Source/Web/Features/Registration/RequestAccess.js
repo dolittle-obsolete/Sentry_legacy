@@ -9,6 +9,7 @@ import { Router } from 'aurelia-router';
 
 const _tenant = new WeakMap();
 const _application = new WeakMap();
+const _client = new WeakMap();
 
 @inject(Router)
 export class RequestAccess {
@@ -34,17 +35,20 @@ export class RequestAccess {
             });
         } else {
 
+            // http://localhost:5000/be4c4da6-5ede-405f-a947-8aedad564b7f/CBS/25c7ddac-dd1b-482a-8638-aaa909fd1f1c/Registration/RequestAccess
+
             // Validate params - guids
             // let guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
             _tenant.set(this, params.tenant);
             _application.set(this, params.application);
+            _client.set(this, params.client);
 
             this._userManager = new UserManager({
                 accessTokenExpiringNotificationTime: 1,
-                authority: `http://localhost:5000/${params.tenant}`,
+                authority: `http://localhost:5000/${params.tenant}/${params.application}`,
                 automaticSilentRenew: true,
                 checkSessionInternal: 10000,
-                client_id: params.application,
+                client_id: params.client,
                 filterProtocolClaims: true,
                 loadUserInfo: true,
                 post_logout_redirect_uri: '',
@@ -67,7 +71,8 @@ export class RequestAccess {
         this._userManager.signinRedirect({
             state: {
                 tenant: _tenant.get(this),
-                application: _application.get(this)
+                application: _application.get(this),
+                client: _client.get(this)
             }
         }).then(request => {
             window.location = request.url;
