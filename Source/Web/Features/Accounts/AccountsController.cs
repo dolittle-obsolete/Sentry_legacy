@@ -13,7 +13,6 @@ using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Read;
 
 namespace Web.Features.Accounts
 {
@@ -43,32 +42,6 @@ namespace Web.Features.Accounts
             _interaction = interaction;
             _schemeProvider = schemeProvider;
             _events = events;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("Authorities")]
-        public async Task<IActionResult> Authorities()
-        {
-            var schemes = await _schemeProvider.GetAllSchemesAsync();
-
-            var providers = schemes
-                .Where(_ =>
-                    !string.IsNullOrEmpty(_.DisplayName)
-                )
-                .Select(_ => new Authority
-                {
-                    Id = Guid.Parse(_.Name),
-
-                        // Overridable name
-                        Name = _.DisplayName,
-                        AuthenticationScheme = _.Name
-                });
-
-            // Allow remember login?
-            return Json(providers);
         }
 
         // http://localhost:5000/Accounts/ExternalLogin?authority=9b296977-7657-4bc8-b5b0-3f0a23c43958&returnUrl=%2Fbe4c4da6-5ede-405f-a947-8aedad564b7f%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dmvc%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A5002%252Fsignin-oidc%26response_type%3Did_token%26scope%3Dopenid%2520profile%2520nationalsociety%26response_mode%3Dform_post%26nonce%3D636579958176163830.ZTg1MWNmNGQtZTBlNy00NDE5LTkzZDItYTJlODcxNjkxZWYwZDdjZDVmMmItNDBlMS00NzUzLWI1NTYtODdmYzkxYTE1ODMw%26state%3DCfDJ8CeXhV5JBLFMkMDAcLC1jYLc48KUu79-SKX6z2gz23l0pg4qU2yygyzK31XVzYqTPim93p05ika5P_t0PARdso-QzuUOTDX8iOLgSwv0dyNrPA02oGundKe6-6SKfRuuZXxq5nQbbQIB2Q8BBrPQLfk67LeGird0dk-W3Opc5idbzHc1ATf7Qq_HpsAMoYcj1NwU44_8O7oKo-PMN5LW63IXrkkhqJihySqY7Kr5QN12AeUhppA3fp58xTBOWbK-zW7SVHkReShBV7dnRDrp-Z2yGPlJ_pEIEDjqgBcP4MNdyWiQLJlyPNyM7pNyZCte73EhU4EoOjrBNL9cEo7nizY%26x-client-SKU%3DID_NET%26x-client-ver%3D2.1.4.0
