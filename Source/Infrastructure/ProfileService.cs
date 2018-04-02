@@ -6,25 +6,24 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using Infrastructure;
 using Read.Management;
 
-namespace Web
+namespace Infrastructure
 {
+
     /// <summary>
     /// 
     /// </summary>
-    public class MyProfileService : IProfileService
+    public class ProfileService : IProfileService
     {
         
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="tenant"></param>
-        public MyProfileService(Tenant tenant)
+        /// <param name="authContext"></param>
+        public ProfileService(AuthContext authContext)
         {
-            var i=0;
-            i++;
-
         }
 
         /// <inheritdoc/>
