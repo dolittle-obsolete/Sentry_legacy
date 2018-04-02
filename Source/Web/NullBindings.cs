@@ -47,10 +47,10 @@ namespace Web
             builder.Bind<ICallContext>().To(new DefaultCallContext());
             builder.Bind<ICanResolvePrincipal>().To(new DefaultPrincipalResolver());
 
-            var applicationConfigurationBuilder = new ApplicationConfigurationBuilder("Demo")
+            var applicationConfigurationBuilder = new ApplicationConfigurationBuilder("Studio")
                 .Application(applicationBuilder =>
                     applicationBuilder
-                    .PrefixLocationsWith(new BoundedContext("Demo"))
+                    .PrefixLocationsWith(new BoundedContext("Sentry"))
                     .WithStructureStartingWith(new ApplicationStructureFragment(typeof(BoundedContext)), _ => { })
                 )
 
