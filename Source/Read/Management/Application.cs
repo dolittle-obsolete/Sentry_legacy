@@ -12,19 +12,19 @@ namespace Read.Management
     public class Application 
     {
         /// <summary>
-        /// Gets or sets the <see cref="ResourceDefinition">resource definitions</see>
+        /// Gets or sets the <see cref="Resource">Api resources</see> available to be granted access to for the application
         /// </summary>
-        public IEnumerable<ResourceDefinition> ResourceDefinitions { get; set; }
+        public IEnumerable<Resource> ApiResources { get; set; }
 
         /// <summary>
-        /// Gets or sets the Api resources available to be granted access to for the application
+        /// Gets or sets the <see cref="Resource">identity resources</see> available to be granted access to for the application
         /// </summary>
-        public IEnumerable<string> ApiResources { get; set; }
+        public IEnumerable<Resource> IdentityResources { get; set; }
 
         /// <summary>
-        /// Gets or sets the Identity resources available to be granted access to for the application
+        /// Gets or sets the well known identity resources by name
         /// </summary>
-        public IEnumerable<string> IdentityResources { get; set; }
+        public IEnumerable<string> WellKnownIdentityResources { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Client">clients</see> of the application
