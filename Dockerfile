@@ -17,7 +17,7 @@ WORKDIR /src/Source/Web
 RUN yarn global add webpack
 RUN yarn global add webpack-cli
 RUN yarn
-RUN webpack
+RUN webpack -p --env.production
 
 # Build runtime image
 FROM microsoft/aspnetcore:2.0.5
