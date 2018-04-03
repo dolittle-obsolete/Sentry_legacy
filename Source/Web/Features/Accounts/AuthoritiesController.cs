@@ -29,6 +29,7 @@ namespace Web.Features.Accounts
         public AuthoritiesController(IAuthenticationSchemeProvider schemeProvider, Tenant tenant)
         {
             _schemeProvider = schemeProvider;
+            
         }
 
         /// <summary>
