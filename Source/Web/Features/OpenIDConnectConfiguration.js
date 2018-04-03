@@ -42,7 +42,7 @@ export default {
     userManagerSettings: {
         accessTokenExpiringNotificationTime: 1,
         
-        authority: `http://localhost:5000/${tenant}`,
+        authority: `${window.location.origin}/${tenant}`,
         automaticSilentRenew: true,
         checkSessionInterval: 10000,
         client_id: application,

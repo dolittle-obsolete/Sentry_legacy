@@ -54,14 +54,14 @@ export class RequestAccess {
 
             this._userManager = new UserManager({
                 accessTokenExpiringNotificationTime: 1,
-                authority: `http://localhost:5000/${params.tenant}/${params.application}`,
+                authority: `${window.location.origin}/${params.tenant}/${params.application}`,
                 automaticSilentRenew: true,
                 checkSessionInternal: 10000,
                 client_id: params.client,
                 filterProtocolClaims: true,
                 loadUserInfo: true,
                 post_logout_redirect_uri: '',
-                redirect_uri: `http://localhost:5000/Registration/RequestAccessOidcCallback`,
+                redirect_uri: `${window.location.origin}/Registration/RequestAccessOidcCallback`,
                 response_type: 'id_token',
                 scope: 'openid email profile',
                 silentRequestTimeout: 10000,
