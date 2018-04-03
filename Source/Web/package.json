@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "dolittle.javascript.build": "github:dolittle/JavaScript.Build.git",
-    "dolittle.javascript.build.aurelia": "github:dolittle-interaction/JavaScript.Build.Aurelia.git",
-    "dolittle.styles": "github:dolittle/dolittle.styles.git"
+    "dolittle.javascript.build": "https://github.com/dolittle/JavaScript.Build.git",
+    "dolittle.javascript.build.aurelia": "https://github.com/dolittle-interaction/JavaScript.Build.Aurelia.git",
+    "dolittle.styles": "https://github.com/dolittle/dolittle.styles.git"
   },
   "dependencies": {
     "aurelia-http-client": "^1.2.1",
