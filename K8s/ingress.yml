@@ -1,0 +1,15 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sentry
+  namespace: dolittle
+spec:
+  rules:
+  - host: dolittle.online
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: sentry
+          servicePort: 80

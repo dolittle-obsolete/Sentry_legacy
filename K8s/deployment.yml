@@ -1,0 +1,19 @@
+---
+  kind: Deployment
+  apiVersion: extensions/v1beta1
+  metadata:
+    name: sentry
+    namespace: dolittle
+  spec:
+    template:
+      metadata:
+        labels:
+          app: sentry
+          name: sentry
+      spec:
+        containers:
+        - name: styles
+          image: dolittle/sentry
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 80
