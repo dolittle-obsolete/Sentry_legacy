@@ -3,16 +3,12 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Dolittle.DependencyInversion.Autofac;
 using Dolittle.Runtime.Events.Coordination;
 using IdentityServer4;
-using IdentityServer4.Hosting;
-using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -25,7 +21,6 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Web
 {
-
     /// <summary>
     /// 
     /// be4c4da6-5ede-405f-a947-8aedad564b7f - Tenant       - Red Cross
