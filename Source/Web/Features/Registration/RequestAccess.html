@@ -1,16 +1,16 @@
 <template>
-    <section class="login narrow-column" if.bind="!isLoggedIn">
+    <section class="request-access narrow-column centered" if.bind="!isLoggedIn">
         <div class="content-box">
             <h1>Request Access</h1>
             <h2>Login</h2>
-            <p>
-                To request access we must log you in with one of the supported identity authorities. Please click the login button to start
-                the process.
+            <p class="narrow">
+                To request access we must log you in with one of the supported identity authorities.
+            </p>
+            <p class="narrow">Please click the login button to start the process.
             </p>
 
-            <div class="button-row">
+            <div class="button-row centered">
                 <button type="submit" class="primary" click.delegate="login()">Login</button>
-
             </div>
         </div>
     </section>

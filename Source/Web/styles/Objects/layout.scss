@@ -8,10 +8,16 @@
 .narrow-column {
     @extend %fixed-width-at-tablet;
     margin: 0 auto;
+    &.centered {
+        text-align: center;
+    }
 }
 
 .button-row {
     @extend %flex-container-horizontal;
     justify-content: space-between;
     padding: $grid-gutter;
+    &.centered {
+        justify-content: center;
+    }
 }
