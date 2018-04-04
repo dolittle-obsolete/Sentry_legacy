@@ -44,14 +44,22 @@ namespace Infrastructure
                 // Todo: proper exception
             }
 
-            return Task.FromResult(new Client
+            var idsrvClient = new Client
             {
                 ClientId = clientIdAsString,
                 AllowedGrantTypes = client.AllowedGrantTypes.ToList(),
                 RedirectUris = client.RedirectUris.ToList(),
                 PostLogoutRedirectUris = client.PostLogooutRedirectUris.ToList(),
-                AllowedScopes = client.AllowedScopes.ToList()
-            });
+                AllowedScopes = client.AllowedScopes.ToList(),
+                AllowedCorsOrigins = client.RedirectUris.Select(url => {
+                    var uri = new Uri(url);
+                    var origin = uri.AbsoluteUri.Substring(0,uri.AbsoluteUri.Length-uri.AbsolutePath.Length);
+                    if( origin.EndsWith("/")) origin = origin.Substring(origin.Length-1);
+                    return origin;
+                }).ToList()
+            };
+
+            return Task.FromResult(idsrvClient);
         }
     }
 }
