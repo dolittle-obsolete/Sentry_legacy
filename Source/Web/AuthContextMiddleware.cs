@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Concepts;
+using IdentityServer4.Extensions;
 using Infrastructure;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Read.Management;
 
@@ -46,16 +48,19 @@ namespace Web
         public const string AuthContextItemKey = "AuthContext";
         readonly RequestDelegate _next;
         readonly ITenantConfiguration _tenantConfiguration;
+        readonly IHostingEnvironment _hostingEnvironment;
 
         /// <summary>
         /// 
         /// </summary>
         /// /// <param name="_next"></param>
         /// <param name="tenantConfiguration"></param>
-        public AuthContextMiddleware(RequestDelegate _next, ITenantConfiguration tenantConfiguration)
+        /// <param name="hostingEnvironment"></param>
+        public AuthContextMiddleware(RequestDelegate _next, ITenantConfiguration tenantConfiguration, IHostingEnvironment hostingEnvironment)
         {
             this._next = _next;
             _tenantConfiguration = tenantConfiguration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         /// <summary>
@@ -91,6 +96,12 @@ namespace Web
                     }
 
                     context.Request.PathBase = new PathString($"/{tenantSegment}/{applicationName}");
+                    if( !_hostingEnvironment.IsDevelopment() )
+                    {
+                        context.Request.Host = new HostString("dolittle.online");
+                        context.Request.Scheme = "https";
+                    }
+                    
                     var remainingSegments = new List<string>(segments);
                     remainingSegments.RemoveRange(0, 3);
                     context.Request.Path = $"/{string.Join('/',remainingSegments)}";
