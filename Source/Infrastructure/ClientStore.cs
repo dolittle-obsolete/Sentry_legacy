@@ -5,9 +5,11 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Dolittle.Collections;
 using Dolittle.DependencyInversion;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure
 {
@@ -17,14 +19,17 @@ namespace Infrastructure
     public class ClientStore : IClientStore
     {
         readonly IAuthContext _authContext;
+        private readonly ILogger<ClientStore> _logger;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="authContext"></param>
-        public ClientStore(IAuthContext authContext)
+        /// <param name="logger"></param>
+        public ClientStore(IAuthContext authContext,ILogger<ClientStore> logger)
         {
             _authContext = authContext;
+            _logger = logger;
         }
 
         /// <inheritdoc/>
@@ -58,6 +63,9 @@ namespace Infrastructure
                     return origin;
                 }).ToList()
             };
+
+            
+            _logger.LogInformation($"Client found - allowed CORS : [{string.Join(", ",idsrvClient.AllowedCorsOrigins)}]");
 
             return Task.FromResult(idsrvClient);
         }

@@ -31,9 +31,19 @@ namespace Web
     /// </summary>
     public partial class Startup
     {
-        static IServiceProvider ServiceProvider;
+        readonly IHostingEnvironment _hostingEnvironment;
 
         BootResult _bootResult;
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hostingEnvironment"></param>
+        public Startup(IHostingEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
 
         /// <summary>
         /// 
@@ -86,6 +96,8 @@ namespace Web
                     {
                         context.Options.Authority = "https://login.microsoftonline.com/381088c1-de08-4d18-9e60-bbe2c94eccb5/v2.0";
                         context.ProtocolMessage.ClientId = "2e2cad73-c11a-4d9f-8af9-beeebcdc5a27";
+
+                        if( !_hostingEnvironment.IsDevelopment() ) context.ProtocolMessage.RedirectUri = $"https://dolittle.online{options.CallbackPath}";
                         await Task.CompletedTask;
                     };
 
@@ -116,37 +128,34 @@ namespace Web
         }
 
         /// <summary>
-        /// Gets the current <see cref="HttpContext"/>
-        /// </summary>
-        public static HttpContext HttpContext => ServiceProvider.GetService<IHttpContextAccessor>().HttpContext;
-        
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            ServiceProvider = app.ApplicationServices;
-
             var committedEventStreamCoordinator = app.ApplicationServices.GetService(typeof(ICommittedEventStreamCoordinator))as ICommittedEventStreamCoordinator;
             committedEventStreamCoordinator.Initialize();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                });
             }
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
-
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowCredentials());
+            
             app.UseMiddleware<AuthContextMiddleware>();
             app.UseIdentityServer();
 

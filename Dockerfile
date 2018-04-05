@@ -13,6 +13,8 @@ RUN dotnet publish -c Release -o out
 FROM node:latest AS node-build
 WORKDIR /src
 COPY ./Source/Web/. ./Source/Web
+RUN find . -name "*.cs" -type f -delete
+RUN find . -name "*.csproj" -type f -delete
 WORKDIR /src/Source/Web
 RUN yarn global add webpack
 RUN yarn global add webpack-cli
