@@ -1,0 +1,16 @@
+table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    tr {
+        &:nth-child(2n) {
+            background-color: darken( $color-light-grey, 1%);
+        }
+    }
+    th,
+    td {
+        padding: $grid-gutter/8 $grid-gutter/4;
+        text-align: left;
+        border: none;
+    }
+}
