@@ -1,8 +1,12 @@
 .content-box {
     background-color: #fff;
-    border-radius: .25rem;
-    box-shadow: .3125rem .3125rem 0 darken($color-medium-grey, 15%);
-    padding: $grid-gutter;
+    padding: $grid-gutter/2 $grid-gutter;
+    @include media-bp-min(tablet) {
+        padding: $grid-gutter;
+        border-radius: .25rem;
+        box-shadow: .3125rem .3125rem 0 darken($color-medium-grey, 15%);
+        margin-bottom: $grid-gutter;
+    }
 }
 
 .narrow-column {
@@ -16,7 +20,7 @@
 .button-row {
     @extend %flex-container-horizontal;
     justify-content: space-between;
-    padding: $grid-gutter;
+    padding: $grid-gutter 0;
     &.centered {
         justify-content: center;
     }
