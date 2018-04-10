@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@dolittle/commands@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@dolittle/commands/-/commands-1.0.4.tgz#afe8dfbc14c1d569a72191eda95db4b8114666b1"
+  dependencies:
+    "@dolittle/core" "1.0.0"
+
+"@dolittle/core@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@dolittle/core/-/core-1.0.0.tgz#1bee105be649f99a86c7c404ca5b3fcd17c3ea88"
+
 "@sinonjs/formatio@^2.0.0":
   version "2.0.0"
   resolved "http://registry.npmjs.org/@sinonjs/formatio/-/formatio-2.0.0.tgz#84db7e9eb5531df18a8c5e0bfb6e449e55e654b2"
@@ -2544,9 +2554,9 @@ doctrine@^2.0.0:
   dependencies:
     esutils "^2.0.2"
 
-"dolittle.javascript.build.aurelia@github:dolittle-interaction/JavaScript.Build.Aurelia.git":
+"dolittle.javascript.build.aurelia@https://github.com/dolittle-interaction/JavaScript.Build.Aurelia.git":
   version "1.0.0"
-  resolved "github:dolittle-interaction/JavaScript.Build.Aurelia.git#053366fe2dbfaddcbfcb3e6e36a87ecebd600fd4"
+  resolved "https://github.com/dolittle-interaction/JavaScript.Build.Aurelia.git#053366fe2dbfaddcbfcb3e6e36a87ecebd600fd4"
   dependencies:
     aurelia-animator-css "^1.0.4"
     aurelia-bootstrapper "^2.2.0"
@@ -2597,9 +2607,38 @@ doctrine@^2.0.0:
     sinon "^4.4.8"
     webpack "^4.2.0"
 
-"dolittle.styles@github:dolittle/dolittle.styles.git":
+"dolittle.javascript.build@https://github.com/dolittle/JavaScript.Build.git":
+  version "1.0.0"
+  resolved "https://github.com/dolittle/JavaScript.Build.git#5aba56cdf150b906817745eebda9f754f2a5573a"
+  dependencies:
+    babel-cli "^6.26.0"
+    babel-core "^6.26.0"
+    babel-eslint "7.2.3"
+    babel-loader "^7.1.4"
+    babel-plugin-istanbul "^4.1.5"
+    babel-plugin-syntax-flow "^6.18.0"
+    babel-plugin-transform-class-properties "^6.24.1"
+    babel-plugin-transform-decorators-legacy "^1.3.4"
+    babel-plugin-transform-flow-strip-types "^6.22.0"
+    babel-polyfill "^6.26.0"
+    babel-preset-env "^1.6.1"
+    babel-preset-stage-1 "^6.24.1"
+    chai "^4.1.2"
+    eslint "3.19.0"
+    istanbul-instrumenter-loader "^3.0.0"
+    karma "^2.0.0"
+    karma-chai-plugins "^0.9.0"
+    karma-coverage-istanbul-reporter "^1.4.2"
+    karma-mocha "^1.3.0"
+    karma-phantomjs-launcher "^1.0.4"
+    karma-webpack "^3.0.0"
+    mocha "^5.0.5"
+    sinon "^4.4.8"
+    webpack "^4.2.0"
+
+"dolittle.styles@https://github.com/dolittle/dolittle.styles.git":
   version "2.0.0"
-  resolved "github:dolittle/dolittle.styles.git#2f47c5f987795df3a8eac671ee332b03a51f7ea3"
+  resolved "https://github.com/dolittle/dolittle.styles.git#2f47c5f987795df3a8eac671ee332b03a51f7ea3"
 
 dom-converter@~0.1:
   version "0.1.4"
