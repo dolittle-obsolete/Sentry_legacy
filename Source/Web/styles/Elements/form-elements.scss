@@ -42,6 +42,10 @@ button {
         box-shadow: .125rem .125rem 0 darken($color-brand-light-blue, 20%);
         color: #fff;
     }
+    &.alert{
+        background-color: $color-brand-yellow;
+        box-shadow: .125rem .125rem 0 darken($color-brand-yellow, 20%);
+    }
 }
 
 select {
