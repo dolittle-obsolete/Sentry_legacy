@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Read;
@@ -20,16 +21,17 @@ namespace Web.Features.Accounts
     public class AuthoritiesController : Controller
     {
         readonly IAuthenticationSchemeProvider _schemeProvider;
+        private readonly IAuthContext _authContext;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="schemeProvider"></param>
-        /// <param name="tenant"></param>
-        public AuthoritiesController(IAuthenticationSchemeProvider schemeProvider, Tenant tenant)
+        /// <param name="authContext"></param>
+        public AuthoritiesController(IAuthenticationSchemeProvider schemeProvider, IAuthContext authContext)
         {
             _schemeProvider = schemeProvider;
-            
+            _authContext = authContext;
         }
 
         /// <summary>
@@ -41,6 +43,19 @@ namespace Web.Features.Accounts
         {
             var schemes = await _schemeProvider.GetAllSchemesAsync();
 
+            // Todo: Allow remember login?
+
+            var providers = _authContext
+                                .Application
+                                    .ExternalAuthorities
+                                        .Where(
+                                            authority => 
+                                                schemes.Any(scheme => scheme.Name == authority.Type.ToString()
+                                            )
+                                        );
+            return Json(providers);
+
+            /*
             var providers = schemes
                 .Where(_ =>
                     !string.IsNullOrEmpty(_.DisplayName)
@@ -54,8 +69,9 @@ namespace Web.Features.Accounts
                         AuthenticationScheme = _.Name
                 });
 
-            // Allow remember login?
+            
             return Json(providers);
+            */
         }
     }
 }
