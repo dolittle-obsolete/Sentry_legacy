@@ -13,7 +13,7 @@ export class ExternalLoginValueConverter {
      * @param {*} authority 
      */
     toView(authority) {
-        let url = `${window.location.origin}/Accounts/ExternalLogin?tenant=${authority.tenant}&authority=${authority.id}&${window.location.search.substr(1)}`;
+        let url = `${window.location.origin}/Accounts/ExternalLogin?tenant=${authority.tenant}&application=${authority.application}&authority=${authority.type}&authorityid=${authority.id}&${window.location.search.substr(1)}`;
         return url;
     }
 }
