@@ -6,7 +6,7 @@ import { OpenIdConnect } from "aurelia-open-id-connect";
 import { OidcClient, UserManager, WebStorageStateStore } from 'oidc-client';
 import { inject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
-import { CommandCoordinator } from '../CommandCoordinator';
+import { CommandCoordinator } from '@dolittle/commands';
 import { RequestAccessWithEmail } from './RequestAccessWithEmail';
 
 const _tenant = new WeakMap();
@@ -25,7 +25,9 @@ export class RequestAccess {
 
     submitRequest() {
         let command = new RequestAccessWithEmail();
-        this._commandCoordinator.handle(command);
+        this._commandCoordinator.handle(command).then((result) => {
+            debugger;
+        });
     }
     
     activate(params, route, navigationInstruction) {
