@@ -39,6 +39,6 @@ namespace Read.Management
         /// <summary>
         /// Gets or sets the allowed <see cref="ExternalAuthority">external authorities</see>
         /// </summary>
-        public IEnumerable<ExternalAuthority> ExternalAuthorities { get; set; }
+        public IEnumerable<AzureActiveDirectoryExternalAuthority> ExternalAuthorities { get; set; }
     }
 }
