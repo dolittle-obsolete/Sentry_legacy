@@ -13,6 +13,11 @@ namespace Read.Management
     public class ExternalAuthority
     {
         /// <summary>
+        /// Gets or sets a unique identifier for the instance of an <see cref="ExternalAuthority"/>
+        /// </summary>
+        public Guid Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the unique identifier of the type
         /// </summary>
         public Guid Type { get; set; }
