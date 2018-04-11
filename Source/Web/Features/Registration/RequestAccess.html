@@ -1,5 +1,5 @@
 <template>
-    <section class="request-access narrow-column centered" if.bind="!isLoggedIn">
+    <section class="request-access centered" if.bind="!isLoggedIn">
         <div class="content-box">
             <h1>Request Access</h1>
             <h2>Login</h2>
@@ -15,7 +15,7 @@
         </div>
     </section>
 
-    <section class="request-access narrow-column" if.bind="isLoggedIn">
+    <section class="request-access" if.bind="isLoggedIn">
         <div class="content-box">
             <h1>Request Access</h1>
             <p>

@@ -40,6 +40,8 @@ export class Login {
                     authority.type = authority.type;
                     authority.tenant = self.tenant;
                     authority.application = self.application;
+                    //40x40 preferred SVG, but png should be accepted
+                    authority.logo_url = self.logo_url || "https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40"; 
                     self.authorities.push(authority);
                 });
             });
