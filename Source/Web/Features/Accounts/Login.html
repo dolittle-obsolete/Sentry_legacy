@@ -6,8 +6,8 @@
         <div class="content-box">
             <h1>Login</h1>
             <h2>Choose preferred provider to login.</h2>
-            <ul class="option-list" repeat.for="authority of authorities">
-                <li>
+            <ul class="option-list">
+                <li repeat.for="authority of authorities">
                     <a href="${authority | externalLogin}">
                         <figure>
                             <img src="${authority.logo_url}" alt="icon">
