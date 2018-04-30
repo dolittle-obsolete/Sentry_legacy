@@ -4,11 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Concepts;
 using IdentityServer4.Extensions;
 using Infrastructure;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Read.Management;
@@ -49,18 +51,25 @@ namespace Web
         readonly RequestDelegate _next;
         readonly ITenantConfiguration _tenantConfiguration;
         readonly IHostingEnvironment _hostingEnvironment;
+        readonly IAuthenticationHandlerProvider _handlerProvider;
 
         /// <summary>
         /// 
         /// </summary>
-        /// /// <param name="_next"></param>
+        /// <param name="next"></param>
         /// <param name="tenantConfiguration"></param>
         /// <param name="hostingEnvironment"></param>
-        public AuthContextMiddleware(RequestDelegate _next, ITenantConfiguration tenantConfiguration, IHostingEnvironment hostingEnvironment)
-        {
-            this._next = _next;
+        /// <param name="handlerProvider"></param>
+        public AuthContextMiddleware(
+            RequestDelegate next,
+            ITenantConfiguration tenantConfiguration,
+            IHostingEnvironment hostingEnvironment,
+            IAuthenticationHandlerProvider handlerProvider)
+        {            
+            _next = next;
             _tenantConfiguration = tenantConfiguration;
             _hostingEnvironment = hostingEnvironment;
+            _handlerProvider = handlerProvider;
         }
 
         /// <summary>
@@ -69,6 +78,9 @@ namespace Web
         /// <param name="context"><see cref="HttpContext"/> for the request</param>
         public async Task Invoke(HttpContext context)
         {
+
+            
+
             var segments = context.Request.Path.Value.Split('/');
             if (segments.Length > 2)
             {
@@ -76,10 +88,15 @@ namespace Web
                 Guid tenantGuid = Guid.Empty;
                 var tenantSegment = segments[1];
 
-
                 var isGuid = Guid.TryParse(tenantSegment, out tenantGuid);
                 if (isGuid)
                 {
+                    var handler = await _handlerProvider.GetHandlerAsync(context, tenantSegment);
+                    if( handler != null ) {
+                        await _next(context);
+                        return;
+                    }
+
                     tenantId = tenantGuid;
                     if (!_tenantConfiguration.HasTenant(tenantId))
                     {
