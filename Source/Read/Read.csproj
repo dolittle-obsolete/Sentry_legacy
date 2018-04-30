@@ -10,6 +10,7 @@
     <PackageReference Include="Dolittle.Serialization.Json" Version="2.0.0-alpha2*" />
     <PackageReference Include="Dolittle.Concepts.Serialization.Json" Version="2.0.0-alpha2*" />
     <PackageReference Include="Dolittle.Runtime.ReadModels" Version="2.0.0-alpha2*" />
+    <PackageReference Include="Dolittle.Runtime.Queries" Version="2.0.0-alpha2*" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.1.0" />
   </ItemGroup>
 
