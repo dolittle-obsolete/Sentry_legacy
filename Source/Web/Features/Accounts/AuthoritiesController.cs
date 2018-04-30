@@ -34,6 +34,7 @@ namespace Web.Features.Accounts
             _authContext = authContext;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -54,24 +55,6 @@ namespace Web.Features.Accounts
                                             )
                                         );
             return Json(providers);
-
-            /*
-            var providers = schemes
-                .Where(_ =>
-                    !string.IsNullOrEmpty(_.DisplayName)
-                )
-                .Select(_ => new Authority
-                {
-                    Id = Guid.Parse(_.Name),
-
-                        // Overridable name
-                        Name = _.DisplayName,
-                        AuthenticationScheme = _.Name
-                });
-
-            
-            return Json(providers);
-            */
         }
     }
 }
