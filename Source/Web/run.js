@@ -7,7 +7,6 @@ const { spawn } = require('child_process');
 
 // { production: true }
 
-
 const webpackConfig = require('./webpack.config.js')();
 
 const compiler = webpack(webpackConfig);
@@ -24,13 +23,13 @@ compiler.watch({
     }
 });
 
-
+/*
 let karmaOptions = {
     configFile : path.resolve('./karma.conf.js')
 };
 
 let server = new karma.Server(karmaOptions).start()
-
+*/
 
 glob("*.csproj", (err, matches) => {
     if (matches.length) {
