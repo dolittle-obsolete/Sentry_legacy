@@ -13,8 +13,8 @@
                 <h1>Consent</h1>
                 <p>
                     <strong>${application}</strong> is requesting access to the following:</p>
-                <ul class="option-list" repeat.for="scope of information.identityScopes">
-                    <li>
+                <ul class="option-list">
+                    <li repeat.for="scope of information.identityScopes">
                         <label>
                             <input type="checkbox" disabled.one-time="scope.required" checked.bind="scope.checked"> ${scope.displayName.value}
                             <em if.bind="scope.required">(required)</em>
