@@ -51,7 +51,9 @@ namespace Web
                 .Application(applicationBuilder =>
                     applicationBuilder
                     .PrefixLocationsWith(new BoundedContext("Sentry"))
-                    .WithStructureStartingWith(new ApplicationStructureFragment(typeof(BoundedContext)), _ => { })
+                    .WithStructureStartingWith<BoundedContext>(_ => _)
+                    
+                    //(new ApplicationStructureFragment(typeof(BoundedContext)), _ => { })
                 )
 
                 .StructureMappedTo(_ => _
