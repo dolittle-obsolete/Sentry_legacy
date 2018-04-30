@@ -7,26 +7,38 @@ import { OidcClient, UserManager, WebStorageStateStore } from 'oidc-client';
 import { inject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
 import { CommandCoordinator } from '@dolittle/commands';
+import { QueryCoordinator } from '@dolittle/queries';
 import { RequestAccessWithEmail } from './RequestAccessWithEmail';
+import { ProfileClaims } from './ProfileClaims';
 
 const _tenant = new WeakMap();
 const _application = new WeakMap();
 const _client = new WeakMap();
 
-@inject(Router, CommandCoordinator)
+@inject(Router, CommandCoordinator, QueryCoordinator)
 export class RequestAccess {
     isLoggedIn = false;
     name = "";
+    profileClaims = [];
 
-    constructor(router, commandCoordinator) {
+    constructor(router, commandCoordinator, queryCoordinator) {
+        let self = this;
         this.router = router;
         this._commandCoordinator = commandCoordinator;
+        this._queryCoordinator = queryCoordinator;
+        let query = new ProfileClaims();
+        query.tenant = "be4c4da6-5ede-405f-a947-8aedad564b7f";
+        query.application = "CBS"
+        queryCoordinator.execute(query).then(result => {
+            self.profileClaims = result.items;
+        });
     }
 
     submitRequest() {
         let command = new RequestAccessWithEmail();
         this._commandCoordinator.handle(command).then((result) => {
-            debugger;
+            var i=0;
+            i++;
         });
     }
     

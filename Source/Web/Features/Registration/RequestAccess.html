@@ -41,17 +41,12 @@
                     </label>
                     <input type="number" name="profile-name">
                 </li>
-                <li>
+                <li repeat.for="claim of profileClaims">
                     <label>
-                        National society:
+                        ${claim.displayName}
                     </label>
-                    <select name="national-society">
-                        <option value="Country-1"> Country 1</option>
-                        <option value="Country-2"> Country 2</option>
-                        <option value="Country-3"> Country 3</option>
-                        <option value="Country-4"> Country 4</option>
-                        <option value="Country-5"> Country 5</option>
-                        <option value="Country-6"> Country 6</option>
+                    <select>
+                        <option repeat.for="value of claim.allowedValues">${value}</option>
                     </select>
                 </li>
             </ul>
