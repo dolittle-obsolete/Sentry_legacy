@@ -37,5 +37,10 @@ namespace Read.Management
         /// This will be displayed to the user when an application is asking to be logged in
         /// </remarks>
         public string LogoUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the secret key used to verify signatures
+        /// </summary>
+        public string Secret { get; set; }
     }   
 }
