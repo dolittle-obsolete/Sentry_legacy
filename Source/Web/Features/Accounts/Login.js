@@ -22,6 +22,7 @@ export class Login {
         this.router = router;
     }
 
+
     /**
      * Method that gets called when view and view model is activated.
      */
@@ -34,6 +35,7 @@ export class Login {
         client.get(`/${params.tenant}/${params.application}/Authorities`)
             .then(data => {
                 let authorities = JSON.parse(data.response);
+
                 authorities.forEach(authority => {
                     
                     // Todo: serialization is not hooked up
@@ -41,7 +43,10 @@ export class Login {
                     authority.tenant = self.tenant;
                     authority.application = self.application;
                     //40x40 preferred SVG, but png should be accepted
-                    authority.logo_url = self.logo_url || "https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40"; 
+                    
+                    if( !authority.logoUrl || authority.logoUrl == '' ) {
+                        authority.logoUrl = 'https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40';
+                    } 
                     self.authorities.push(authority);
                 });
             });
