@@ -163,7 +163,9 @@ namespace Web
                         var application = tenant.Applications[applicationName];
 
                         var authority = application.ExternalAuthorities.Single(_ => _.Id == authorityId);
-                        context.Options.TokenValidationParameters.ValidAudience = authority.ClientId;                       
+                        context.Options.TokenValidationParameters.ValidAudience = authority.ClientId;                  
+
+                        // Todo: Dynamically create a new instance of OpenIdConnectMessage for the actual configuration - this could potentially fall over with multiple users accessing the system at once
                         context.ProtocolMessage.ClientId = authority.ClientId;
                         // Todo: rename autority.Secret to client secret
                         //context.ProtocolMessage.ClientSecret = authority.Secret;
