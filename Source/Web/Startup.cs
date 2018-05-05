@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,9 +12,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Autofac;
-using Dolittle.AspNetCore.Bootstrap;
-using Dolittle.DependencyInversion.Autofac;
 using Dolittle.Applications.Serialization.Json;
+using Dolittle.AspNetCore.Bootstrap;
+using Dolittle.Collections;
+using Dolittle.DependencyInversion.Autofac;
 using Dolittle.Runtime.Events.Coordination;
 using Dolittle.Serialization.Json;
 using IdentityServer4;
@@ -26,6 +28,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders.Physical;
+using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Read.Management;
@@ -33,6 +36,42 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Web
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    public class CustomOpenIdConfigurationManager : IConfigurationManager<OpenIdConnectConfiguration>
+    {
+        static ConcurrentDictionary<string, OpenIdConnectConfiguration> _configurations = new ConcurrentDictionary<string, OpenIdConnectConfiguration>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string url = "https://login.microsoftonline.com/common/.well-known/openid-configuration";
+        //"https://login.microsoftonline.com/tfp/cbsrc.onmicrosoft.com/B2C_1_local/v2.0/.well-known/openid-configuration";
+
+
+        /// <inheritdoc/>
+        public async Task<OpenIdConnectConfiguration> GetConfigurationAsync(CancellationToken cancel)
+        {
+            if (_configurations.ContainsKey(url)) return _configurations[url];
+            var configuration = await OpenIdConnectConfigurationRetriever.GetAsync(url, cancel);
+            _configurations[url] = configuration;
+            return configuration;
+        }
+
+        /// <inheritdoc/>
+        public void RequestRefresh()
+        {
+            _configurations.Keys.ForEach(url =>
+            {
+                OpenIdConnectConfigurationRetriever.GetAsync(url, CancellationToken.None).ContinueWith(result =>
+                {
+                    _configurations[url] = result.Result;
+                });
+            });
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -101,8 +140,8 @@ namespace Web
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.SignOutScheme = IdentityServerConstants.SignoutScheme;
 
-                    options.Authority = "https://login.microsoftonline.com/common";
-                    options.ClientId = "Blah";
+                    options.Authority = "[Not Set]";
+                    options.ClientId = "[Not Set]";
 
                     // Todo: dynamic scope based on tenant configuration - ask for the same as configured with
                     options.Scope.Clear();
@@ -110,52 +149,36 @@ namespace Web
                     options.Scope.Add(IdentityServerConstants.StandardScopes.Email);
                     options.Scope.Add(IdentityServerConstants.StandardScopes.Profile);
 
+                    options.ConfigurationManager = new CustomOpenIdConfigurationManager();
 
-                    options.Events.OnRedirectToIdentityProvider = async(context)=>
+                    options.Events.OnRedirectToIdentityProvider = async(context) =>
                     {
                         var query = context.HttpContext.Request.Query;
                         var authorityId = Guid.Parse(query["authorityid"]);
                         var tenantId = Guid.Parse(query["tenant"]);
                         var applicationName = query["application"];
 
-                        var tenantConfiguration = _serviceProvider.GetService(typeof(ITenantConfiguration))as ITenantConfiguration;
+                        var tenantConfiguration = _serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
                         var tenant = tenantConfiguration.GetFor(tenantId);
                         var application = tenant.Applications[applicationName];
 
                         var authority = application.ExternalAuthorities.Single(_ => _.Id == authorityId);
-                        context.Options.Authority = authority.Authority;
-
-                        context.Options.ClientId = authority.ClientId;
-                        context.Options.ClientSecret = authority.Secret; // Todo: rename to client secret
-                        context.Options.RefreshOnIssuerKeyNotFound = false;
-
-                        // Todo: Avoid having to consent twice when logging into an application for the first time
-
-                        // Todo: this might not scale all too well :) - cache per tenant per external type configured
-
-                        var url = $"{authority.Authority}/.well-known/openid-configuration";
-                        var configuration = await OpenIdConnectConfigurationRetriever.GetAsync(url, CancellationToken.None);
-                        context.Options.Configuration = configuration;
+                        context.Options.TokenValidationParameters.ValidAudience = authority.ClientId;                       
                         context.ProtocolMessage.ClientId = authority.ClientId;
-                        context.ProtocolMessage.ClientSecret = authority.Secret;
-                        context.ProtocolMessage.AuthorizationEndpoint = configuration.AuthorizationEndpoint;
-                        context.ProtocolMessage.IssuerAddress = configuration.AuthorizationEndpoint;
-                        context.ProtocolMessage.TokenEndpoint = configuration.TokenEndpoint;
-                        
+                        // Todo: rename autority.Secret to client secret
+                        //context.ProtocolMessage.ClientSecret = authority.Secret;
+
                         // Todo: Guide on setting up an app for Azure - include this https://apps.dev.microsoft.com/
 
-                        if (!_hostingEnvironment.IsDevelopment())context.ProtocolMessage.RedirectUri = $"https://dolittle.online{options.CallbackPath}";
+                        if (!_hostingEnvironment.IsDevelopment()) context.ProtocolMessage.RedirectUri = $"https://dolittle.online{options.CallbackPath}";
                         await Task.CompletedTask;
                     };
 
+                    
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        // Todo: We want to validate these things
-                        ValidateAudience = false,
+                        // Todo: We should validate everything!!
                         ValidateIssuer = false,
-                        //ValidateIssuerSigningKey = false,
-                        //ValidateActor = false,
-                        //ValidateLifetime = false,
 
                         // Todo: set the correct claim types depending on the target - Azure AD has a different claim for name than others
                         NameClaimType = "name",
@@ -205,12 +228,32 @@ namespace Web
                 .AllowCredentials());
 
             app.UseMiddleware<AuthContextMiddleware>();
+
+            app.Use(async(context, next) =>
+            {
+                var query = context.Request.Query;
+                if (query.ContainsKey("tenant") && query.ContainsKey("application") && query.ContainsKey("authority"))
+                {
+                    var authorityId = Guid.Parse(query["authorityid"]);
+                    var tenantId = Guid.Parse(query["tenant"]);
+                    var applicationName = query["application"];
+
+                    var tenantConfiguration = _serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
+                    var tenant = tenantConfiguration.GetFor(tenantId);
+                    var application = tenant.Applications[applicationName];
+                    var authority = application.ExternalAuthorities.Single(_ => _.Id == authorityId);
+                    var url = $"{authority.Authority}/.well-known/openid-configuration";
+                    CustomOpenIdConfigurationManager.url = url;
+                }
+
+                await next();
+            });
             app.UseIdentityServer();
 
             app.UseMvc();
             app.UseDolittle();
 
-            //app.RunAsSinglePageApplication();
+            app.RunAsSinglePageApplication();
         }
     }
 }
@@ -243,5 +286,39 @@ namespace Web
 
 // https://login.microsoftonline.com/te/cbsrc.onmicrosoft.com/b2c_1_local/oauth2/v2.0/authorize?client_id=0734a066-658a-47e6-aea5-a036c997b61f&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2F9b296977-7657-4bc8-b5b0-3f0a23c43958%2Fsignin-oidc&response_type=id_token&scope=openid&response_mode=form_post&nonce=636591224042648990.YWRlNzgzZjEtOWNlZC00MDQxLTlmYWYtN2Y4OWQ2Yjg5NTFlN2EzNGE3OGMtZGI5Ny00MzA4LTg0MzAtZGJiMGQwMmVlM2Fi&state=CfDJ8CeXhV5JBLFMkMDAcLC1jYIpR_XxkCjpfJ2NfF-ua0qd2auhJoGfBncyNLdVC1LQ2mUbWn-LpkQiS6fk3F80TyuK7EE9KuoFf0edWoiL4jMmQr-nuDYEzJd4IJ2ZJm03PeoFzJhHA6ZFGOkKQ_lRbVkWF5pC5oAZdog162GWNpAPoDB1eFAW65l6Me-W3ZQINwpZxM80LO0XjUf9JMPxiNxm1OFhz7mC2AMf5ShpXevLVPPH64clvWgovfAEuGSzqSqfN_x33GfK8wxEmuXm7BPoE9iTv9uIXGpR-rvo18PMMgl3eA7p6Il3zJVErVQeCBUQIEjfwKyf7eJ_p0YYRo23KDswJ6JENdqijkuGOsRrE3hV_iF5hRoT657qUL8qmTmvdh9ipHE9kmnwy8VRVZMT2OQUTjTyIHgBQHbkuQJ6KKLmR33g87vz_TNnL485fnz0fpwXN3nOyZ1Xojm2jmN6QOsq2Vu5P7SaWqEoP-ihTFy74dkdRzBTjyk6jrmbozGd16VnY_XjJ97-mg8_Np_xrWgfkUkkFSkqmHzZk-BNjosop7fRbXKHL92ZOz4UJmQKeR6cq7KfkIvFj5rrGM3yVQRHSUjIj9jafcj38IysGsfsVkkkaMjy6GQv9yqpgpKePFTlYnp8b4-N-PXHKsxXnDvDNdNtLyJUR5fuNOObasDlm1Ya6wbbF_VLZJkEWqbOA5IkpdftKPv2Tf-lTWAGPrXU9bwE4QgjXwcEBXRrG4Yn-inxsnB4Pi_hzqt6am3W9IcSrRsM-wsd42Bsexir6Ek5LUz05HKAtrmyIIigjMs7qajUM595iTQ2ohSwpsHS2pIFa40EMUEkin3czDtUJwS0EF6SgcXI76FMmCYMoWPogvNv5Q8JgaGt3L_0b1tKpnFEtuKtd6o8IQnYAQr0n2oM4c8Qh_tIl3Tt4Cwg&x-client-SKU=ID_NET&x-client-ver=2.1.4.0
 
-
 // http://dolittle.online/be4c4da6-5ede-405f-a947-8aedad564b7f/CBS/connect/authorize?client_id=25c7ddac-dd1b-482a-8638-aaa909fd1f1c&redirect_uri=http%3A%2F%2Fdev.cbsrc.org%2F&response_type=id_token&scope=openid%20email%20profile&state=332dc2698d75497584230d1422840571&nonce=8399d458dc914660b06e6a0ba98ff62e 
+
+/*
+
+,
+                {
+                    "Id": "f4366163-ade0-485f-85fa-3065341f23f4",
+                    "TenantId": "381088c1-de08-4d18-9e60-bbe2c94eccb5",
+                    "ClientId": "e4f46937-110a-4693-9a5b-1e521af81192",
+                    "Authority": "https://login.microsoftonline.com/common/v2.0",
+                    "Type": "9b296977-7657-4bc8-b5b0-3f0a23c43958",
+                    "DisplayName": "Multitenant Azure AD",
+                    "Secret": "",
+                    "LogoUrl": ""
+                },                
+                {
+                    "Id": "f52b452b-105d-4ccd-b95b-9fe0e7733439",
+                    "TenantId": "19901569-9bba-4fe3-8a0b-1fab6c80c151",
+                    "ClientId": "cbs-staging",
+                    "Authority": "https://auth.humanitarian.id",
+                    "Type": "9b296977-7657-4bc8-b5b0-3f0a23c43958",
+                    "DisplayName": "Humanitarian Id",
+                    "Secret": "",
+                    "LogoUrl": ""
+                },
+                {
+                    "Id": "92727dde-685d-4780-81ae-4981f2bc7798",
+                    "TenantId": "381088c1-de08-4d18-9e60-bbe2c94eccb5",
+                    "ClientId": "2e2cad73-c11a-4d9f-8af9-beeebcdc5a27",
+                    "Authority": "https://login.microsoftonline.com/common/v2.0",
+                    "Type": "9b296977-7657-4bc8-b5b0-3f0a23c43958",
+                    "DisplayName": "Dolittle",
+                    "Secret": "",
+                    "LogoUrl": ""
+                }
+ */
