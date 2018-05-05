@@ -18,6 +18,7 @@ RUN find . -name "*.csproj" -type f -delete
 WORKDIR /src/Source/Web
 RUN yarn global add webpack
 RUN yarn global add webpack-cli
+RUN yarn add babel-loader
 RUN yarn
 RUN webpack -p --env.production
 
