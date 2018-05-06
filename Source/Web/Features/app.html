@@ -2,8 +2,8 @@
     <require from="./app.scss"></require>
     <require from="./components/app_header/app_header"></require>
     <main class="${router.currentInstruction.config.settings.cssClass ? router.currentInstruction.config.settings.cssClass : 'narrow-column'}">
-        <app_header></app_header>
-        <router-view></router-view>
+        <app_header containerless></app_header>
+        <router-view containerless></router-view>
     </main>
     <footer>
         <small>
