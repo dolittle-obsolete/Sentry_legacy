@@ -1,5 +1,5 @@
-@import "../styles/Settings/all";
-@import "../styles/Tools/all";
+@import '../styles/Settings/all';
+@import '../styles/Tools/all';
 main {
     flex: 1 1 auto;
     width: 100vw;
@@ -11,8 +11,17 @@ main {
 footer {
     background-color: $color-brand-grey;
     color: $color-light-grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: 0 0 5rem;
     padding: $grid-gutter;
-    text-align: center;
     width: 100vw;
+    figure {
+        width: 7rem;
+        padding: $grid-gutter/2;
+        img {
+            max-height: 100%;
+        }
+    }
 }
