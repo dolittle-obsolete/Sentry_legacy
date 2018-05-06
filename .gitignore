@@ -288,3 +288,6 @@ __pycache__/
 *.xsd.cs
 
 .buildsettings
+.DS_Store
+yarn.lock
+package-lock.json
