@@ -1,6 +1,6 @@
 import { PLATFORM } from 'aurelia-pal';
 import style from '../styles/style.scss';
-import { OpenIdConnect, OpenIdConnectRoles } from "aurelia-open-id-connect";
+import { OpenIdConnect, OpenIdConnectRoles } from 'aurelia-open-id-connect';
 import { inject } from 'aurelia-dependency-injection';
 
 @inject(OpenIdConnect)
@@ -12,11 +12,20 @@ export class app {
     configureRouter(config, router) {
         config.options.pushState = true;
         config.map([
-            { route: ['', 'welcome'], name: 'welcome', moduleId: PLATFORM.moduleName('welcome') },
+            { route: ['', 'welcome'], name: 'welcome', moduleId: PLATFORM.moduleName('welcome'), layoutView: PLATFORM.moduleName('layout_fullscreen.html') },
             { route: ':tenant/:application/Accounts/Login', name: 'Login', moduleId: PLATFORM.moduleName('Accounts/Login') },
             { route: ':tenant/:application/Accounts/Consent', name: 'Consent', moduleId: PLATFORM.moduleName('Accounts/Consent') },
-            { route: ['Registration/RequestAccessOidcCallback', ':tenant/:application/:client/Registration/RequestAccess'], name: 'RequestAccess', moduleId: PLATFORM.moduleName('Registration/RequestAccess') },
-            { route: ':tenant/:application/Registration/Requests', name: 'Requests', moduleId: PLATFORM.moduleName('Registration/Requests'), settings: { cssClass: "wide-column" } }
+            {
+                route: ['Registration/RequestAccessOidcCallback', ':tenant/:application/:client/Registration/RequestAccess'],
+                name: 'RequestAccess',
+                moduleId: PLATFORM.moduleName('Registration/RequestAccess')
+            },
+            {
+                route: ':tenant/:application/Registration/Requests',
+                name: 'Requests',
+                moduleId: PLATFORM.moduleName('Registration/Requests'),
+                settings: { cssClass: 'wide-column' }
+            }
         ]);
 
         this._openIdConnect.configure(config);

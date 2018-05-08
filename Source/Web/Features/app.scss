@@ -3,25 +3,9 @@
 main {
     flex: 1 1 auto;
     width: 100vw;
-    @include media-bp-min(tablet) {
-        padding: $grid-gutter;
-    }
-}
-
-footer {
-    background-color: $color-brand-grey;
-    color: $color-light-grey;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 0 0 5rem;
-    padding: $grid-gutter;
-    width: 100vw;
-    figure {
-        width: 7rem;
-        padding: $grid-gutter/2;
-        img {
-            max-height: 100%;
+    &.default_layout {
+        @include media-bp-min(tablet) {
+            padding: $grid-gutter;
         }
     }
 }
