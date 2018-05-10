@@ -1,11 +1,11 @@
 <template>
     <require from="./app_header.scss"></require>
-    <header class="app-header">
+    <header class="app_header">
         <div class="content-box">
-            <figure>
-                <img src="https://dolittle.blob.core.windows.net/sentry-tenant-logos/${tenantId}.png" alt="Logo">
+            <figure class="site-logo">
+                <img src="${tenantLogoUrl}" alt="Logo">
             </figure>
-            <span class="tenant-name">${tenantName}</span>
+            <span if.bind="tenantName" class="tenant-name">${tenantName}</span>
         </div>
     </header>
 </template>

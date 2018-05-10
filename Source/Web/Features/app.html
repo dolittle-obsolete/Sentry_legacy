@@ -1,13 +1,5 @@
 <template>
     <require from="./app.scss"></require>
-    <require from="./components/app_header/app_header"></require>
-    <main class="${router.currentInstruction.config.settings.cssClass ? router.currentInstruction.config.settings.cssClass : 'narrow-column'}">
-        <app_header></app_header>
-        <router-view></router-view>
-    </main>
-    <footer>
-        <small>
-            Copyright © 2018 - Dolittle AS
-        </small>
-    </footer>
+
+    <router-view containerless layout-view="layout.html"></router-view>
 </template>

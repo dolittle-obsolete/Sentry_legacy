@@ -1,18 +1,11 @@
-@import "../styles/Settings/all";
-@import "../styles/Tools/all";
+@import '../styles/Settings/all';
+@import '../styles/Tools/all';
 main {
     flex: 1 1 auto;
     width: 100vw;
-    @include media-bp-min(tablet) {
-        padding: $grid-gutter;
+    &.default_layout {
+        @include media-bp-min(tablet) {
+            padding: $grid-gutter;
+        }
     }
-}
-
-footer {
-    background-color: $color-brand-grey;
-    color: $color-light-grey;
-    flex: 0 0 5rem;
-    padding: $grid-gutter;
-    text-align: center;
-    width: 100vw;
 }
