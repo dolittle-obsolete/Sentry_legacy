@@ -36,6 +36,9 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Web
 {
+
+    // Todo: Support all the different endpoints types for Azure AD as options : https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oidc
+
     /// <summary>
     /// 
     /// </summary>
