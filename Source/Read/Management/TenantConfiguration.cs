@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Concepts;
+using Dolittle.Collections;
 using Dolittle.Execution;
+using Dolittle.Logging;
 using Dolittle.Serialization.Json;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -27,14 +29,17 @@ namespace Read.Management
         readonly CloudBlobDirectory _tenantsDirectory;
         readonly ISerializer _serializer;
         readonly ConcurrentDictionary<Guid, Tenant> _tenants = new ConcurrentDictionary<Guid, Tenant>();
+        readonly ILogger _logger;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="serializer"></param>
-        public TenantConfiguration(ISerializer serializer)
+        /// <param name="logger"></param>
+        public TenantConfiguration(ISerializer serializer, ILogger logger)
         {
             _serializer = serializer;
+            _logger = logger;
 
             var storageAccount = CloudStorageAccount.Parse(ConnectionString);
             _client = storageAccount.CreateCloudBlobClient();
@@ -92,7 +97,20 @@ namespace Read.Management
                     {
                         var jsonAsString = await tenantBlob.DownloadTextAsync();
                         var tenant = _serializer.FromJson<Tenant>(jsonAsString);
+                        _logger.Information($"Loaded tenant '{tenant.Name}' with id '{tenant.TenantId}'");
+
                         _tenants[tenant.TenantId] = tenant;
+                        tenant.Applications.ForEach(application => 
+                        {
+                            _logger.Information($"With application '{application.Key}'");
+                            application.Value.Clients.ForEach(client =>
+                            {
+                                _logger.Information($"With client '{client.Name}' with id '{client.Id}'");
+
+                            });
+
+
+                        });
                     }
                 })).ToArray();
         
