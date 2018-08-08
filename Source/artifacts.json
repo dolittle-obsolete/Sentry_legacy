@@ -1,0 +1,123 @@
+{
+  "artifacts": {
+    "dba7d22d-af83-4afa-9f4a-2766deaae9b9": {
+      "commands": [
+        {
+          "artifact": "d8d393b2-2d00-4dbc-9717-8086cb4e0ecf",
+          "generation": 1,
+          "type": "Domain.UserManagement.AddClaim, Domain"
+        }
+      ],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [],
+      "queries": []
+    },
+    "0cd4b788-fe66-473e-8f4e-f5d1c47e159f": {
+      "commands": [
+        {
+          "artifact": "d6a26b84-842a-4e50-b2d1-eac52b98cb1d",
+          "generation": 1,
+          "type": "Domain.Registration.RequestAccessWithEmail, Domain"
+        }
+      ],
+      "events": [
+        {
+          "artifact": "845cd479-5167-4e41-a48a-24a499df5ae0",
+          "generation": 1,
+          "type": "Events.Registration.ApplicationAccessRequested, Events"
+        },
+        {
+          "artifact": "2665a44d-7f0d-40da-9a99-2d2568de8b24",
+          "generation": 1,
+          "type": "Events.Registration.UserAssociatedWithAuthority, Events"
+        },
+        {
+          "artifact": "e97e3cb0-601c-4144-bdba-62b708a525f3",
+          "generation": 1,
+          "type": "Events.Registration.UserRegistered, Events"
+        }
+      ],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [],
+      "queries": [
+        {
+          "artifact": "d332611b-4ab9-4fc5-befc-97d32c8df054",
+          "generation": 1,
+          "type": "Read.Registration.ProfileClaims, Read"
+        }
+      ]
+    },
+    "7f054940-5b37-4616-bc7c-bfc99730ad49": {
+      "commands": [
+        {
+          "artifact": "23b171ed-9586-4b1d-b46d-7faab7797595",
+          "generation": 1,
+          "type": "Domain.Management.Resources.AddClaimToIdentityResource, Domain"
+        },
+        {
+          "artifact": "a3790168-bcd5-40c4-b303-b431b9f02a1d",
+          "generation": 1,
+          "type": "Domain.Management.Resources.AddIdentityResource, Domain"
+        },
+        {
+          "artifact": "a1051e7c-2c37-478f-9cbf-b61f59f3d7fa",
+          "generation": 1,
+          "type": "Domain.Management.Resources.DisableIdentityResource, Domain"
+        },
+        {
+          "artifact": "c8dd9516-850e-4a74-8c7a-4f064f2e71a1",
+          "generation": 1,
+          "type": "Domain.Management.Resources.EmphasizeIdentityResource, Domain"
+        },
+        {
+          "artifact": "2c00f016-4379-4bc5-bc5f-80582b13d5db",
+          "generation": 1,
+          "type": "Domain.Management.Resources.EnableIdentityResource, Domain"
+        }
+      ],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [],
+      "queries": []
+    },
+    "378f8152-3181-4f1a-8a6c-ccb28d68bb2f": {
+      "commands": [
+        {
+          "artifact": "55e7f08f-f4b2-436a-999c-53da961e3d7e",
+          "generation": 1,
+          "type": "Domain.Accounts.GrantAccessToApplicationForUser, Domain"
+        }
+      ],
+      "events": [
+        {
+          "artifact": "8db39fa5-0f3c-4dc4-b5a2-746a8280429c",
+          "generation": 1,
+          "type": "Events.Accounts.ApplicationAccessGrantedByUser, Events"
+        },
+        {
+          "artifact": "0f974d7e-0097-4f28-97cf-6adcd3cec5df",
+          "generation": 1,
+          "type": "Events.Accounts.ClaimAddedToUser, Events"
+        },
+        {
+          "artifact": "88500559-e4ce-4e7f-9463-89084401e3c0",
+          "generation": 1,
+          "type": "Events.Accounts.LoggedIn, Events"
+        },
+        {
+          "artifact": "4f6d46c6-d0fe-42fa-a151-2cafbf3aefe4",
+          "generation": 1,
+          "type": "Events.Accounts.LoggedOut, Events"
+        }
+      ],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [],
+      "queries": []
+    }
+  }
+}

@@ -47,31 +47,6 @@ namespace Web
             builder.Bind<ICallContext>().To(new DefaultCallContext());
             builder.Bind<ICanResolvePrincipal>().To(new DefaultPrincipalResolver());
 
-            var applicationConfigurationBuilder = new ApplicationConfigurationBuilder("Studio")
-                .Application(applicationBuilder =>
-                    applicationBuilder
-                    .PrefixLocationsWith(new BoundedContext("Sentry"))
-                    .WithStructureStartingWith<BoundedContext>(_ => _)
-                    
-                    //(new ApplicationStructureFragment(typeof(BoundedContext)), _ => { })
-                )
-
-                .StructureMappedTo(_ => _
-                    .Domain("Domain.-^{Feature}.-^{SubFeature}*")
-                    .Domain("Domain.-^{Module}.-^{Feature}.-^{SubFeature}*")
-                    .Events("Events.-^{Feature}.-^{SubFeature}*")
-                    .Events("Events.-^{Module}.-^{Feature}.-^{SubFeature}*")
-                    .Read("Read.-^{Feature}.-^{SubFeature}*")
-                    .Read("Read.-^{Module}.-^{Feature}.-^{SubFeature}*")
-                    .Frontend("Web.-^{Feature}.-^{SubFeature}*")
-                    .Frontend("Web.-^{Module}.-^{Feature}.-^{SubFeature}*")
-                );
-
-            (IApplication application, IApplicationStructureMap structureMap)applicationConfiguration = applicationConfigurationBuilder.Build();
-
-            builder.Bind<IApplication>().To(applicationConfiguration.application);
-            builder.Bind<IApplicationStructureMap>().To(applicationConfiguration.structureMap);
-
             builder.Bind<Dolittle.ReadModels.MongoDB.Configuration>().To(new Dolittle.ReadModels.MongoDB.Configuration
             {
                 Url = "mongodb://localhost:27017",

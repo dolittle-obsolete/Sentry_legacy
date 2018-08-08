@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Autofac;
-using Dolittle.Applications.Serialization.Json;
 using Dolittle.AspNetCore.Bootstrap;
 using Dolittle.Collections;
 using Dolittle.DependencyInversion.Autofac;
@@ -256,6 +255,7 @@ namespace Web
             app.UseIdentityServer();
 
             app.UseMvc();
+
             app.UseDolittle();
 
             app.RunAsSinglePageApplication();
