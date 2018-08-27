@@ -60,6 +60,7 @@ namespace Web
             _configurations[url] = configuration;
             return configuration;
         }
+        
 
         /// <inheritdoc/>
         public void RequestRefresh()

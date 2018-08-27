@@ -5,7 +5,7 @@
 using Concepts;
 using Dolittle.ReadModels;
 
-namespace Read
+namespace Read.Authority
 {
     /// <summary>
     /// Represents an authority
