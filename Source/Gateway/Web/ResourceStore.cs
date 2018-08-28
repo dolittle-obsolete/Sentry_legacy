@@ -10,7 +10,7 @@ using Dolittle.DependencyInversion;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// 
@@ -80,7 +80,7 @@ namespace Entrypoint
             return identityResources;
         }
 
-        T ConvertToResource<T>(Entrypoint.Resource resource)where T : IdentityServer4.Models.Resource, new()
+        T ConvertToResource<T>(Web.Resource resource)where T : IdentityServer4.Models.Resource, new()
         {
             return new T()
             {

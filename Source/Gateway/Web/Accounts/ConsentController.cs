@@ -13,7 +13,7 @@ using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entrypoint.Accounts
+namespace Web.Accounts
 {
 
     /// <summary>

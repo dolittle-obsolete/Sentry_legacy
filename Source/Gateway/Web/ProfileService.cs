@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 
-namespace Entrypoint
+namespace Web
 {
 
     /// <summary>

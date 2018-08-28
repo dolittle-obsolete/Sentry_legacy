@@ -2,21 +2,18 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-namespace Entrypoint
+using System;
+
+namespace Web
 {
     /// <summary>
-    /// Defines the context used throughout
+    /// Represents a <see cref="OpenIdConnectExternalAuthority"/> for Azure Active Directory
     /// </summary>
-    public interface IAuthContext
+    public class AzureActiveDirectoryExternalAuthority : OpenIdConnectExternalAuthority
     {
         /// <summary>
-        /// Gets the current <see cref="Tenant"/>
+        /// Gets or sets the unique identifier that identifies the tenant that owns the Azure Active Directory
         /// </summary>
-        Tenant Tenant { get; }
-
-        /// <summary>
-        /// Gets the current <see cref="Application"/>
-        /// </summary>
-        Application Application { get; }
+        public Guid TenantId { get; set; }
     }
 }

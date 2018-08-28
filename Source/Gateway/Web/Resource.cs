@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Concepts.Claims;
 using Concepts.Resources;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents a definition of a resource

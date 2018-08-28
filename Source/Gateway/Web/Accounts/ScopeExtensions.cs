@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using Concepts.Scopes;
 
-namespace Entrypoint.Accounts
+namespace Web.Accounts
 {
     /// <summary>
     /// Represents extensions <see cref="Scope">scopes</see>

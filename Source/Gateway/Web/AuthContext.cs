@@ -5,7 +5,7 @@
 using Dolittle.Applications;
 using Dolittle.Runtime.Tenancy;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents the context used throughout

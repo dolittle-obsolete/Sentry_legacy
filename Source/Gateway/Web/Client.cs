@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents a client configuration in an <see cref="Application"/>

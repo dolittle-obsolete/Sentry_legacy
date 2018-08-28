@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// An in-memory representation of <see cref="IConsentMessageStore"/>

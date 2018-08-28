@@ -11,7 +11,7 @@ using Dolittle.Logging;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents an implementation of <see cref="IClientStore"/>

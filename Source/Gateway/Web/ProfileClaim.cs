@@ -7,7 +7,7 @@ using Concepts.Claims;
 using Concepts.Resources;
 using Dolittle.ReadModels;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents additional claims for a profile - typically collected during registration

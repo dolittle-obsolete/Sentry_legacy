@@ -6,7 +6,7 @@ using System.Threading;
 using Dolittle.DependencyInversion;
 using Dolittle.Execution;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// 

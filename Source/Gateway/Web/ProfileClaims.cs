@@ -6,7 +6,7 @@ using System.Linq;
 using Concepts;
 using Dolittle.Queries;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// 

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// 

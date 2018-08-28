@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System.Collections.Generic;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents the configuration of an application

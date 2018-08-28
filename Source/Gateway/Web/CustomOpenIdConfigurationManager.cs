@@ -10,7 +10,7 @@ using Dolittle.Collections;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
-namespace Entrypoint
+namespace Web
 {
     // Todo: Support all the different endpoints types for Azure AD as options : https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oidc
 

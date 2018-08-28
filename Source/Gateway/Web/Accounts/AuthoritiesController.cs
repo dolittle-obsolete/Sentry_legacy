@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Entrypoint.Accounts
+namespace Web.Accounts
 {
     /// <summary>
     /// 

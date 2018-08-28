@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Concepts.Scopes;
 
-namespace Entrypoint.Accounts
+namespace Web.Accounts
 {
     /// <summary>
     /// Represents the information for the consent process

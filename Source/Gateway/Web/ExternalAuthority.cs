@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents the base configuration of an external authority

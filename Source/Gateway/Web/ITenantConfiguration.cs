@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using Concepts;
 
-namespace Entrypoint
+namespace Web
 {
 
     /// <summary>

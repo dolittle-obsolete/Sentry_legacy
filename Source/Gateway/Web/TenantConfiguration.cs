@@ -15,7 +15,7 @@ using Dolittle.Serialization.Json;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents an implementation of <see cref="ITenantConfiguration"/>

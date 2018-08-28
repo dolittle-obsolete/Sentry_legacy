@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using Concepts;
 
-namespace Entrypoint
+namespace Web
 {
     /// <summary>
     /// Represents the configuration for a tenant

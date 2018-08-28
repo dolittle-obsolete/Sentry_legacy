@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
-namespace Entrypoint
+namespace Web
 {
 
     /// <summary>
