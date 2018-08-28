@@ -1,7 +1,7 @@
 {
   "application": "215daeda-b2c7-4c8e-a305-586eb779733b",
   "boundedContext": "31f864e6-6ee0-46e1-8c19-2a4738cc0f17",
-  "boundedContextName": "Sentry",
+  "boundedContextName": "Studio",
   "useModules": false,
   "proxiesBasePath": "Proxies",
   "namespaceSegmentsToStrip": {
@@ -10,39 +10,6 @@
     ]
   },
   "topology": {
-    "modules": [],
-    "features": [
-      {
-        "feature": "f8f0f9c1-ae5b-45eb-93a7-cda62cfbc57c",
-        "name": "UserManagement",
-        "subFeatures": []
-      },
-      {
-        "feature": "56f460c2-ac35-4a99-8857-0d146f705d3f",
-        "name": "Registration",
-        "subFeatures": []
-      },
-      {
-        "feature": "6477c0e4-7732-4b3a-8e5a-b3faff345057",
-        "name": "Management",
-        "subFeatures": [
-          {
-            "feature": "8d298ea0-4bd4-4eaa-8b36-84404dd9934e",
-            "name": "Resources",
-            "subFeatures": []
-          }
-        ]
-      },
-      {
-        "feature": "7aeee534-eac6-4564-94eb-5b3805683309",
-        "name": "Accounts",
-        "subFeatures": []
-      },
-      {
-        "feature": "c47f68a9-62b0-45d9-834c-8a89eb9ddbcb",
-        "name": "Authority",
-        "subFeatures": []
-      }
-    ]
+    
   }
 }

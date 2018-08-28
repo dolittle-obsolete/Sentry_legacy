@@ -7,7 +7,7 @@ using Dolittle.Concepts;
 namespace Concepts.Scopes
 {
     /// <summary>
-    /// Represents a description of a scope
+    /// Represents the display name of a scope
     /// </summary>
     public class ScopeDisplayName : ConceptAs<string>
     {
