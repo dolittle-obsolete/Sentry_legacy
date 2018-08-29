@@ -10,6 +10,8 @@ using Dolittle.AspNetCore.Bootstrap;
 using Dolittle.DependencyInversion.Autofac;
 using IdentityServer4;
 using IdentityServer4.Stores;
+using Infrastructure;
+using Infrastructure.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;

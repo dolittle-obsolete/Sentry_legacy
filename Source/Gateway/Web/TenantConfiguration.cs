@@ -12,11 +12,14 @@ using Dolittle.Collections;
 using Dolittle.Execution;
 using Dolittle.Logging;
 using Dolittle.Serialization.Json;
+using Infrastructure;
+using Infrastructure.Tenants;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace Web
 {
+    //TODO: This is obsolete when we decide to mount the configuration files and using them directly, then most of the Infrastructure code will go as well.
     /// <summary>
     /// Represents an implementation of <see cref="ITenantConfiguration"/>
     /// </summary>

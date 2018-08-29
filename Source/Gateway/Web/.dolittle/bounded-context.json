@@ -3,7 +3,13 @@
   "boundedContext": "a38588a5-8ead-46dc-8df7-d5409e7df7c8",
   "boundedContextName": "Gateway",
   "useModules": false,
-  "proxiesBasePath": "Proxies",
+  "generateProxies": true,
+  "proxiesBasePath": "Features/Proxies",
+  "namespaceSegmentsToStrip": {
+    "Web": [
+      "Features"
+    ]
+  },
   "topology": {
     
   }

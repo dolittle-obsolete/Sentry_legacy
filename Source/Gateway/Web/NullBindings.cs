@@ -9,6 +9,7 @@ using Dolittle.Runtime.Events.Coordination;
 using Dolittle.Runtime.Events.Store;
 using Dolittle.Runtime.Execution;
 using Dolittle.Security;
+using Infrastructure;
 using MongoDB.Driver;
 
 namespace Web
@@ -44,6 +45,8 @@ namespace Web
             });
 
             builder.Bind(typeof(IReadModelRepositoryFor<>)).To(typeof(Dolittle.ReadModels.MongoDB.ReadModelRepositoryFor<>));
+
+            builder.Bind<ITenantConfiguration>().To<TenantConfiguration>();
         }
     }
 }

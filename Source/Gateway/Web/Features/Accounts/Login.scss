@@ -1,0 +1,24 @@
+@import "../../styles/Settings/all";
+@import "../../styles/Tools/all";
+.login {
+    text-align: center;
+    .option-list {
+        margin: 0 auto;
+        @include media-bp-min(tablet) {
+            width: 80%;
+        }
+        a {
+            color: $color-dark-grey;
+        }
+        figure {
+            height: 2.5rem;
+            width: 2.5rem;
+            margin-right: 1rem;
+        }
+        .provider-name {
+            font-weight: 400;
+            font-size: 1.5rem;
+            text-align: left;
+        }
+    }
+}

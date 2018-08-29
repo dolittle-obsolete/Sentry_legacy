@@ -3,7 +3,8 @@
   "boundedContext": "31f864e6-6ee0-46e1-8c19-2a4738cc0f17",
   "boundedContextName": "Studio",
   "useModules": false,
-  "proxiesBasePath": "Proxies",
+  "generateProxies": true,
+  "proxiesBasePath": "Features/Proxies",
   "namespaceSegmentsToStrip": {
     "Web": [
       "Features"

@@ -5,6 +5,9 @@
 using System.Threading;
 using Dolittle.DependencyInversion;
 using Dolittle.Execution;
+using Infrastructure;
+using Infrastructure.Applications;
+using Infrastructure.Tenants;
 
 namespace Web
 {

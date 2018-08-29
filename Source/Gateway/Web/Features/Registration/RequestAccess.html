@@ -1,0 +1,59 @@
+<template>
+    <section class="request-access centered" if.bind="!isLoggedIn">
+        <div class="content-box">
+            <h1>Request Access</h1>
+            <h2>Login</h2>
+            <p class="narrow">
+                To request access we must log you in with one of the supported identity authorities.
+            </p>
+            <p class="narrow">Please click the login button to start the process.
+            </p>
+
+            <div class="button-row centered">
+                <button type="submit" class="primary" click.delegate="login()">Login</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="request-access" if.bind="isLoggedIn">
+        <div class="content-box">
+            <h1>Request Access</h1>
+            <p>
+                We need the following information before we can submit a request
+            </p>
+
+            <ul class="registration-fields">
+                <li>
+                    <label>
+                        Name:
+                    </label>
+                    <input type="text" name="profile-name" value="${name}" disabled>
+                </li>
+                <li>
+                    <label>
+                        E-mail:
+                    </label>
+                    <input type="text" name="profile-name">
+                </li>
+                <li>
+                    <label>
+                        Phone:
+                    </label>
+                    <input type="number" name="profile-name">
+                </li>
+                <li repeat.for="claim of profileClaims">
+                    <label>
+                        ${claim.displayName}
+                    </label>
+                    <select>
+                        <option repeat.for="value of claim.allowedValues">${value}</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="button-row">
+                <button type="reset">Cancel</button>
+                <button type="submit" class="primary" click.delegate="submitRequest()">Submit Request</button>
+            </div>
+        </div>
+    </section>
+</template>
