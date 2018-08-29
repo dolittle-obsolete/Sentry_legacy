@@ -1,0 +1,57 @@
+[
+    {
+        "id": "20415ed0-319a-41c6-a7b3-4a4347eb3b26",
+        "name": "Dolittle",
+        "applications": {
+            "studio": {
+                "ResourceDefinitions": [
+                    { 
+                        "name": "",
+                        "displayName": "",
+                        "required": false,
+                        "emphasize": false,
+                        "showInDiscoveryDocument": false,
+                        "userClaims": [
+                            ""
+                        ],
+                        "type": "string|boolean|select",
+                        "allowedValues": [
+                            ""
+                        ]
+                    }
+
+                ],
+                "apiResources": [
+
+                ],
+                "identityResources": [
+                    "openid",
+                    "profile"
+                ],
+                "clients": [{
+                    "id": "62e92b0a-d41d-4754-9dcd-a478482f0835",
+                    "name": "Web",
+                    "allowedGrantTypes": [
+                        "Implicit"
+                    ],
+                    "redirectUris": [
+                        ""
+                    ],
+                    "postLogoutRedirectUris": [
+                    ],
+                    "allowedScopes": [
+                        "openid",
+                        "profile"
+                    ]
+                }],
+                "externalAuthorities": [{
+                    "type": "9b296977-7657-4bc8-b5b0-3f0a23c43958",
+                    "displayName": "Azure Active Directory / Office 365",
+                    "authority": "https://login.microsoftonline.com/381088c1-de08-4d18-9e60-bbe2c94eccb5/v2.0",
+                    "clientId": "2e2cad73-c11a-4d9f-8af9-beeebcdc5a27",
+                    "logoUrl": ""
+                }]
+            }
+        }
+    }
+]

@@ -3,7 +3,7 @@ label {
 }
 
 input {
-    border: .0625rem solid darken($color-medium-grey, 15%);
+    border: .0625rem solid darken($color-gray-medium, 15%);
     border-radius: .375rem;
     display: block;
     font-size: 1.5rem;
@@ -25,10 +25,10 @@ input {
 }
 
 button {
-    background-color: $color-light-grey;
+    background-color: $color-gray-light;
     border: none;
     border-radius: .375rem;
-    box-shadow: .125rem .125rem 0 darken($color-medium-grey, 15%);
+    box-shadow: .125rem .125rem 0 darken($color-gray-medium, 15%);
     font-size: 1.2rem;
     font-weight: 400;
     margin: $grid-gutter/3 0;
@@ -49,8 +49,8 @@ button {
 }
 
 select {
-    border: .0625rem solid darken($color-medium-grey, 15%);
-    box-shadow: .125rem .125rem 0 darken($color-medium-grey, 15%);
+    border: .0625rem solid darken($color-gray-medium, 15%);
+    box-shadow: .125rem .125rem 0 darken($color-gray-medium, 15%);
     padding: .5rem 1rem;
     margin: $grid-gutter/3 0 $grid-gutter/2;
     transition: transform .05s;

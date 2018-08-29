@@ -4,7 +4,7 @@
     @include media-bp-min(tablet) {
         padding: $grid-gutter;
         border-radius: .25rem;
-        box-shadow: .3125rem .3125rem 0 darken($color-medium-grey, 15%);
+        box-shadow: .3125rem .3125rem 0 darken($color-gray-medium, 15%);
         margin-bottom: $grid-gutter;
     }
 }

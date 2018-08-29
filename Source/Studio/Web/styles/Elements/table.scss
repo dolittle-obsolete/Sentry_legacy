@@ -5,7 +5,7 @@ table {
     border-collapse: collapse;
     thead {
         tr {
-            border-bottom: .0625rem solid $color-medium-grey;
+            border-bottom: .0625rem solid $color-gray-medium;
         }
         th {
             font-size: 1rem;
@@ -17,7 +17,7 @@ table {
     tbody {
         tr {
             &:nth-child(2n) {
-                background-color: darken( $color-light-grey, 1%);
+                background-color: darken( $color-gray-light, 1%);
             }
         }
     }
