@@ -50,52 +50,6 @@ namespace Web.Accounts
             _commandCoordinator = commandCoordinator;
         }
 
-        
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="returnUrl"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult> Initiate([FromQuery] string returnUrl)
-        {
-            var information = new ConsentProcessInformation();
-
-            var request = await _interaction.GetAuthorizationContextAsync(returnUrl);
-            if (request != null)
-            {
-                var client = await _clientStore.FindEnabledClientByIdAsync(request.ClientId);
-                if (client != null)
-                {
-                    var resources = await _resourceStore.FindEnabledResourcesByScopeAsync(request.ScopesRequested);
-                    if (resources != null && (resources.IdentityResources.Any()|| resources.ApiResources.Any()))
-                    {
-                        information.ClientName = client.ClientName ?? client.ClientId;
-                        information.ClientUrl = client.ClientUri;
-                        information.ClientLogoUrl = client.LogoUri;
-                        information.AllowRememberConsent = client.AllowRememberConsent;
-                        information.IdentityScopes = resources.IdentityResources.Select(_ => _.ToScope());
-                        information.ResourceScopes = resources.ApiResources.SelectMany(_ => _.Scopes).Select(_ => _.ToScope());
-                    }
-                    else
-                    {
-                        information.AddError($"No scopes matching: {request.ScopesRequested.Aggregate((x, y) => x + ", " + y)}");
-                    }
-                }
-                else
-                {
-                    information.AddError($"Invalid client id: {request.ClientId}");
-                }
-            }
-            else
-            {
-                information.AddError($"No consent request matching request: {returnUrl}");
-            }
-
-            return Json(information);
-        }
-
         //TODO: This is a command
         /// <summary>
         /// 
