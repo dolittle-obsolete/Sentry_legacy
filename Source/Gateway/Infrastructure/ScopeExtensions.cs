@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using Concepts.Scopes;
 
-namespace Web.Accounts
+namespace Infrastructure
 {
     /// <summary>
     /// Represents extensions <see cref="Scope">scopes</see>

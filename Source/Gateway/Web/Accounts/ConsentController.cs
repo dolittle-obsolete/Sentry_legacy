@@ -10,8 +10,10 @@ using Dolittle.Runtime.Commands;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
+using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Read.Consents;
 
 namespace Web.Accounts
 {
@@ -47,6 +49,8 @@ namespace Web.Accounts
             _resourceStore = resourceStore;
             _commandCoordinator = commandCoordinator;
         }
+
+        
 
         /// <summary>
         /// 
@@ -92,6 +96,7 @@ namespace Web.Accounts
             return Json(information);
         }
 
+        //TODO: This is a command
         /// <summary>
         /// 
         /// </summary>

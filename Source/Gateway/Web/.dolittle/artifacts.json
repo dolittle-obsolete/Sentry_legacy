@@ -105,6 +105,26 @@
         }
       ],
       "queries": []
+    },
+    "9baba52a-b65e-4101-885d-4e1ce6f2b17c": {
+      "commands": [],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "7d595215-988d-451b-b7e9-fe66ec9153d9",
+          "generation": 1,
+          "type": "Read.Consents.ConsentProcessInformation, Read"
+        }
+      ],
+      "queries": [
+        {
+          "artifact": "6aa13b75-c91e-44a2-903a-20e3e3e3a7ac",
+          "generation": 1,
+          "type": "Read.Consents.RetrieveConsentProcessInformation, Read"
+        }
+      ]
     }
   }
 }

@@ -5,13 +5,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Concepts.Scopes;
+using Dolittle.ReadModels;
 
-namespace Web.Accounts
+namespace Read.Consents
 {
     /// <summary>
     /// Represents the information for the consent process
     /// </summary>
-    public class ConsentProcessInformation
+    public class ConsentProcessInformation : IReadModel
     {
         readonly List<string> _errors = new List<string>();
 

@@ -42,6 +42,11 @@
         "feature": "51dfa947-0dba-40d7-bd3a-8c3483330224",
         "name": "Applications",
         "subFeatures": []
+      },
+      {
+        "feature": "9baba52a-b65e-4101-885d-4e1ce6f2b17c",
+        "name": "Consents",
+        "subFeatures": []
       }
     ]
   }

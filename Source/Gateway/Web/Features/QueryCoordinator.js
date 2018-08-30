@@ -6,6 +6,7 @@ import { HttpClient } from 'aurelia-http-client';
 import { inject } from 'aurelia-framework';
 import { QueryRequest } from '@dolittle/queries/QueryRequest';
 
+//IMPORTANT: This will be obsolete when we extend the javaclient code
 @inject(HttpClient)
 export class QueryCoordinator {
 

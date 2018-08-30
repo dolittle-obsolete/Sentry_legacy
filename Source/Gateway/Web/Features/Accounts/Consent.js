@@ -7,13 +7,16 @@ import { inject } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-http-client';
 import { parseQueryString } from 'aurelia-path';
 import { ObserverLocator } from 'aurelia-framework';
+import {QueryCoordinator} from '../QueryCoordinator'
+import {ConsentProcessInformation} from '../Proxies/Consents/ConsentProcessInformation'
+import {RetrieveConsentProcessInformation} from '../Proxies/Consents/RetrieveConsentProcessInformation'
 
 /**
  * The view model used for dealing with consent
  */
-@inject(OpenIdConnect, ObserverLocator)
+@inject(OpenIdConnect, ObserverLocator, QueryCoordinator)
 export class Consent {
-    information={};
+    information={}
     rememberConsent=false;
     scopes=[];
     returnUrl="";
@@ -24,17 +27,16 @@ export class Consent {
      * Initializes a new instance of {Consent}
      * @param {OpenIdConnect} openIdConnect 
      */
-    constructor(openIdConnect, observerLocator) {
+    constructor(openIdConnect, observerLocator, queryCoordinator) {
         this._openIdConnect = openIdConnect;
         this._observerLocator = observerLocator;
+        this._queryCoordinator = queryCoordinator;
     }
 
     /**
      * Method that gets invoked when view and view model is activated
      */
     activate(routeParams) { 
-        let self = this;
-        let client = new HttpClient();
         let params = parseQueryString(window.location.search.substr(1));
         this.returnUrl = params.returnUrl;
         this.tenant = routeParams.tenant;
@@ -46,16 +48,16 @@ export class Consent {
                 .getObserver(scope, 'checked') 
                 .subscribe(() => this.updateGrantedScopes());
         };
-        
-        client.createRequest(`/${routeParams.tenant}/${routeParams.application}/Consent`)
-            .asGet()
-            .withParams({returnUrl: params.returnUrl})
-            .send()
-            .then(data => {
-                self.information = JSON.parse(data.response);
-                self.information.identityScopes.forEach(setupChecked);
-                self.information.resourceScopes.forEach(setupChecked);
-                self.updateGrantedScopes();
+
+        let query = new RetrieveConsentProcessInformation();
+        query.returnUrl = this.returnUrl;
+        this._queryCoordinator.execute(query, this.tenant, this.application)
+            .then((result) => {
+                this.information = new ConsentProcessInformation(result.items[0]);
+                this.information.identityScopes.forEach(setupChecked);
+                this.information.resourceScopes.forEach(setupChecked);
+                this.updateGrantedScopes();
+            },(error) => {
             });
     }
 
@@ -67,8 +69,7 @@ export class Consent {
     }
 
     allow() {
-        
-
+        //TODO: Fire off a GrantConsent/Consent command
         /*
         let self = this;
         let client = new HttpClient();
