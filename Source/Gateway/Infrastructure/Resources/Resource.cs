@@ -12,7 +12,7 @@ namespace Infrastructure.Resources
     /// <summary>
     /// Represents a definition of a resource
     /// </summary>
-    public class Resource
+    public class Resource : IReadModel
     {
         /// <summary>
         /// Gets or sets the <see cref="Name"/> of the <see cref="Resource"/>

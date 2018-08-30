@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 using System.Collections.Generic;
 using Concepts;
+using Dolittle.ReadModels;
 using Infrastructure.Applications;
 
 namespace Infrastructure.Tenants
@@ -11,7 +12,7 @@ namespace Infrastructure.Tenants
     /// <summary>
     /// Represents the configuration for a tenant
     /// </summary>
-    public class Tenant
+    public class Tenant : IReadModel
     {
         /// <summary>
         /// Initializes a new instance of <see cref="Tenant"/>

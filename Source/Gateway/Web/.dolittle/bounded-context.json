@@ -11,6 +11,38 @@
     ]
   },
   "topology": {
-    
+    "modules": [],
+    "features": [
+      {
+        "feature": "39dfeb03-6232-40da-abdd-d6e8bba540a5",
+        "name": "Tenants",
+        "subFeatures": []
+      },
+      {
+        "feature": "1d879321-3319-4d0d-ad58-c69a6b9de231",
+        "name": "Resources",
+        "subFeatures": []
+      },
+      {
+        "feature": "c309e460-fb48-49ef-9fb3-e88db3a80428",
+        "name": "Clients",
+        "subFeatures": []
+      },
+      {
+        "feature": "31d64e37-f877-4b67-8bfe-361fa53c8367",
+        "name": "Claims",
+        "subFeatures": []
+      },
+      {
+        "feature": "f9401031-dd9e-4b66-bdbd-549ffbc6aa90",
+        "name": "Authorities",
+        "subFeatures": []
+      },
+      {
+        "feature": "51dfa947-0dba-40d7-bd3a-8c3483330224",
+        "name": "Applications",
+        "subFeatures": []
+      }
+    ]
   }
 }

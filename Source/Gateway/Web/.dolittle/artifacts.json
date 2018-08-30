@@ -1,3 +1,110 @@
 {
-  
+  "artifacts": {
+    "39dfeb03-6232-40da-abdd-d6e8bba540a5": {
+      "commands": [],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "7a3c67e6-4c82-47c0-a562-6af235043d8e",
+          "generation": 1,
+          "type": "Infrastructure.Tenants.Tenant, Infrastructure"
+        }
+      ],
+      "queries": []
+    },
+    "1d879321-3319-4d0d-ad58-c69a6b9de231": {
+      "commands": [],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "c1eb6ede-753f-46ce-9e17-669f01c1d0f1",
+          "generation": 1,
+          "type": "Infrastructure.Resources.Resource, Infrastructure"
+        }
+      ],
+      "queries": []
+    },
+    "c309e460-fb48-49ef-9fb3-e88db3a80428": {
+      "commands": [],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "4f63f392-963b-4b86-a107-467ba236393e",
+          "generation": 1,
+          "type": "Infrastructure.Clients.Client, Infrastructure"
+        }
+      ],
+      "queries": []
+    },
+    "31d64e37-f877-4b67-8bfe-361fa53c8367": {
+      "commands": [],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "23f2af41-21d0-416c-9c62-f77e59d0b841",
+          "generation": 1,
+          "type": "Infrastructure.Claims.ProfileClaim, Infrastructure"
+        }
+      ],
+      "queries": [
+        {
+          "artifact": "772777ae-09f7-4f62-979a-3510bf57c3d6",
+          "generation": 1,
+          "type": "Read.Claims.ProfileClaims, Read"
+        }
+      ]
+    },
+    "f9401031-dd9e-4b66-bdbd-549ffbc6aa90": {
+      "commands": [],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "d54cf2a7-08bb-4d1c-b38f-33c42c4cfdfd",
+          "generation": 1,
+          "type": "Infrastructure.Authorities.AzureActiveDirectoryExternalAuthority, Infrastructure"
+        },
+        {
+          "artifact": "95866fc4-11fa-480a-b9bf-e7b2698add4b",
+          "generation": 1,
+          "type": "Infrastructure.Authorities.ExternalAuthority, Infrastructure"
+        },
+        {
+          "artifact": "ceffb89b-c775-4776-8069-a800e9fc41f9",
+          "generation": 1,
+          "type": "Infrastructure.Authorities.OpenIdConnectExternalAuthority, Infrastructure"
+        }
+      ],
+      "queries": [
+        {
+          "artifact": "1b43b2cb-6812-4925-b7e3-bcd0266c7e2f",
+          "generation": 1,
+          "type": "Read.Authorities.ExternalAuthoritiesInScheme, Read"
+        }
+      ]
+    },
+    "51dfa947-0dba-40d7-bd3a-8c3483330224": {
+      "commands": [],
+      "events": [],
+      "eventProcessors": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "eb216416-3171-421b-9b77-3bcf3c64ffc4",
+          "generation": 1,
+          "type": "Infrastructure.Applications.Application, Infrastructure"
+        }
+      ],
+      "queries": []
+    }
+  }
 }

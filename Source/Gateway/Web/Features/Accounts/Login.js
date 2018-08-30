@@ -5,21 +5,23 @@
 import { HttpClient } from 'aurelia-http-client';
 import { inject } from 'aurelia-framework';
 import { Router } from 'aurelia-router';
+import {ExternalAuthoritiesInScheme} from '../Proxies/Authorities/ExternalAuthoritiesInScheme'
+import {QueryCoordinator} from '../QueryCoordinator'
 
 /**
  * The view model for the Login view
  */
-@inject(Router)
+@inject(QueryCoordinator)
 export class Login {
     authorities = []
     tenant = '';
 
     /**
      * Initializes a new instance of {Login}
-     * @param {Router} router 
+     * @param {QueryCoordinator} queryCoordinator 
      */
-    constructor(router) {
-        this.router = router;
+    constructor(queryCoordinator) {
+        this.queryCoordinator = queryCoordinator;
     }
 
 
@@ -30,15 +32,13 @@ export class Login {
         let self = this;
         this.tenant = params.tenant;
         this.application = params.application;
-
-        let client = new HttpClient();
-        client.get(`/${params.tenant}/${params.application}/Authorities`)
-            .then(data => {
-                let authorities = JSON.parse(data.response);
+        console.log(this.queryCoordinator);
+        
+        this.queryCoordinator.execute(new ExternalAuthoritiesInScheme(), params.tenant, params.application)
+            .then((result) => {
+                let authorities = result.items;
 
                 authorities.forEach(authority => {
-                    
-                    // Todo: serialization is not hooked up
                     authority.type = authority.type;
                     authority.tenant = self.tenant;
                     authority.application = self.application;
@@ -48,7 +48,9 @@ export class Login {
                         authority.logoUrl = 'https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40';
                     } 
                     self.authorities.push(authority);
-                });
+                })
+            },
+            (error) => {
             });
     }
 }

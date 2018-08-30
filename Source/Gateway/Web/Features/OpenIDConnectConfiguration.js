@@ -37,8 +37,8 @@ export default {
     unauthorizedRedirectRoute: `/${tenant}/Accounts/Login`,
     //Accounts/Login?returnUrl=/login`,
     ///be4c4da6-5ede-405f-a947-8aedad564b7f/25c7ddac-dd1b-482a-8638-aaa909fd1f1c/Registration/RequestAccess`,
-    loginRedirectRoute: 'welcome',
-    logoutRedirectRoute: 'welcome',
+    loginRedirectRoute: '/welcome',
+    logoutRedirectRoute: '/welcome',
     userManagerSettings: {
         accessTokenExpiringNotificationTime: 1,
         
