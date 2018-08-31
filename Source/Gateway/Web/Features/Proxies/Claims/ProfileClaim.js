@@ -9,7 +9,7 @@ export class ProfileClaim extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: '23f2af41-21d0-416c-9c62-f77e59d0b841',
+           id: '1a2314ab-cdfc-4b0a-afc6-cf6a02e239a9',
            generation: '1'
         };
         this.name = '';

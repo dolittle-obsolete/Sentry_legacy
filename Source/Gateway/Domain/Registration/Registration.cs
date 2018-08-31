@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Concepts.Scopes;
 using Dolittle.Domain;
 using Events.Consents;
+
 namespace Domain.Registration
 {
     /// <summary>

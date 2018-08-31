@@ -3,7 +3,7 @@ using Concepts;
 using Concepts.Scopes;
 using Dolittle.Commands;
 
-namespace Domain.Registration.Consents
+namespace Domain.Consents
 {
     /// <summary>
     /// Represents the intent of the user granting the tenant and application his consent  

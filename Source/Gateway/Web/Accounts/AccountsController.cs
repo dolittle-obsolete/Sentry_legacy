@@ -66,10 +66,10 @@ namespace Web.Accounts
             var tenantName = string.Empty;
             Guid tenantId = Guid.Empty;
             var hasTenant = Guid.TryParse(tenant, out tenantId);
-            if( hasTenant )
+            if ( hasTenant )
             {
                 var tenantConfiguration = _tenants.GetFor(tenantId);
-                if( tenantConfiguration != null )
+                if ( tenantConfiguration != null )
                 {
                     tenantName = tenantConfiguration.Name;
                 }

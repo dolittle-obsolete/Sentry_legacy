@@ -47,6 +47,11 @@
         "feature": "9baba52a-b65e-4101-885d-4e1ce6f2b17c",
         "name": "Consents",
         "subFeatures": []
+      },
+      {
+        "feature": "5aa4c2aa-e589-4c07-ad91-22d71f796acb",
+        "name": "Registration",
+        "subFeatures": []
       }
     ]
   }

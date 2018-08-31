@@ -1,7 +1,7 @@
 
 using Dolittle.Commands.Handling;
 using Dolittle.Domain;
-using Domain.Registration.Consents;
+using Domain.Consents;
 
 namespace Domain.Registration
 {

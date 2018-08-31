@@ -9,7 +9,7 @@ export class AzureActiveDirectoryExternalAuthority extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: 'd54cf2a7-08bb-4d1c-b38f-33c42c4cfdfd',
+           id: '76e27d65-6cd4-4978-ae9f-64e25b385708',
            generation: '1'
         };
         this.tenantId = '00000000-0000-0000-0000-000000000000';

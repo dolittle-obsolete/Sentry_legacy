@@ -2,13 +2,14 @@
  *  This file is an automatically generated ReadModel Proxy
  *  
  *--------------------------------------------------------------------------------------------*/
+import { ReadModel } from  '@dolittle/readModels';
 
-
-export class ConsentProcessInformation
+export class ConsentProcessInformation extends ReadModel
 {
     constructor() {
+        super();
         this.artifact = {
-           id: '7d595215-988d-451b-b7e9-fe66ec9153d9',
+           id: '3402a658-44c1-4ce9-b4c5-918f5eb55948',
            generation: '1'
         };
         this.clientName = '';

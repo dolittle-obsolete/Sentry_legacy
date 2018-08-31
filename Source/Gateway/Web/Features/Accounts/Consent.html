@@ -3,7 +3,7 @@
     <section class="consent">
         <div class="content-box">
             
-            <form onSubmit="allow()" role="form">
+            <form role="form">
                 <input type="hidden" name="returnUrl" value.one-time="returnUrl">
 
                 <template repeat.for="scope of scopes">
@@ -27,7 +27,7 @@
                 </label>
                 <div class="button-row">
                     <button type="reset" click.delegate="notAllow()">No, do not allow</button>
-                    <button type="submit" class="primary">Yes, allow</button>
+                    <button type="submit" class="primary" click.delegate="allow()">Yes, allow</button>
                 </div>
             </form>
         </div>

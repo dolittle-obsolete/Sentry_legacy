@@ -9,7 +9,7 @@ export class ExternalAuthority extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: '95866fc4-11fa-480a-b9bf-e7b2698add4b',
+           id: '45aa9e04-eec8-4f0e-b340-bedb558fb87d',
            generation: '1'
         };
         this.id = '00000000-0000-0000-0000-000000000000';
