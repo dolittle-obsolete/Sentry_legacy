@@ -31,7 +31,7 @@ namespace Read.Consents
             };
 
             var request = _interaction.GetAuthorizationContextAsync(@event.ReturnUrl).Result;
-            
+            if (request == null) throw new System.Exception("User not authorized");
             _interaction.GrantConsentAsync(request, grantedConsent);
 
             // Redirect, do in browser?.
