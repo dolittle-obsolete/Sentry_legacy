@@ -1,3 +1,4 @@
+
 using Dolittle.Commands.Handling;
 using Dolittle.Domain;
 using Domain.Registration.Consents;
@@ -5,21 +6,29 @@ using Domain.Registration.Consents;
 namespace Domain.Registration
 {
     /// <summary>
-    /// 
+    /// Represents the <see cref="Dolittle.Commands.ICommand"/> handlers for commands that has to do with user registration
     /// </summary>
     public class RegistrationCommandHandler : ICanHandleCommands
     {
-        readonly IAggregateRootRepositoryFor<Registration> _aggregateRoot;
+        readonly IAggregateRootRepositoryFor<Registration> _aggregateRootRepository;
 
+        /// <summary>
+        /// Instantiates an instance of <see cref="RegistrationCommandHandler"/>
+        /// </summary>
+        /// <param name="aggregateRoot"></param>
         public RegistrationCommandHandler(IAggregateRootRepositoryFor<Registration> aggregateRoot)
         {
-            _aggregateRoot = aggregateRoot; 
+            _aggregateRootRepository = aggregateRoot; 
         }
 
+        /// <summary>
+        /// Handles the <see cref="GrantConsent"/> command
+        /// </summary>
+        /// <param name="cmd"></param>    
         public void Handle(GrantConsent cmd)
         {
-            var aggregate = _aggregateRoot.Get(cmd.Tenant.Value);
-            aggregate.GrantConsent(cmd.Application, cmd.ClientName, cmd.IdentityScopesConsentedTo, cmd.ResourceScopesConsentedTo);
+            var aggregateRoot = _aggregateRootRepository.Get(cmd.Tenant.Value);
+            aggregateRoot.GrantConsent(cmd.Scopes, cmd.ReturnUrl, cmd.RememberConsent);
         }
     }
 }

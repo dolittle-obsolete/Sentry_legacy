@@ -11,29 +11,26 @@ namespace Domain.Registration.Consents
     public class GrantConsent : ICommand
     {
         /// <summary>
-        /// The <see cref="TenantId"/>
+        /// The <see cref="TenantId">Tenant's id</see>
         /// </summary>
         /// <value></value>
         public TenantId Tenant {get; set;}
         /// <summary>
-        /// The application name
+        /// The scopes the user consented to
+        /// </summary>
+        public IEnumerable<string> Scopes {get; set;} = new List<string>();
+
+        /// <summary>
+        /// The return url
         /// </summary>
         /// <value></value>
-        public string Application {get; set;}
-        /// <summary>
-        /// Gets or sets the name of the client
-        /// </summary>
-        public string ClientName { get; set; }
-        /// <summary>
-        /// The <see cref="Scope">Identity Scopes</see> the user consented to
-        /// </summary>
-        public IEnumerable<Scope> IdentityScopesConsentedTo {get; set;} = new List<Scope>();
+        public string ReturnUrl {get; set;}
 
         /// <summary>
-        /// The <see cref="Scope">Resource Scopes</see> the user consented to
+        /// Wether or not the consent should be remembered
         /// </summary>
-        public IEnumerable<Scope> ResourceScopesConsentedTo {get; set;} = new List<Scope>();
-
+        /// <value></value>
+        public bool RememberConsent {get; set;}
 
     }
 }

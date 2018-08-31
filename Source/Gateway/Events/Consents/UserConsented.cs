@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Dolittle.Events;
 
 namespace Events.Consents
@@ -7,6 +8,17 @@ namespace Events.Consents
     /// </summary>
     public class UserConsented : IEvent
     {
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<string> ScopesConsented {get; set;}
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ReturnUrl { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool RememberConsent {get; set;}
     }
 }

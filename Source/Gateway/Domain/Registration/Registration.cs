@@ -11,7 +11,7 @@ namespace Domain.Registration
     public class Registration : AggregateRoot
     {
         /// <summary>
-        /// 
+        /// Initializes an instance of <see cref="Registration"/>
         /// </summary>
         public Registration(Guid id) : base(id)
         {
@@ -19,15 +19,22 @@ namespace Domain.Registration
         }
 
         /// <summary>
-        /// 
+        /// Grants consent
         /// </summary>
-        /// <param name="application"></param>
-        /// <param name="clientName"></param>
-        /// <param name="identityScopesConsentedTo"></param>
-        /// <param name="resourceScopesConsentedTo"></param>
-        public void GrantConsent(string application, string clientName, IEnumerable<Scope> identityScopesConsentedTo, IEnumerable<Scope> resourceScopesConsentedTo)
+        /// <param name="scopes"></param>
+        /// <param name="returnUrl"></param>
+        /// <param name="rememberConsent"></param>
+        public void GrantConsent(IEnumerable<string> scopes, string returnUrl, bool rememberConsent)
         {
-            Apply(new UserConsented());
+            Apply
+            (
+                new UserConsented()
+                {
+                    ScopesConsented = scopes,
+                    ReturnUrl = returnUrl,
+                    RememberConsent = rememberConsent
+                }
+            );
         }
     }
 }
