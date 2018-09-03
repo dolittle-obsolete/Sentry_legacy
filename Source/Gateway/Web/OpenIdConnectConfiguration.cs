@@ -34,7 +34,20 @@ namespace Web
         /// </summary>
         public const string ClientId = "[Not Set]";
 
-        const string CallbackPath = "/9b296977-7657-4bc8-b5b0-3f0a23c43958/signin-oidc";
+        /// <summary>
+        /// NOTE: Some places "authorityid" was used instead
+        /// </summary>
+        public const string AuthorityIdQueryParameter = "authority";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string TenantIdQueryParameter = "tenant";
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string ApplicationNameQueryParameter = "application";
+
+        readonly static string CallbackPath = $"/{AuthenticationScheme}/signin-oidc";
 
         static readonly TokenValidationParameters _validationParameters = new TokenValidationParameters
         {
@@ -87,9 +100,9 @@ namespace Web
             return async(context) =>
             {
                 var query = context.HttpContext.Request.Query;
-                var authorityId = Guid.Parse(query["authorityid"]);
-                var tenantId = Guid.Parse(query["tenant"]);
-                var applicationName = query["application"];
+                var authorityId = Guid.Parse(query[AuthorityIdQueryParameter]);
+                var tenantId = Guid.Parse(query[TenantIdQueryParameter]);
+                var applicationName = query[ApplicationNameQueryParameter];
 
                 var tenantConfiguration = serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
                 var tenant = tenantConfiguration.GetFor(tenantId);

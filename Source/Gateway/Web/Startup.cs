@@ -53,7 +53,8 @@ namespace Web
 
             services.AddMvc();
 
-            services.AddIdentityServer(options =>
+            services.AddIdentityServer(
+                options =>
                 {
                     options.UserInteraction.LoginUrl = "/accounts/login";
                     options.UserInteraction.LogoutUrl = "/accounts/logout";
@@ -112,26 +113,7 @@ namespace Web
 
             app.UseMiddleware<AuthContextMiddleware>();
             app.UseMiddleware<OpenIdWellKnownConfigurationMiddleware>();
-            
-            app.Use(async(context, next) =>
-            {
-                var query = context.Request.Query;
-                if (query.ContainsKey("tenant") && query.ContainsKey("application") && query.ContainsKey("authority"))
-                {
-                    var authorityId = Guid.Parse(query["authorityid"]);
-                    var tenantId = Guid.Parse(query["tenant"]);
-                    var applicationName = query["application"];
 
-                    var tenantConfiguration = _serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
-                    var tenant = tenantConfiguration.GetFor(tenantId);
-                    var application = tenant.Applications[applicationName];
-                    var authority = application.ExternalAuthorities.Single(_ => _.Id == authorityId);
-                    var url = $"{authority.Authority}/.well-known/openid-configuration";
-                    CustomOpenIdConfigurationManager.url = url;
-                }
-
-                await next();
-            });
             app.UseIdentityServer();
 
             app.UseMvc();

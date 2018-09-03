@@ -11,20 +11,6 @@ namespace Web
     /// </summary>
     public class OpenIdWellKnownConfigurationMiddleware
     {
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string AuthorityIdQueryParameter = "authorityid";
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string TenantIdQueryParameter = "tenant";
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string ApplicationNameQueryParameter = "application";
-
         readonly RequestDelegate _next;
         readonly IServiceProvider _serviceProvider;
 
@@ -48,24 +34,29 @@ namespace Web
         public async Task Invoke(HttpContext context)
         {
             var query = context.Request.Query;
-            if (query.ContainsKey("tenant") && query.ContainsKey("application") && query.ContainsKey("authority"))
+            if (QueryHasRequiredParameters(query))
             {
-                var authorityId = Guid.Parse(query[AuthorityIdQueryParameter]);
-                var tenantId = Guid.Parse(query[TenantIdQueryParameter]);
-                var applicationName = query[ApplicationNameQueryParameter];
+                var authorityId = Guid.Parse(query[OpenIdConnectConfiguration.AuthorityIdQueryParameter]);
+                var tenantId = Guid.Parse(query[OpenIdConnectConfiguration.TenantIdQueryParameter]);
+                var applicationName = query[OpenIdConnectConfiguration.ApplicationNameQueryParameter];
 
                 var tenantConfiguration = _serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
                 var tenant = tenantConfiguration.GetFor(tenantId);
                 var application = tenant.Applications[applicationName];
                 var authority = application.ExternalAuthorities.Single(_ => _.Id == authorityId);
                 var url = GetWellKnownOpenIdConfigurationUrl(authority.Authority);
-                
+
                 CustomOpenIdConfigurationManager.url = url;
             }
 
             await _next(context);
         }
-
+        bool QueryHasRequiredParameters(IQueryCollection query)
+        {
+            return query.ContainsKey(OpenIdConnectConfiguration.TenantIdQueryParameter) 
+                && query.ContainsKey(OpenIdConnectConfiguration.ApplicationNameQueryParameter) 
+                && query.ContainsKey(OpenIdConnectConfiguration.AuthorityIdQueryParameter);
+        }
         string GetWellKnownOpenIdConfigurationUrl(string authority)
         {
             return $"{authority}/.well-known/openid-configuration";
