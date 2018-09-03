@@ -33,6 +33,7 @@ namespace Infrastructure.Applications
 
         /// <summary>
         /// Gets or sets the <see cref="Client">clients</see> of the application
+        /// //TODO: This can perhaps be simplified so that it only contains one client, 
         /// </summary>
         public IEnumerable<Client> Clients { get; set; }
 

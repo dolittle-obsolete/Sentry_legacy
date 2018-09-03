@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Concepts;
 using Dolittle.Collections;
-using Dolittle.Execution;
+using Dolittle.Lifecycle;
 using Dolittle.Logging;
 using Dolittle.Serialization.Json;
 using Infrastructure;
