@@ -111,7 +111,8 @@ namespace Web
                 .AllowCredentials());
 
             app.UseMiddleware<AuthContextMiddleware>();
-
+            app.UseMiddleware<OpenIdWellKnownConfigurationMiddleware>();
+            
             app.Use(async(context, next) =>
             {
                 var query = context.Request.Query;
