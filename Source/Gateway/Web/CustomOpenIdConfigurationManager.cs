@@ -17,9 +17,9 @@ namespace Web
     /// <summary>
     /// 
     /// </summary>
-    public class CustomOpenIdConfigurationManager : IConfigurationManager<OpenIdConnectConfiguration>
+    public class CustomOpenIdConfigurationManager : IConfigurationManager<Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectConfiguration>
     {
-        static ConcurrentDictionary<string, OpenIdConnectConfiguration> _configurations = new ConcurrentDictionary<string, OpenIdConnectConfiguration>();
+        static ConcurrentDictionary<string, Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectConfiguration> _configurations = new ConcurrentDictionary<string, Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectConfiguration>();
 
         /// <summary>
         /// 
@@ -29,7 +29,7 @@ namespace Web
 
 
         /// <inheritdoc/>
-        public async Task<OpenIdConnectConfiguration> GetConfigurationAsync(CancellationToken cancel)
+        public async Task<Microsoft.IdentityModel.Protocols.OpenIdConnect.OpenIdConnectConfiguration> GetConfigurationAsync(CancellationToken cancel)
         {
             if (_configurations.ContainsKey(url)) return _configurations[url];
             var configuration = await OpenIdConnectConfigurationRetriever.GetAsync(url, cancel);

@@ -73,63 +73,7 @@ namespace Web
 
             services.Add(new ServiceDescriptor(typeof(IConsentMessageStore), typeof(InMemoryConsentMessageStore), ServiceLifetime.Transient));
 
-            services.AddAuthentication()
-                // Todo: b2c should have its own provider type, since it has a bunch of different policy things attached to it for signup and signin
-
-                .AddOpenIdConnect("9b296977-7657-4bc8-b5b0-3f0a23c43958", "Azure Active Directory", options =>
-                {
-                    options.CallbackPath = "/9b296977-7657-4bc8-b5b0-3f0a23c43958/signin-oidc";
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    options.SignOutScheme = IdentityServerConstants.SignoutScheme;
-
-                    options.Authority = "[Not Set]";
-                    options.ClientId = "[Not Set]";
-
-                    // Todo: dynamic scope based on tenant configuration - ask for the same as configured with
-                    options.Scope.Clear();
-                    options.Scope.Add(IdentityServerConstants.StandardScopes.OpenId);
-                    options.Scope.Add(IdentityServerConstants.StandardScopes.Email);
-                    options.Scope.Add(IdentityServerConstants.StandardScopes.Profile);
-
-                    options.ConfigurationManager = new CustomOpenIdConfigurationManager();
-
-                    options.Events.OnRedirectToIdentityProvider = async(context) =>
-                    {
-                        var query = context.HttpContext.Request.Query;
-                        var authorityId = Guid.Parse(query["authorityid"]);
-                        var tenantId = Guid.Parse(query["tenant"]);
-                        var applicationName = query["application"];
-
-                        var tenantConfiguration = _serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
-                        var tenant = tenantConfiguration.GetFor(tenantId);
-                        var application = tenant.Applications[applicationName];
-
-                        var authority = application.ExternalAuthorities.Single(_ => _.Id == authorityId);
-                        context.Options.TokenValidationParameters.ValidAudience = authority.ClientId;                  
-
-                        // Todo: Dynamically create a new instance of OpenIdConnectMessage for the actual configuration - this could potentially fall over with multiple users accessing the system at once
-                        context.ProtocolMessage.ClientId = authority.ClientId;
-                        // Todo: rename autority.Secret to client secret
-                        //context.ProtocolMessage.ClientSecret = authority.Secret;
-
-                        // Todo: Guide on setting up an app for Azure - include this https://apps.dev.microsoft.com/
-
-                        if (!_hostingEnvironment.IsDevelopment()) context.ProtocolMessage.RedirectUri = $"https://dolittle.online{options.CallbackPath}";
-                        await Task.CompletedTask;
-                    };
-
-                    
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        // Todo: We should validate everything!!
-                        ValidateIssuer = false,
-
-                        // Todo: set the correct claim types depending on the target - Azure AD has a different claim for name than others
-                        NameClaimType = "name",
-                        RoleClaimType = "role"
-                    };
-                });
-
+            services.AddSentryAuthentication(_serviceProvider, _hostingEnvironment);
             _bootResult = services.AddDolittle();
         }
 
