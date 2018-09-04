@@ -41,8 +41,12 @@ export class Consent {
         const params = parseQueryString(window.location.search.substr(1));
 
         this.returnUrl = params.returnUrl;
-        this.tenant = routeParams.tenant;
-        this.application = routeParams.application;
+        this.tenant = params.tenant;
+        this.application = params.application;
+
+        console.log(this.returnUrl);
+        console.log(this.tenant);
+        console.log(this.application);
 
         const setupChecked = (scope) => {
             scope.checked = true;
@@ -88,6 +92,7 @@ export class Consent {
                 if (commandResult.success)
                 {
                     //Do something, probably redirect to returnUrl¨
+                    console.log(commandResult);
                     console.log("SUCCESS");
                 } else {
                     console.log(commandResult);
@@ -97,18 +102,5 @@ export class Consent {
                 console.error("ERROR");
             }
         );
-        //TODO: Fire off a GrantConsent/Consent command
-        /*
-        let self = this;
-        let client = new HttpClient();
-        client.createRequest("/Consent/Grant")
-            .asPost()
-            .withContent(scopes)
-            .withParams(
-                { 
-                    returnUrl: this._returnUrl,
-                    rememberConsent: this.rememberConsent
-                })
-            .send();*/
     }
 }

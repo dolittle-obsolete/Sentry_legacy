@@ -6,6 +6,8 @@ using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Autofac.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace Web
 {
@@ -14,6 +16,13 @@ namespace Web
     /// </summary>
     public class Program
     {
+        private static readonly Dictionary<string, string> defaults =
+            new Dictionary<string, string> 
+            {
+                { WebHostDefaults.EnvironmentKey, "Development" }
+            };
+
+ 
         /// <summary>
         /// 
         /// </summary>
@@ -24,11 +33,24 @@ namespace Web
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            var configuration =
+                new ConfigurationBuilder
+                ()
+                    .AddInMemoryCollection(defaults)
+                    .AddEnvironmentVariables("ASPNETCORE_")
+                    .AddCommandLine(args)
+                    .Build();
+
+            return WebHost.CreateDefaultBuilder(args)
+                .UseConfiguration(configuration)
                 .UseKestrel()
                 .ConfigureServices(services => services.AddAutofac())
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>();
+        }
+
+        
     }
 }

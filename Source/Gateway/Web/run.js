@@ -33,7 +33,7 @@ let server = new karma.Server(karmaOptions).start()
 
 glob("*.csproj", (err, matches) => {
     if (matches.length) {
-        let dotnet = spawn("dotnet", ["watch","run"]);
+        let dotnet = spawn("dotnet", ["watch", "run", `environment=Development`]);
         dotnet.stdout.on('data', (data) => {
             console.log(data.toString());
         });

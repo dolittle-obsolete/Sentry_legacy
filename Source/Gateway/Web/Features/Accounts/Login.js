@@ -24,7 +24,6 @@ export class Login {
         this.queryCoordinator = queryCoordinator;
     }
 
-
     /**
      * Method that gets called when view and view model is activated.
      */
@@ -32,21 +31,21 @@ export class Login {
         let self = this;
         this.tenant = params.tenant;
         this.application = params.application;
-        console.log(this.queryCoordinator);
         
         this.queryCoordinator.execute(new ExternalAuthoritiesInScheme(), params.tenant, params.application)
             .then((result) => {
                 let authorities = result.items;
 
                 authorities.forEach(authority => {
-                    authority.type = authority.type;
                     authority.tenant = self.tenant;
                     authority.application = self.application;
+                    authority.returnUrl = `${window.location.origin}/${authority.tenant}/${authority.application}/Accounts/Consent/?tenant=${authority.tenant}&application=${authority.application}&returnUrl=localhost:5000/`
                     //40x40 preferred SVG, but png should be accepted
                     
                     if( !authority.logoUrl || authority.logoUrl == '' ) {
                         authority.logoUrl = 'https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40';
-                    } 
+                    }
+                    console.log(authority); 
                     self.authorities.push(authority);
                 })
             },
