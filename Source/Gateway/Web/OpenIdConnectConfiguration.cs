@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Concepts.Authorities;
 using Dolittle.Collections;
 using IdentityServer4;
 using Infrastructure;
@@ -17,6 +18,12 @@ namespace Web
     /// </summary>
     public class OpenIdConnectConfiguration
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static IServiceProvider ServiceProvider {get; set;}
+
         /// <summary>
         /// 
         /// </summary>
@@ -33,11 +40,14 @@ namespace Web
         /// 
         /// </summary>
         public const string ClientId = "[Not Set]";
-
         /// <summary>
-        /// NOTE: Some places "authorityid" was used instead
+        /// The <see cref="AuthorityId"/>
         /// </summary>
-        public const string AuthorityIdQueryParameter = "authority";
+        public const string AuthorityIdQueryParameter = "authorityId";
+        /// <summary>
+        /// The <see cref="AuthorityType"/>
+        /// </summary>
+        public const string AuthorityQueryParameter = "authority";
         /// <summary>
         /// 
         /// </summary>
@@ -69,10 +79,9 @@ namespace Web
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="serviceProvider"></param>
         /// <param name="hostingEnvironment"></param>
         /// <returns></returns>
-        public static Action<OpenIdConnectOptions> GetOptionsCallback(IServiceProvider serviceProvider, IHostingEnvironment hostingEnvironment)
+        public static Action<OpenIdConnectOptions> GetOptionsCallback(IHostingEnvironment hostingEnvironment)
         {
             return options =>
             {
@@ -89,7 +98,7 @@ namespace Web
 
                 options.ConfigurationManager = new CustomOpenIdConfigurationManager();
 
-                options.Events.OnRedirectToIdentityProvider = GetRedirectToIdentityProviderCallback(serviceProvider, hostingEnvironment);
+                options.Events.OnRedirectToIdentityProvider = GetRedirectToIdentityProviderCallback(ServiceProvider, hostingEnvironment);
                 
                 options.TokenValidationParameters = _validationParameters;
             };
@@ -100,9 +109,9 @@ namespace Web
             return async(context) =>
             {
                 var query = context.HttpContext.Request.Query;
-                var authorityId = Guid.Parse(query[AuthorityIdQueryParameter]);
-                var tenantId = Guid.Parse(query[TenantIdQueryParameter]);
-                var applicationName = query[ApplicationNameQueryParameter];
+                var authorityId = Guid.Parse(query[AuthorityIdQueryParameter].FirstOrDefault());
+                var tenantId = Guid.Parse(query[TenantIdQueryParameter].FirstOrDefault());
+                var applicationName = query[ApplicationNameQueryParameter].FirstOrDefault();
 
                 var tenantConfiguration = serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
                 var tenant = tenantConfiguration.GetFor(tenantId);

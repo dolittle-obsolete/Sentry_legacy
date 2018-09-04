@@ -20,7 +20,7 @@ namespace Web
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            while (!System.Diagnostics.Debugger.IsAttached) {System.Threading.Thread.Sleep(20);}
+            // while (!System.Diagnostics.Debugger.IsAttached) {System.Threading.Thread.Sleep(20);}
             CreateWebHostBuilder(args).Build().Run();
         }
 

@@ -14,13 +14,12 @@ namespace Web
         /// 
         /// </summary>
         /// <param name="authBuilder"></param>
-        /// <param name="serviceProvider"></param>
         /// <param name="hostingEnvironment"></param>
         /// <returns></returns>
-        public static AuthenticationBuilder AddSentryOpenIdConnect(this AuthenticationBuilder authBuilder, IServiceProvider serviceProvider, IHostingEnvironment hostingEnvironment)
+        public static AuthenticationBuilder AddSentryOpenIdConnect(this AuthenticationBuilder authBuilder, IHostingEnvironment hostingEnvironment)
         {
             authBuilder.AddOpenIdConnect(OpenIdConnectConfiguration.AuthenticationScheme, OpenIdConnectConfiguration.DisplayName, 
-                OpenIdConnectConfiguration.GetOptionsCallback(serviceProvider, hostingEnvironment));
+                OpenIdConnectConfiguration.GetOptionsCallback(hostingEnvironment));
             return authBuilder;
         }
     }

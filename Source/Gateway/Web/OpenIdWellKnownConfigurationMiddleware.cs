@@ -36,14 +36,14 @@ namespace Web
             var query = context.Request.Query;
             if (QueryHasRequiredParameters(query))
             {
-                var authorityId = Guid.Parse(query[OpenIdConnectConfiguration.AuthorityIdQueryParameter]);
-                var tenantId = Guid.Parse(query[OpenIdConnectConfiguration.TenantIdQueryParameter]);
-                var applicationName = query[OpenIdConnectConfiguration.ApplicationNameQueryParameter];
+                var authorityId = Guid.Parse(query[OpenIdConnectConfiguration.AuthorityIdQueryParameter].FirstOrDefault());
+                var tenantId = Guid.Parse(query[OpenIdConnectConfiguration.TenantIdQueryParameter].FirstOrDefault());
+                var applicationName = query[OpenIdConnectConfiguration.ApplicationNameQueryParameter].FirstOrDefault();
 
                 var tenantConfiguration = _serviceProvider.GetService(typeof(ITenantConfiguration)) as ITenantConfiguration;
                 var tenant = tenantConfiguration.GetFor(tenantId);
                 var application = tenant.Applications[applicationName];
-                var authority = application.ExternalAuthorities.Single(_ => _.Id == authorityId);
+                var authority = application.ExternalAuthorities.Single(_ => _.Id.Value == authorityId);
                 var url = GetWellKnownOpenIdConfigurationUrl(authority.Authority);
 
                 CustomOpenIdConfigurationManager.url = url;

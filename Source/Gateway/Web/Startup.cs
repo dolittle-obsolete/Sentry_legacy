@@ -25,7 +25,6 @@ namespace Web
     public partial class Startup
     {
         readonly IHostingEnvironment _hostingEnvironment;
-        IServiceProvider _serviceProvider;
 
         BootResult _bootResult;
 
@@ -74,7 +73,7 @@ namespace Web
 
             services.Add(new ServiceDescriptor(typeof(IConsentMessageStore), typeof(InMemoryConsentMessageStore), ServiceLifetime.Transient));
 
-            services.AddSentryAuthentication(_serviceProvider, _hostingEnvironment);
+            services.AddSentryAuthentication(_hostingEnvironment);
             _bootResult = services.AddDolittle();
         }
 
@@ -94,7 +93,7 @@ namespace Web
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            _serviceProvider = app.ApplicationServices;
+            OpenIdConnectConfiguration.ServiceProvider = app.ApplicationServices;
 
             if (env.IsDevelopment())
             {

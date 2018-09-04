@@ -13,13 +13,12 @@ namespace Web
         /// 
         /// </summary>
         /// <param name="service"></param>
-        /// <param name="serviceProvider"></param>
         /// <param name="hostingEnvironment"></param>
         /// <returns></returns>
-        public static IServiceCollection AddSentryAuthentication(this IServiceCollection service, IServiceProvider serviceProvider, IHostingEnvironment hostingEnvironment)
+        public static IServiceCollection AddSentryAuthentication(this IServiceCollection service, IHostingEnvironment hostingEnvironment)
         {
             service.AddAuthentication()
-                .AddSentryOpenIdConnect(serviceProvider, hostingEnvironment);
+                .AddSentryOpenIdConnect(hostingEnvironment);
 
             return service;
         }
