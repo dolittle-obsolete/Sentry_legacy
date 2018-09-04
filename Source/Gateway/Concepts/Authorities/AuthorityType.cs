@@ -13,9 +13,9 @@ namespace Concepts.Authorities
     public class AuthorityType : ConceptAs<Guid>
     {
         /// <summary>
-        /// Implicitally convert from <see cref="Guid"/> to <see cref="AuthorityId"/>
+        /// Implicitally convert from <see cref="Guid"/> to <see cref="AuthorityType"/>
         /// </summary>
-        /// <param name="id"><see cref="Guid">Unique identifier</see> representing the authority</param>
-        public static implicit operator AuthorityType(Guid id) => new AuthorityType { Value = id };
+        /// <param name="authorityType"><see cref="Guid">Unique identifier</see> representing the authority type</param>
+        public static implicit operator AuthorityType(Guid authorityType) => new AuthorityType { Value = authorityType };
     }
 }
