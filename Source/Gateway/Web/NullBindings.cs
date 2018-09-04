@@ -42,7 +42,8 @@ namespace Web
 
             builder.Bind(typeof(IReadModelRepositoryFor<>)).To(typeof(Dolittle.ReadModels.MongoDB.ReadModelRepositoryFor<>));
 
-            builder.Bind<ITenantConfiguration>().To<TenantConfiguration>();
+            // builder.Bind<ITenantConfiguration>().To<TenantConfiguration>();
+            builder.Bind<ITenantConfiguration>().To<TenantTestConfiguration>();
         }
     }
 }

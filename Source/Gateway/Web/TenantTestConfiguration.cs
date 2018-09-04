@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using Concepts;
+using Dolittle.Lifecycle;
 using Infrastructure;
 using Infrastructure.Tenants;
 
 namespace Web
 {
     /// <inheritdoc/>
+    [Singleton]
     public class TenantTestConfiguration : ITenantConfiguration
     {
         readonly IDictionary<TenantId, Tenant> _tenants = new Dictionary<TenantId, Tenant>();
