@@ -39,13 +39,12 @@ export class Login {
                 authorities.forEach(authority => {
                     authority.tenant = self.tenant;
                     authority.application = self.application;
-                    authority.returnUrl = `${window.location.origin}/${authority.tenant}/${authority.application}/Accounts/Consent/?tenant=${authority.tenant}&application=${authority.application}&returnUrl=localhost:5000/`
+                    authority.returnUrl = `${window.location.origin}/${authority.tenant}/${authority.application}/Accounts/Consent/?tenant=${authority.tenant}&application=${authority.application}&returnUrl=${window.location.origin}/${authority.tenant}/${authority.application}`
                     //40x40 preferred SVG, but png should be accepted
                     
                     if( !authority.logoUrl || authority.logoUrl == '' ) {
                         authority.logoUrl = 'https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40';
                     }
-                    console.log(authority); 
                     self.authorities.push(authority);
                 })
             },

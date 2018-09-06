@@ -44,10 +44,6 @@ export class Consent {
         this.tenant = params.tenant;
         this.application = params.application;
 
-        console.log(this.returnUrl);
-        console.log(this.tenant);
-        console.log(this.application);
-
         const setupChecked = (scope) => {
             scope.checked = true;
             this._observerLocator
@@ -63,7 +59,6 @@ export class Consent {
                 this.information = result.items[0];
                 this.information.identityScopes = this.information.identityScopes || new Array();
                 this.information.resourceScopes = this.information.resourceScopes || new Array();
-                console.log(this.information);
                 this.information.identityScopes.forEach(setupChecked);
                 this.information.resourceScopes.forEach(setupChecked);
                 this.updateGrantedScopes();
@@ -86,20 +81,15 @@ export class Consent {
         command.scopes = this.scopes;
         command.tenant = this.tenant;
 
-        console.log(command);
         this._commandCoordinator.handle(command, command.tenant, this.application)
             .then((commandResult) => {
                 if (commandResult.success)
                 {
                     //Do something, probably redirect to returnUrl¨
-                    console.log(commandResult);
-                    console.log("SUCCESS");
                 } else {
-                    console.log(commandResult);
-                    console.error("Command was not successful");
                 }
             },(error) => {
-                console.error("ERROR");
+                console.error("ERROR:", error);
             }
         );
     }

@@ -7,7 +7,6 @@ namespace Domain.Specs.for_consents
 {
     public class when_creating_GrantConsent_command
     {
-
         readonly static TenantId tenant_id = Guid.NewGuid();
         const bool remember_consent = true;
         const string return_url = "/";
