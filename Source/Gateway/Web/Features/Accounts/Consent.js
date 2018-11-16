@@ -86,7 +86,10 @@ export class Consent {
                 if (commandResult.success)
                 {
                     //Do something, probably redirect to returnUrl¨
+                    console.log(commandResult);
                 } else {
+
+                    console.log(commandResult);
                 }
             },(error) => {
                 console.error("ERROR:", error);

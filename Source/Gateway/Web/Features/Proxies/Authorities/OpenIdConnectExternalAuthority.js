@@ -9,7 +9,7 @@ export class OpenIdConnectExternalAuthority extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: 'd00f0da9-b903-48b1-86d7-a6c6b055fba3',
+           id: 'db2f5347-6e94-47c2-9507-982ab27871a9',
            generation: '1'
         };
         this.clientId = '';

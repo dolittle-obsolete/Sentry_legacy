@@ -1,0 +1,45 @@
+{
+  "modules": [],
+  "features": [
+    {
+      "feature": "ac1383c7-560e-4699-a2af-ab7cbc7f5b3b",
+      "name": "Registration",
+      "subFeatures": []
+    },
+    {
+      "feature": "01509e15-dc0c-409f-8a8b-82622b5e7781",
+      "name": "Consents",
+      "subFeatures": []
+    },
+    {
+      "feature": "45f4cc39-b273-4b76-a455-59185e7d0a0b",
+      "name": "Tenants",
+      "subFeatures": []
+    },
+    {
+      "feature": "01d7a7a1-a441-47ce-9c1b-9f96a3bec2d3",
+      "name": "Resources",
+      "subFeatures": []
+    },
+    {
+      "feature": "a50f52ef-eb68-4c25-9459-c5b32f9ddcfa",
+      "name": "Clients",
+      "subFeatures": []
+    },
+    {
+      "feature": "15937244-544e-4315-8156-4c538bfc2c20",
+      "name": "Claims",
+      "subFeatures": []
+    },
+    {
+      "feature": "65c6fab4-4fd8-4ac6-a05a-82e2e07e430f",
+      "name": "Authorities",
+      "subFeatures": []
+    },
+    {
+      "feature": "54baff4d-7b9a-421e-85fd-7050332f7516",
+      "name": "Applications",
+      "subFeatures": []
+    }
+  ]
+}

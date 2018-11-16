@@ -1,161 +1,147 @@
 {
   "artifacts": {
-    "9baba52a-b65e-4101-885d-4e1ce6f2b17c": {
+    "01509e15-dc0c-409f-8a8b-82622b5e7781": {
       "commands": [
         {
-          "artifact": "24dbdad3-f4c4-429c-b3cf-449cc4287c94",
+          "artifact": "10c24f5d-ca85-4a78-8a26-8b94fdd23c1a",
           "generation": 1,
           "type": "Domain.Consents.GrantConsent, Domain"
         }
       ],
       "events": [
         {
-          "artifact": "74c814ca-f64b-4295-a675-16aa8ac87c2f",
+          "artifact": "e2df292a-4a41-4ca7-8172-6f9e27d0f7d4",
           "generation": 1,
           "type": "Events.Consents.UserConsented, Events"
-        }
-      ],
-      "eventProcessors": [
-        {
-          "artifact": "361f6af0-33b3-4616-ac54-e46f870041ca",
-          "generation": 1,
-          "type": "Read.Consents.ConsentEventProcessor, Read"
         }
       ],
       "eventSources": [],
       "readModels": [
         {
-          "artifact": "3402a658-44c1-4ce9-b4c5-918f5eb55948",
+          "artifact": "deb36d29-5874-4503-a4af-1c3802febb06",
           "generation": 1,
           "type": "Read.Consents.ConsentProcessInformation, Read"
         }
       ],
       "queries": [
         {
-          "artifact": "9bf6d615-ab56-470c-9750-8f0b54bd6f34",
+          "artifact": "e513aba2-d6c6-48d0-8879-bd5e3f6469d3",
           "generation": 1,
           "type": "Read.Consents.RetrieveConsentProcessInformation, Read"
         }
       ]
     },
-    "39dfeb03-6232-40da-abdd-d6e8bba540a5": {
+    "ac1383c7-560e-4699-a2af-ab7cbc7f5b3b": {
       "commands": [],
       "events": [],
-      "eventProcessors": [],
+      "eventSources": [
+        {
+          "artifact": "36e6b27d-892f-4924-b8c7-bdd044535626",
+          "generation": 1,
+          "type": "Domain.Registration.Registration, Domain"
+        }
+      ],
+      "readModels": [],
+      "queries": []
+    },
+    "45f4cc39-b273-4b76-a455-59185e7d0a0b": {
+      "commands": [],
+      "events": [],
       "eventSources": [],
       "readModels": [
         {
-          "artifact": "6fd8017e-2173-4135-90f9-23375410e5ac",
+          "artifact": "8094f671-1133-4cf7-b9de-b1f23daab8e4",
           "generation": 1,
           "type": "Infrastructure.Tenants.Tenant, Infrastructure"
         }
       ],
       "queries": []
     },
-    "1d879321-3319-4d0d-ad58-c69a6b9de231": {
+    "01d7a7a1-a441-47ce-9c1b-9f96a3bec2d3": {
       "commands": [],
       "events": [],
-      "eventProcessors": [],
       "eventSources": [],
       "readModels": [
         {
-          "artifact": "95567347-6804-491c-8e12-fc3d750e2b60",
+          "artifact": "9c7c0a38-94e6-4bb2-8f1d-cf906c1a34f1",
           "generation": 1,
           "type": "Infrastructure.Resources.Resource, Infrastructure"
         }
       ],
       "queries": []
     },
-    "c309e460-fb48-49ef-9fb3-e88db3a80428": {
+    "a50f52ef-eb68-4c25-9459-c5b32f9ddcfa": {
       "commands": [],
       "events": [],
-      "eventProcessors": [],
       "eventSources": [],
       "readModels": [
         {
-          "artifact": "99427e2c-1fc8-43d2-8fd3-8baad6c08337",
+          "artifact": "ade076ed-9cbf-4f74-91f5-f87248b5ac54",
           "generation": 1,
           "type": "Infrastructure.Clients.Client, Infrastructure"
         }
       ],
       "queries": []
     },
-    "31d64e37-f877-4b67-8bfe-361fa53c8367": {
+    "15937244-544e-4315-8156-4c538bfc2c20": {
       "commands": [],
       "events": [],
-      "eventProcessors": [],
       "eventSources": [],
       "readModels": [
         {
-          "artifact": "1a2314ab-cdfc-4b0a-afc6-cf6a02e239a9",
+          "artifact": "ba717022-45cc-4204-acce-8659701bc43c",
           "generation": 1,
           "type": "Infrastructure.Claims.ProfileClaim, Infrastructure"
         }
       ],
       "queries": [
         {
-          "artifact": "cda1dbac-13f4-45b0-8e94-fd4a0e07f030",
+          "artifact": "b93d814c-4c7b-4ff7-8b18-5bbf49758b81",
           "generation": 1,
           "type": "Read.Claims.ProfileClaims, Read"
         }
       ]
     },
-    "f9401031-dd9e-4b66-bdbd-549ffbc6aa90": {
+    "65c6fab4-4fd8-4ac6-a05a-82e2e07e430f": {
       "commands": [],
       "events": [],
-      "eventProcessors": [],
       "eventSources": [],
       "readModels": [
         {
-          "artifact": "76e27d65-6cd4-4978-ae9f-64e25b385708",
+          "artifact": "84d35b56-a8ad-4425-bc69-663e37c6446e",
           "generation": 1,
           "type": "Infrastructure.Authorities.AzureActiveDirectoryExternalAuthority, Infrastructure"
         },
         {
-          "artifact": "45aa9e04-eec8-4f0e-b340-bedb558fb87d",
+          "artifact": "47c6777b-34bd-489d-b272-e4de91fc345e",
           "generation": 1,
           "type": "Infrastructure.Authorities.ExternalAuthority, Infrastructure"
         },
         {
-          "artifact": "d00f0da9-b903-48b1-86d7-a6c6b055fba3",
+          "artifact": "db2f5347-6e94-47c2-9507-982ab27871a9",
           "generation": 1,
           "type": "Infrastructure.Authorities.OpenIdConnectExternalAuthority, Infrastructure"
         }
       ],
       "queries": [
         {
-          "artifact": "4bacc0b6-0ba3-40f0-bc12-8e71dc190059",
+          "artifact": "980517ce-2998-49bf-941b-bff78092866d",
           "generation": 1,
           "type": "Read.Authorities.ExternalAuthoritiesInScheme, Read"
         }
       ]
     },
-    "51dfa947-0dba-40d7-bd3a-8c3483330224": {
+    "54baff4d-7b9a-421e-85fd-7050332f7516": {
       "commands": [],
       "events": [],
-      "eventProcessors": [],
       "eventSources": [],
       "readModels": [
         {
-          "artifact": "6fa78262-463e-43e9-ad01-717370482b0b",
+          "artifact": "b8c817fd-7021-49f0-bb75-46c401f22712",
           "generation": 1,
           "type": "Infrastructure.Applications.Application, Infrastructure"
         }
       ],
-      "queries": []
-    },
-    "5aa4c2aa-e589-4c07-ad91-22d71f796acb": {
-      "commands": [],
-      "events": [],
-      "eventProcessors": [],
-      "eventSources": [
-        {
-          "artifact": "94ba089d-07ed-41e2-970c-787e0a482365",
-          "generation": 1,
-          "type": "Domain.Registration.Registration, Domain"
-        }
-      ],
-      "readModels": [],
       "queries": []
     }
   }

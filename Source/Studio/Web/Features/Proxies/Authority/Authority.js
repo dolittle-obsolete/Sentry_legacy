@@ -4,18 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 import { ReadModel } from  '@dolittle/readModels';
 
-export class ExternalAuthority extends ReadModel
+export class Authority extends ReadModel
 {
     constructor() {
         super();
         this.artifact = {
-           id: '47c6777b-34bd-489d-b272-e4de91fc345e',
+           id: '4e4558e2-6978-4eff-b402-0355e07aaab0',
            generation: '1'
         };
         this.id = '00000000-0000-0000-0000-000000000000';
-        this.type = '00000000-0000-0000-0000-000000000000';
-        this.displayName = '';
-        this.logoUrl = '';
-        this.secret = '';
+        this.url = '';
+        this.clientId = '';
+        this.name = '';
+        this.description = '';
+        this.authenticationScheme = '';
+        this.iconUrl = '';
     }
 }

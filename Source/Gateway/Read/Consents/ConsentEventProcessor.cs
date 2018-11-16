@@ -19,9 +19,10 @@ namespace Read.Consents
         {
             _interaction = interaction;
         }
-        /// <summary>
+         /// <summary>
         /// Processes the <see cref="UserConsented"/> event
         /// </summary>
+        [EventProcessor("3279e73a-d4fe-4980-9b8a-ac8deefcd65e")]
         public void Process(UserConsented @event)
         {
             var grantedConsent = new IdentityServer4.Models.ConsentResponse()

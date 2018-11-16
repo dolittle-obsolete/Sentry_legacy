@@ -5,6 +5,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <DolittleUseModules>False</DolittleUseModules>
+    <DolittleNamespaceSegmentsToStrip>Web=Features</DolittleNamespaceSegmentsToStrip>
+    <DolittleGenerateProxies>True</DolittleGenerateProxies>
+    <DolittleProxiesBasePath>Features/Proxies</DolittleProxiesBasePath>
+  </PropertyGroup>
   
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -27,8 +33,7 @@
     <PackageReference Include="Dolittle.Concepts.Serialization.Json" Version="2.0.0-alpha2.*" />
     <PackageReference Include="Dolittle.SDK" Version="2.0.0-alpha2*" />
 
-    
-    <PackageReference Include="DolittleArtifactsBuild" Version="2.0.0-alpha2*" />
+    <PackageReference Include="Dolittle.Build" Version="2.0.0-alpha2*" />
     <!--
     <PackageReference Include="Dolittle.Runtime.Events.MongoDB" Version="2.0.0-alpha2*" />  
     <PackageReference Include="Dolittle.Concepts.Serialization.Json" Version="2.0.0-alpha2.*" />

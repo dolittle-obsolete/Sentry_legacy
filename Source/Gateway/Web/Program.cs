@@ -16,7 +16,7 @@ namespace Web
     /// </summary>
     public class Program
     {
-        private static readonly Dictionary<string, string> defaults =
+        static readonly Dictionary<string, string> defaults =
             new Dictionary<string, string> 
             {
                 { WebHostDefaults.EnvironmentKey, "Development" }
@@ -29,7 +29,7 @@ namespace Web
         /// <param name="args"></param>
         public static void Main(string[] args)
         {
-            // while (!System.Diagnostics.Debugger.IsAttached) {System.Threading.Thread.Sleep(20);}
+            while (!System.Diagnostics.Debugger.IsAttached) {System.Threading.Thread.Sleep(20);}
             CreateWebHostBuilder(args).Build().Run();
         }
 

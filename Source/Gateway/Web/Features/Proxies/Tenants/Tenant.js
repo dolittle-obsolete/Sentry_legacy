@@ -9,7 +9,7 @@ export class Tenant extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: '6fd8017e-2173-4135-90f9-23375410e5ac',
+           id: '8094f671-1133-4cf7-b9de-b1f23daab8e4',
            generation: '1'
         };
         this.tenantId = '00000000-0000-0000-0000-000000000000';

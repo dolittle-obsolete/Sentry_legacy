@@ -72,8 +72,7 @@ namespace Web
                 .AddProfileService<ProfileService>();
 
             services.Add(new ServiceDescriptor(typeof(IConsentMessageStore), typeof(InMemoryConsentMessageStore), ServiceLifetime.Transient));
-
-            services.AddSentryAuthentication(_hostingEnvironment);
+            services.AddSentryAuthentication(_hostingEnvironment);            
             _bootResult = services.AddDolittle();
         }
 

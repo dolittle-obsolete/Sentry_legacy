@@ -4,15 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 import { Command } from  '@dolittle/commands';
 
-export class GrantConsent extends Command
+export class EmphasizeIdentityResource extends Command
 {
     constructor() {
         super();
-        this.type = '10c24f5d-ca85-4a78-8a26-8b94fdd23c1a';
+        this.type = 'a2c3b82a-007a-42bf-b76f-49aad34083ad';
 
-        this.tenant = '00000000-0000-0000-0000-000000000000';
-        this.scopes = [];
-        this.returnUrl = '';
-        this.rememberConsent = false;
+        this.name = '';
     }
 }

@@ -9,7 +9,7 @@ export class Resource extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: '95567347-6804-491c-8e12-fc3d750e2b60',
+           id: '9c7c0a38-94e6-4bb2-8f1d-cf906c1a34f1',
            generation: '1'
         };
         this.name = '';

@@ -9,7 +9,7 @@ export class ConsentProcessInformation extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: '3402a658-44c1-4ce9-b4c5-918f5eb55948',
+           id: 'deb36d29-5874-4503-a4af-1c3802febb06',
            generation: '1'
         };
         this.clientName = '';

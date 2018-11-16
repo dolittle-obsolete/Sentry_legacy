@@ -4,15 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 import { Command } from  '@dolittle/commands';
 
-export class GrantConsent extends Command
+export class RequestAccessWithEmail extends Command
 {
     constructor() {
         super();
-        this.type = '10c24f5d-ca85-4a78-8a26-8b94fdd23c1a';
+        this.type = '28f6cc6e-e03e-48d7-bb5a-25b85345ec63';
 
         this.tenant = '00000000-0000-0000-0000-000000000000';
-        this.scopes = [];
-        this.returnUrl = '';
-        this.rememberConsent = false;
+        this.application = '';
+        this.email = '';
     }
 }

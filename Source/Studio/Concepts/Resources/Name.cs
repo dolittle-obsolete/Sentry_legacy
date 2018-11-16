@@ -6,8 +6,6 @@ using Dolittle.Concepts;
 
 namespace Concepts.Resources
 {
-
-
     /// <summary>
     /// Represents the concept of a name for an identity resource
     /// </summary>

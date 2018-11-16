@@ -11,6 +11,39 @@
     ]
   },
   "topology": {
-    
+    "modules": [],
+    "features": [
+      {
+        "feature": "adf963b7-3eb2-4fa2-b7a0-16cd86a04fbd",
+        "name": "UserManagement",
+        "subFeatures": []
+      },
+      {
+        "feature": "2a78aedb-bac9-4717-a52e-b6a212361026",
+        "name": "Registration",
+        "subFeatures": []
+      },
+      {
+        "feature": "28531cab-d849-48ed-9977-fdd36342bd5e",
+        "name": "Management",
+        "subFeatures": [
+          {
+            "feature": "d1974c11-2981-45c6-89e3-f9cef2c3c262",
+            "name": "Resources",
+            "subFeatures": []
+          }
+        ]
+      },
+      {
+        "feature": "df6e160c-d5d4-44da-8b83-16cf118cf82d",
+        "name": "Accounts",
+        "subFeatures": []
+      },
+      {
+        "feature": "d890ccad-4302-47fa-b111-f18a244fe887",
+        "name": "Authority",
+        "subFeatures": []
+      }
+    ]
   }
 }
