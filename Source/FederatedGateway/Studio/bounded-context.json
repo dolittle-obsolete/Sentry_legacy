@@ -1,0 +1,18 @@
+{
+  "application": "215daeda-b2c7-4c8e-a305-586eb779733b",
+  "boundedContext": "14c6306b-2a04-9274-7ed0-6497382e48e8",
+  "boundedContextName": "FederatedGateway",
+  "resources": {
+    "readModels": {
+      "production": "MongoDB",
+      "development": "MongoDB"
+    },
+    "eventStore": {
+      "production": "MongoDB",
+      "development": "MongoDB"
+    }
+  },
+  "core": {
+    "language": "csharp"
+  }
+}
