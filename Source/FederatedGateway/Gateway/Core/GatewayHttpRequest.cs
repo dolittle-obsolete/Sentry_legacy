@@ -9,8 +9,8 @@ namespace Core
 {
     public class GatewayHttpRequest
     {
-        const int TENANT_SEGMENT = 1;
-        const int APPLICATION_SEGMENT = 2;
+        const int TENANT_SEGMENT = 0;
+        const int APPLICATION_SEGMENT = 1;
 
         public static GatewayHttpRequest ParseFromHttpContext (HttpContext context)
         {
@@ -24,8 +24,8 @@ namespace Core
 
             var tenantSegment = segments[TENANT_SEGMENT];
             var applicationSegment = segments[APPLICATION_SEGMENT];
-
-            if (Guid.TryParse(tenantSegment, out tenant)) throw new InvalidTenantId("TenantId could not be parsed to a GUID");
+            var isGuid = Guid.TryParse(tenantSegment, out tenant); 
+            if (!isGuid) throw new InvalidTenantId("TenantId could not be parsed to a GUID");
 
             return new GatewayHttpRequest(context, tenant, applicationSegment, segments, fromEtag);
 
