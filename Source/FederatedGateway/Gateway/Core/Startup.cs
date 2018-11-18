@@ -27,6 +27,11 @@ namespace Core
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Todo: understand anti forgery
+            //services.AddAntiforgery();
+
+            // Todo: RSA Signing Key for Dolittle as Authority
+
             services.AddCors();
             
             services.AddMvc();
@@ -48,9 +53,9 @@ namespace Core
                 .AddProfileService<ProfileService>();
 
             services.Add(new ServiceDescriptor(typeof(IConsentMessageStore), typeof(InMemoryConsentMessageStore), ServiceLifetime.Transient));
+            
             services.AddSentryAuthentication(_hostingEnvironment);            
             
-
             _bootResult = services.AddDolittle(_loggerFactory);
         }
 
@@ -72,12 +77,22 @@ namespace Core
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            // Todo: this probably is a bit too lose.. 
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowCredentials());
+            
+            app.UseMiddleware<AuthContextMiddleware>();
+            app.UseMiddleware<OpenIdWellKnownConfigurationMiddleware>();
+
+            app.UseIdentityServer();
             app.UseMvc();
 
-
             app.UseDolittle();
+
             app.RunAsSinglePageApplication();
         }
-
     }
 }
