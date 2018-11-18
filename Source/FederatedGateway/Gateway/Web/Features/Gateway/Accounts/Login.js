@@ -34,10 +34,7 @@ export class Login {
         
         this.queryCoordinator.execute(new ExternalAuthoritiesInScheme(), params.tenant, params.application)
             .then((result) => {
-                console.log(result);
                 let authorities = result.items;
-                console.log('authorities = ');
-                console.log(authorities);
 
                 authorities.forEach(authority => {
                     authority.tenant = self.tenant;
@@ -49,7 +46,6 @@ export class Login {
                         authority.logoUrl = 'https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40';
                     }
                     self.authorities.push(authority);
-                    console.log(authority);
                 })
             },
             (error) => {
