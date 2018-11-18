@@ -5,10 +5,6 @@ metadata:
   name: sentry
   namespace: dolittle
 spec:
-  tls:
-  - hosts:
-    - dolittle.online
-    secretName: dolittle-online-secret
   rules:
   - host: dolittle.online
     http:
