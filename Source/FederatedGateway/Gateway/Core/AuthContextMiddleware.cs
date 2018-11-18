@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 using Read.Infrastructure.Gateway;
+using Read.Infrastructure.Gateway.Tenants;
 
 namespace Core
 {
@@ -52,6 +53,7 @@ namespace Core
         /// Gets the key used to get the <see cref="AuthContext"/> from the current <see cref="HttpContext"/>
         /// </summary>
         public const string AuthContextItemKey = "AuthContext";
+
         readonly RequestDelegate _next;
         readonly ITenantConfiguration _tenantConfiguration;
         readonly IHostingEnvironment _hostingEnvironment;
@@ -82,98 +84,47 @@ namespace Core
         /// <param name="context"><see cref="HttpContext"/> for the request</param>
         public async Task Invoke(HttpContext context)
         {
-            // If Cookie exists: Tenant / Application
-            // Else - extract from URL - put in a cookie
-            // Rewrite the URL
+            var gatewayRequest = GatewayHttpRequest.ParseFromHttpContext(context);
             
-            // Alternative to Cookie: HTTP ETag - session only - https://en.wikipedia.org/wiki/HTTP_ETag
-            
-            var requestETag = GetEtag(context.Request);
-
-            var segments = context.Request.Path.Value.Split('/').Skip(1).ToArray();
-
-            TenantId tenantId = null;
-            Guid tenantGuid = Guid.Empty;
-            string tenantSegment = "";
-            string applicationName = "";
-
-            if (ETagHasAuthContextInfo(requestETag))
+            var handler = await _handlerProvider.GetHandlerAsync(context, gatewayRequest.Tenant.Value.ToString());
+            if (handler != null) 
             {
-                var eTagSegments = requestETag[0].Split('/');
-                tenantSegment = eTagSegments[0];
-                applicationName = eTagSegments[1];
-            }
-            else if (segments.Length > 1)
-            {
-                tenantSegment = segments[0];
-                applicationName = segments[1];
-            }
-            else throw new ArgumentException("Request path does not have tenantId or applicationName");
-            
-            var isGuid = Guid.TryParse(tenantSegment, out tenantGuid);
-            if (!isGuid) throw new ArgumentException("TenantId could not be parsed to a GUID");
-            
-            var handler = await _handlerProvider.GetHandlerAsync(context, tenantSegment);
-            if( handler != null ) {
                 await _next(context);
                 return;
             }
 
-            tenantId = tenantGuid;
+            HandleIfTenantDoesNotExist(gatewayRequest.Tenant);
+
+            var tenant = _tenantConfiguration.GetFor(gatewayRequest.Tenant);
+            
+            HandleIfTenantHasNoApplication(tenant, gatewayRequest.Application);
+
+            gatewayRequest.SetEtag();
+
+            gatewayRequest.ModifyRequest(_hostingEnvironment.IsDevelopment());
+            
+            AuthContextBindings.AuthContext = new Read.Infrastructure.Gateway.AuthContext(tenant, tenant.Applications[gatewayRequest.Application]);
+            
+            await _next(gatewayRequest.Context);
+        }
+
+
+        void HandleIfTenantDoesNotExist(TenantId tenantId)
+        {
             if (!_tenantConfiguration.HasTenant(tenantId))
             {
-                throw new ArgumentException("Tenant does not exist");
+                throw new TenantDoesNotExist(tenantId);
                 // Todo: redirect to error page with proper error 
             }
-
-            var tenant = _tenantConfiguration.GetFor(tenantId);
-            
+        }
+        void HandleIfTenantHasNoApplication(Tenant tenant, string applicationName)
+        {
             if (!tenant.HasApplication(applicationName))
             {
-                throw new ArgumentException($"Application '{applicationName}' does not exist in tenant '{tenantId.Value}'");
+                throw new InvalidApplication(tenant, applicationName);
                 // Todo: redirect to error page with proper error 
             }
-
-            // Set Response ETag
-            var responseETag = $"{tenantId.Value}/{applicationName}";
-            context.Response.Headers[HeaderNames.ETag] = responseETag;
-
-
-            context.Request.PathBase = new PathString($"/{tenantSegment}/{applicationName}");
-            if( !_hostingEnvironment.IsDevelopment() )
-            {
-                context.Request.Host = new HostString("dolittle.online");
-                context.Request.Scheme = "https";
-            }
-            
-            context.Request.Path = GeneratePath(segments, tenantSegment, applicationName);
-
-            var authContext = new Read.Infrastructure.Gateway.AuthContext(tenant, tenant.Applications[applicationName]);
-            //context.Items[AuthContextItemKey] = authContext;
-            AuthContextBindings.AuthContext = authContext; 
-            
-            
-            await _next(context);
-        }
-        StringValues GetEtag(HttpRequest request)
-        {
-            StringValues values = "";
-            request.Headers.TryGetValue("If-None-Match", out values);
-
-            return values;
-        }
-        bool ETagHasAuthContextInfo(StringValues eTag)
-        {
-            if (eTag.Count != 1) return false;
-            return eTag[0].Split('/').Count() == 2;
         }
 
-        string GeneratePath(string[] requestPathSegments, string tenantId, string applicationName)
-        {
-            var remainingSegments = new List<string>(requestPathSegments);
-            remainingSegments.Remove(tenantId);
-            remainingSegments.Remove(applicationName);
-            return $"/{string.Join('/',remainingSegments)}";
-        }
     }
 }
