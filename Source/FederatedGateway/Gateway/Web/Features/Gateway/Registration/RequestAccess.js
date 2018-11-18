@@ -26,14 +26,6 @@ export class RequestAccess {
         this.router = router;
         this._commandCoordinator = sentryCommandCoordinator;
         this._queryCoordinator = sentryQueryCoordinator;
-
-        //TODO: Replace this with generic thing from route or something
-        let query = new ProfileClaims();
-        query.tenant = "be4c4da6-5ede-405f-a947-8aedad564b7f";
-        query.application = "CBS"
-        sentryQueryCoordinator.execute(query).then(result => {
-            self.profileClaims = result.items;
-        });
     }
 
     submitRequest() {
@@ -63,10 +55,13 @@ export class RequestAccess {
             // http://localhost:5000/be4c4da6-5ede-405f-a947-8aedad564b7f/CBS/25c7ddac-dd1b-482a-8638-aaa909fd1f1c/Registration/RequestAccess
 
             // Validate params - guids
-            // let guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+            let guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+            if (! guidRegex.test(params.tenant)) console.error('tenant id not a valid guid');
+            if (! guidRegex.test(params.client)) console.error('client id not a valid guid');
             _tenant.set(this, params.tenant);
             _application.set(this, params.application);
             _client.set(this, params.client);
+
 
             this._userManager = new UserManager({
                 accessTokenExpiringNotificationTime: 1,
