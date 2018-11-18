@@ -43,6 +43,7 @@ namespace Core
             var json = File.ReadAllText(Path);
             return _serializer.FromJson<Tenant>(json, _serializationOptions);
         }
+        
         /// <inheritdoc/>
         public void Save(Tenant tenant)
         {
