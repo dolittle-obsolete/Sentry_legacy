@@ -29,10 +29,6 @@ export class SentryQueryCoordinator {
      */
     execute(query, tenantId, applicationName) {
         QueryCoordinator.apiBaseUrl = `/${tenantId}/${applicationName}`;
-        console.log('executing query');
-        console.log(query);
-        console.log(tenantId);
-        console.log(applicationName);
         return this._queryCoordinator.execute(query)
             .then( queryResult => queryResult)
             .catch( error => error);
