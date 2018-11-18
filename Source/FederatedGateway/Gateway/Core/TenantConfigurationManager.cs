@@ -50,10 +50,5 @@ namespace Core
             var json = _serializer.ToJson(tenant, _serializationOptions);
             File.WriteAllText(Path, json);
         }
-
-        Tenant ITenantConfigurationManager.Load()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
