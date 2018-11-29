@@ -1,0 +1,104 @@
+{
+  "artifacts": {
+    "8a4b3249-de2c-46b8-8eef-f8658baecdaa": {
+      "commands": [],
+      "events": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "0638c482-236d-4716-a1b7-bd14eabc71c1",
+          "generation": 1,
+          "type": "Read.Tenants.Tenant, Read"
+        }
+      ],
+      "queries": []
+    },
+    "78ef6c71-419f-46f7-9388-304c2de74ef1": {
+      "commands": [],
+      "events": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "a456c486-652c-4236-b7fe-a9dc114513f6",
+          "generation": 1,
+          "type": "Read.Resources.Resource, Read"
+        }
+      ],
+      "queries": []
+    },
+    "bfcbbee3-1f69-48c5-a6c2-62214ce6949e": {
+      "commands": [],
+      "events": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "05099ac2-1f7a-418e-8176-4a28625f839f",
+          "generation": 1,
+          "type": "Read.Profiles.ProfileClaim, Read"
+        }
+      ],
+      "queries": [
+        {
+          "artifact": "57d21e6f-d412-485b-91ed-d27fb2bb8669",
+          "generation": 1,
+          "type": "Read.Profiles.ProfileClaims, Read"
+        }
+      ]
+    },
+    "efd24b1c-096a-406f-bc0a-088cf9763a8c": {
+      "commands": [],
+      "events": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "6deaf02f-5ed5-435e-aae9-cfe0b7033aed",
+          "generation": 1,
+          "type": "Read.Clients.Client, Read"
+        }
+      ],
+      "queries": []
+    },
+    "4aba95cf-c088-4048-bd45-b56636fb2216": {
+      "commands": [],
+      "events": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "4c59d821-fa09-4391-8b15-09dc0dc98835",
+          "generation": 1,
+          "type": "Read.Authorities.AzureActiveDirectoryExternalAuthority, Read"
+        },
+        {
+          "artifact": "3b8829b4-4a38-43f1-8aed-327b74388222",
+          "generation": 1,
+          "type": "Read.Authorities.ExternalAuthority, Read"
+        },
+        {
+          "artifact": "3d1d24cc-079c-461c-9220-8cf988b016ad",
+          "generation": 1,
+          "type": "Read.Authorities.OpenIdConnectExternalAuthority, Read"
+        }
+      ],
+      "queries": [
+        {
+          "artifact": "a2c0d686-0275-4fa8-8411-d498637a3c5e",
+          "generation": 1,
+          "type": "Read.Authorities.ExternalAuthoritiesInScheme, Read"
+        }
+      ]
+    },
+    "dd5773ff-54e6-4284-88ba-d37c9781c0fb": {
+      "commands": [],
+      "events": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "1504fee8-119a-4a52-a033-68031128dc3b",
+          "generation": 1,
+          "type": "Read.Applications.Application, Read"
+        }
+      ],
+      "queries": []
+    }
+  }
+}
