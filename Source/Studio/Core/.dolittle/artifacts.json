@@ -1,0 +1,126 @@
+{
+  "artifacts": {
+    "6f9eabcb-9ba8-4a25-a488-4746cc9d5aa9": {
+      "commands": [
+        {
+          "artifact": "5b2162ff-1f86-418b-9899-20e212d9c7b7",
+          "generation": 1,
+          "type": "Domain.Studio.UserManagement.AddClaimToUser, Domain"
+        }
+      ],
+      "events": [],
+      "eventSources": [],
+      "readModels": [],
+      "queries": []
+    },
+    "a30625c5-2663-4cbb-9680-30dd834223d8": {
+      "commands": [
+        {
+          "artifact": "067aa6b6-f751-4e95-9a20-60bb3194794b",
+          "generation": 1,
+          "type": "Domain.Studio.Resources.AddClaimToIdentityResource, Domain"
+        },
+        {
+          "artifact": "c4ad0dfa-21ba-4739-aa44-1d613da169fb",
+          "generation": 1,
+          "type": "Domain.Studio.Resources.AddIdentityResource, Domain"
+        },
+        {
+          "artifact": "56c26d3b-b3a4-4cbe-948a-b8bd294cd043",
+          "generation": 1,
+          "type": "Domain.Studio.Resources.DisableIdentityResource, Domain"
+        },
+        {
+          "artifact": "938018c9-cd0b-4b3a-97e3-033deadf84cf",
+          "generation": 1,
+          "type": "Domain.Studio.Resources.EmphasizeIdentityResource, Domain"
+        },
+        {
+          "artifact": "ec6212c2-757b-4336-b458-a625781b8131",
+          "generation": 1,
+          "type": "Domain.Studio.Resources.EnableIdentityResource, Domain"
+        }
+      ],
+      "events": [],
+      "eventSources": [],
+      "readModels": [],
+      "queries": []
+    },
+    "fcad7482-671e-40f3-978c-3f53c350b0df": {
+      "commands": [
+        {
+          "artifact": "00b28f2e-1033-4f0e-be10-5ca4f6c66030",
+          "generation": 1,
+          "type": "Domain.Studio.Registration.RequestAccessWithEmail, Domain"
+        }
+      ],
+      "events": [
+        {
+          "artifact": "810d7c13-0cb4-4c90-90d8-e65f187ab598",
+          "generation": 1,
+          "type": "Events.Studio.Registration.ApplicationAccessRequested, Events"
+        },
+        {
+          "artifact": "12fe282d-564e-4ece-8509-e68698fc9fc4",
+          "generation": 1,
+          "type": "Events.Studio.Registration.UserAssociatedWithAuthority, Events"
+        },
+        {
+          "artifact": "9c9c0e15-06af-4502-a96f-35bb7a03ca8b",
+          "generation": 1,
+          "type": "Events.Studio.Registration.UserRegistered, Events"
+        }
+      ],
+      "eventSources": [],
+      "readModels": [],
+      "queries": []
+    },
+    "1a9ed6bb-0504-4705-acd6-fefb26297e1e": {
+      "commands": [
+        {
+          "artifact": "4445fc82-59c5-4bad-a1cf-7eb61be76aba",
+          "generation": 1,
+          "type": "Domain.Studio.Accounts.GrantAccessToApplicationForUser, Domain"
+        }
+      ],
+      "events": [
+        {
+          "artifact": "2df9bea8-7aad-42a0-9960-eb4820a54ebe",
+          "generation": 1,
+          "type": "Events.Studio.Accounts.ApplicationAccessGrantedByUser, Events"
+        },
+        {
+          "artifact": "7f8cc178-be2f-4029-a2f6-dd2d0add055c",
+          "generation": 1,
+          "type": "Events.Studio.Accounts.ClaimAddedToUser, Events"
+        },
+        {
+          "artifact": "b77f27dd-0ced-4868-9365-3e7e78bbef70",
+          "generation": 1,
+          "type": "Events.Studio.Accounts.LoggedIn, Events"
+        },
+        {
+          "artifact": "82af8540-4db3-42f4-9e0c-1412dce7ae87",
+          "generation": 1,
+          "type": "Events.Studio.Accounts.LoggedOut, Events"
+        }
+      ],
+      "eventSources": [],
+      "readModels": [],
+      "queries": []
+    },
+    "4ad32d16-61dc-404d-96ee-bdf85a774f94": {
+      "commands": [],
+      "events": [],
+      "eventSources": [],
+      "readModels": [
+        {
+          "artifact": "daff1b3f-fc5b-4cdb-9dc3-aec559d95698",
+          "generation": 1,
+          "type": "Read.Studio.Authority.Authority, Read"
+        }
+      ],
+      "queries": []
+    }
+  }
+}

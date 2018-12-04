@@ -1,0 +1,50 @@
+{
+    "TenantId": "508c1745-5f2a-4b4c-b7a5-2fbb1484346d",
+    "Name": "Dolittle",
+    "Applications": {
+        "Studio": {
+            "ApiResources": null,
+            "IdentityResources": [],
+            "WellKnownIdentityResources": [
+                "openid",
+                "email",
+                "profile"
+            ],
+            "Clients": [
+                {
+                    "Id": "94526bfb-719c-44cd-ad33-cfba77a60c2e",
+                    "Name": "Web",
+                    "AllowedGrantTypes": [
+                        "implicit"
+                    ],
+                    "RedirectUris": [
+                        "http://localhost:5000/signin-oidc",
+                        "https://dolittle.studio/signin-oidc"
+                    ],
+                    "PostLogooutRedirectUris": [
+                        "http://localhost:5002/signout-callback-oidc",
+                        "http://localhost:5000/signout-callback-oidc"
+                    ],
+                    "AllowedScopes": [
+                        "openid",
+                        "email",
+                        "profile"
+                    ]
+                }
+            ],
+            "ProfileClaims": [],
+            "ExternalAuthorities": [
+                {
+                    "Id": "84803376-39ff-40f5-857e-9f8d7ecfa8c9",
+                    "TenantId": "381088c1-de08-4d18-9e60-bbe2c94eccb5",
+                    "ClientId": "0d10f319-ec64-4df3-aa14-ea15f7c9bbd9",
+                    "Authority": "https://login.microsoftonline.com/381088c1-de08-4d18-9e60-bbe2c94eccb5/v2.0",
+                    "Type": "9b296977-7657-4bc8-b5b0-3f0a23c43958",
+                    "DisplayName": "Dolittle Employees Only",
+                    "Secret": "",
+                    "LogoUrl": ""
+                }
+            ]
+        }
+    }
+}

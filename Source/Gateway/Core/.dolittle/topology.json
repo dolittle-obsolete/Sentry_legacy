@@ -1,0 +1,35 @@
+{
+  "modules": [],
+  "features": [
+    {
+      "feature": "8a4b3249-de2c-46b8-8eef-f8658baecdaa",
+      "name": "Tenants",
+      "subFeatures": []
+    },
+    {
+      "feature": "78ef6c71-419f-46f7-9388-304c2de74ef1",
+      "name": "Resources",
+      "subFeatures": []
+    },
+    {
+      "feature": "bfcbbee3-1f69-48c5-a6c2-62214ce6949e",
+      "name": "Profiles",
+      "subFeatures": []
+    },
+    {
+      "feature": "efd24b1c-096a-406f-bc0a-088cf9763a8c",
+      "name": "Clients",
+      "subFeatures": []
+    },
+    {
+      "feature": "4aba95cf-c088-4048-bd45-b56636fb2216",
+      "name": "Authorities",
+      "subFeatures": []
+    },
+    {
+      "feature": "dd5773ff-54e6-4284-88ba-d37c9781c0fb",
+      "name": "Applications",
+      "subFeatures": []
+    }
+  ]
+}

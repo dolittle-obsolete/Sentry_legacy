@@ -1,0 +1,36 @@
+{
+  "modules": [
+    {
+      "module": "5dbc0779-8a99-4aa0-84de-e8d441de798b",
+      "name": "Studio",
+      "features": [
+        {
+          "feature": "6f9eabcb-9ba8-4a25-a488-4746cc9d5aa9",
+          "name": "UserManagement",
+          "subFeatures": []
+        },
+        {
+          "feature": "a30625c5-2663-4cbb-9680-30dd834223d8",
+          "name": "Resources",
+          "subFeatures": []
+        },
+        {
+          "feature": "fcad7482-671e-40f3-978c-3f53c350b0df",
+          "name": "Registration",
+          "subFeatures": []
+        },
+        {
+          "feature": "1a9ed6bb-0504-4705-acd6-fefb26297e1e",
+          "name": "Accounts",
+          "subFeatures": []
+        },
+        {
+          "feature": "4ad32d16-61dc-404d-96ee-bdf85a774f94",
+          "name": "Authority",
+          "subFeatures": []
+        }
+      ]
+    }
+  ],
+  "features": []
+}
