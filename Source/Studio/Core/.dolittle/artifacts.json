@@ -47,13 +47,6 @@
       "queries": []
     },
     "fcad7482-671e-40f3-978c-3f53c350b0df": {
-      "commands": [
-        {
-          "artifact": "00b28f2e-1033-4f0e-be10-5ca4f6c66030",
-          "generation": 1,
-          "type": "Domain.Studio.Registration.RequestAccessWithEmail, Domain"
-        }
-      ],
       "events": [
         {
           "artifact": "810d7c13-0cb4-4c90-90d8-e65f187ab598",
