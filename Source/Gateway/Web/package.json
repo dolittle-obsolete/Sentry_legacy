@@ -5,26 +5,33 @@
   "main": "karma.conf.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run": "./run.js"
+    "build": "webpack --mode production --env.DOLITTLE_ENVIRONMENT=production --config webpack.config.prod.js",
+    "start": "webpack-dev-server --mode development --env.DOLITTLE_ENVIRONMENT=development --open --watch --progress --hot",
+    "run": "cd .. && dolittle run"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@dolittle/build": "1.0.0",
-    "@dolittle/build.aurelia": "1.1.0",
+    "@dolittle/build.aurelia": "^3.2.1",
     "@dolittle/styles": "^2.9.5",
-    "eslint": "^5.9.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "prettier": "^1.15.3",
-    "webpack-cli": "^3.1.2"
+    "babel-eslint": "^10.0.1",
+    "dotenv": "^6.1.0",
+    "dotenv-webpack": "^1.7.0",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-notifier": "^1.7.0"
   },
   "dependencies": {
-    "@dolittle/commands": "^1.0.10",
-    "@dolittle/core": "^1.0.4",
-    "@dolittle/queries": "^1.0.12",
+    "@dolittle/aurelia": "^1.0.15",
+    "@dolittle/commands": "^1.0.12",
+    "@dolittle/core": "^1.0.5",
+    "@dolittle/queries": "^1.0.14",
     "aurelia-http-client": "^1.2.1",
-    "aurelia-open-id-connect": "^1.0.3",
-    "dotenv": "^6.1.0"
+    "aurelia-open-id-connect": "^1.0.3"
   }
 }
