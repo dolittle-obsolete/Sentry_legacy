@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../../Build/MSBuild/default.props"></Import>
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,6 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dolittle.SDK" Version="2.*" />
+    <PackageReference Include="Dolittle.SDK" Version="3.*" />
   </ItemGroup>
 </Project>

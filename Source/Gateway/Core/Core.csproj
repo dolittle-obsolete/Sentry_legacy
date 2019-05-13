@@ -33,9 +33,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" AllowExplicitVersion="true" />
 
-    <PackageReference Include="Dolittle.AspNetCore" Version="2.*" />
+    <PackageReference Include="Dolittle.AspNetCore" Version="3.*" />
     
-    <PackageReference Include="Dolittle.Build" Version="3.*" />
+    <PackageReference Include="Dolittle.Build.MSBuild" Version="3.*" />
     <PackageReference Include="Dolittle.SDK" Version="3.*" />
     <PackageReference Include="Dolittle.SDK.Build" Version="3.*" />   
 

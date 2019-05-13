@@ -18,6 +18,6 @@ export class UserInvitation extends ReadModel
         this.email = '';
         this.invited = new Date();
         this.validTo = new Date();
-        this.status = {};
+        this.status = 0;
     }
 }
