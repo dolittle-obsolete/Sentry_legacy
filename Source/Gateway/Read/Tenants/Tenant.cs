@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System.Collections.Generic;
-using Concepts;
 using Dolittle.ReadModels;
 using Read.Applications;
+using Dolittle.Tenancy;
 
 namespace Read.Tenants
 {

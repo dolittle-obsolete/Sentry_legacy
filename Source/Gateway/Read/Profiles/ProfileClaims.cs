@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 using System.Linq;
-using Concepts;
 using Dolittle.Queries;
+using Dolittle.Tenancy;
 using Read.Tenants;
 
 namespace Read.Profiles

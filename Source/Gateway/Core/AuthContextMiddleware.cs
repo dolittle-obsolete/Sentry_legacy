@@ -5,6 +5,7 @@
 
 using System.Threading.Tasks;
 using Concepts;
+using Dolittle.Tenancy;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
