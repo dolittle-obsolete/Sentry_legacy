@@ -28,16 +28,22 @@ namespace Core
             if (context.Request.Headers.ContainsKey(TENANT_HEADER)) tenant = context.Request.Headers[TENANT_HEADER];
             if (context.Request.Headers.ContainsKey(APPLICATION_HEADER)) application = context.Request.Headers[APPLICATION_HEADER];
 
-            if( string.IsNullOrEmpty(tenant) && string.IsNullOrEmpty(application) )
+            if( context.Request.Query.ContainsKey("tenant") ) tenant = context.Request.Query["tenant"][0];            
+            if( context.Request.Query.ContainsKey("application") ) application = context.Request.Query["application"][0];
+
+            if (string.IsNullOrEmpty(tenant) && string.IsNullOrEmpty(application))
             {
                 var etag = context.Request.GetEtag();
-                if( etag.Count == 1 ) 
+                if (etag.Count == 1)
                 {
                     var etagContent = etag[0].Split('/');
-                    tenant = etagContent[0];
-                    application = etagContent[1];
-                } 
-                else 
+                    if (etagContent.Length >= 2)
+                    {
+                        tenant = etagContent[0];
+                        application = etagContent[1];
+                    }
+                }
+                else
                 {
                     segments = context.Request.Path.Value.Split('/').Skip(1).ToArray();
                     if (segments.Length <= 1) throw new InvalidRequest("No tenant or application name was present in the url or ETag");

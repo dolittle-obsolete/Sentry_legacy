@@ -34,10 +34,7 @@ namespace Read.Authorities
                 return _authContext
                     .Application
                     .ExternalAuthorities
-                    .Where(
-                        authority =>
-                        schemes.Any(scheme => scheme.Name == authority.Type.ToString())
-                    ).AsQueryable();
+                    .AsQueryable();
             }
         }
 

@@ -21,7 +21,7 @@ namespace Core.Accounts
     /// 
     /// </summary>
     [SecurityHeaders]
-    [Route("Accounts")]
+    [Route("api/Accounts")]
     public class AccountsController : Controller
     {
         readonly IIdentityServerInteractionService _interaction;
