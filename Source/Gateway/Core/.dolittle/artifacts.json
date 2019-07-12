@@ -1,171 +1,90 @@
 {
-  "bfd8510b-24d6-4fb6-a971-d5d00a2ff8b7": {
-    "commands": {
-      "55e11974-ecea-4f1b-81f5-29c033a13379": {
-        "generation": 1,
-        "type": "Domain.SignUps.AskToJoinTenant, Domain"
-      },
-      "34efa104-b4fc-484b-9e31-a74ea2d66062": {
-        "generation": 1,
-        "type": "Domain.SignUps.SignUpTenant, Domain"
-      }
-    },
-    "events": {
-      "e4537391-26ef-4ec7-8777-b175363fac97": {
-        "generation": 1,
-        "type": "Events.SignUps.AskedToJoinTenant, Events"
-      },
-      "4c43121a-1f6e-4787-8df6-46a9fb39139b": {
-        "generation": 1,
-        "type": "Events.SignUps.TenantCreated, Events"
-      },
-      "ac84d9bc-94c6-48cd-a1d3-56213cd0e634": {
-        "generation": 1,
-        "type": "Events.SignUps.TenantSignedUp, Events"
-      }
-    },
-    "eventSources": {
-      "933ca4aa-6d5c-443f-abf1-906110fd586c": {
-        "generation": 1,
-        "type": "Domain.SignUps.SignUp, Domain"
-      }
-    },
-    "readModels": {
-      "bf641221-9f35-4085-82bb-db15f4688ea4": {
-        "generation": 1,
-        "type": "Read.SignUps.Country, Read"
-      }
-    },
-    "queries": {
-      "c1a1b48b-6157-43a3-9e7c-9c9dd6d53995": {
-        "generation": 1,
-        "type": "Read.SignUps.AllCountries, Read"
-      }
-    }
-  },
-  "8a4b3249-de2c-46b8-8eef-f8658baecdaa": {
+  "4c3f0bd5-bb06-441e-bf59-45d05fa83a3c": {
     "commands": {},
     "events": {},
     "eventSources": {},
     "readModels": {
-      "c1e8ca97-c46a-477c-832d-6c591351eed0": {
+      "6016ecbe-7170-4c0a-8454-97866811a44a": {
         "generation": 1,
         "type": "Read.Tenants.Tenant, Read"
       }
     },
     "queries": {}
   },
-  "78ef6c71-419f-46f7-9388-304c2de74ef1": {
+  "87369083-f33b-4ee8-a94c-52daa4a9c214": {
     "commands": {},
     "events": {},
     "eventSources": {},
     "readModels": {
-      "a456c486-652c-4236-b7fe-a9dc114513f6": {
+      "f07fe364-5a9c-44ab-b6d5-e58475beaf76": {
         "generation": 1,
         "type": "Read.Resources.Resource, Read"
       }
     },
     "queries": {}
   },
-  "bfcbbee3-1f69-48c5-a6c2-62214ce6949e": {
+  "23ad814f-2694-4bc0-aecf-b1dbb8042c6c": {
     "commands": {},
     "events": {},
     "eventSources": {},
     "readModels": {
-      "05099ac2-1f7a-418e-8176-4a28625f839f": {
+      "df65dafc-3c92-4eec-b320-816a7d3e03ed": {
         "generation": 1,
         "type": "Read.Profiles.ProfileClaim, Read"
       }
     },
     "queries": {
-      "57d21e6f-d412-485b-91ed-d27fb2bb8669": {
+      "059ad59f-c262-4e15-95ec-cfa86881f7e9": {
         "generation": 1,
         "type": "Read.Profiles.ProfileClaims, Read"
       }
     }
   },
-  "efd24b1c-096a-406f-bc0a-088cf9763a8c": {
+  "5adda586-48df-453a-b351-eeeaa2ee17ae": {
     "commands": {},
     "events": {},
     "eventSources": {},
     "readModels": {
-      "6deaf02f-5ed5-435e-aae9-cfe0b7033aed": {
+      "77cacdc0-a6f1-4840-9838-c8a074b8c8ee": {
         "generation": 1,
         "type": "Read.Clients.Client, Read"
       }
     },
     "queries": {}
   },
-  "4aba95cf-c088-4048-bd45-b56636fb2216": {
+  "76dd9237-4462-492a-8062-2b6731eb00a7": {
     "commands": {},
     "events": {},
     "eventSources": {},
     "readModels": {
-      "4c59d821-fa09-4391-8b15-09dc0dc98835": {
+      "d7f89aa4-8e2b-4390-b140-54c8a5bd2e3d": {
         "generation": 1,
         "type": "Read.Authorities.AzureActiveDirectoryExternalAuthority, Read"
       },
-      "3b8829b4-4a38-43f1-8aed-327b74388222": {
+      "45f2e48c-10a9-4cb0-8869-220d37f11c40": {
         "generation": 1,
         "type": "Read.Authorities.ExternalAuthority, Read"
       },
-      "3d1d24cc-079c-461c-9220-8cf988b016ad": {
+      "946a0b15-55d8-421c-9ce7-d66731ad83f0": {
         "generation": 1,
         "type": "Read.Authorities.OpenIdConnectExternalAuthority, Read"
       }
     },
     "queries": {
-      "a2c0d686-0275-4fa8-8411-d498637a3c5e": {
+      "545e463a-65ef-4d35-b88d-033f57d8aa93": {
         "generation": 1,
         "type": "Read.Authorities.ExternalAuthoritiesInScheme, Read"
       }
     }
   },
-  "dd5773ff-54e6-4284-88ba-d37c9781c0fb": {
+  "0fb11ac2-c937-471f-a174-de8d3cdb6d70": {
     "commands": {},
     "events": {},
     "eventSources": {},
     "readModels": {
-      "1504fee8-119a-4a52-a033-68031128dc3b": {
+      "ce4c61d2-6690-420c-b8ab-f54d99abbc4d": {
         "generation": 1,
         "type": "Read.Applications.Application, Read"
-      }
-    },
-    "queries": {}
-  },
-  "3b74f16a-eaed-4375-aaa9-d73b9203f37b": {
-    "commands": {
-      "664b907d-d774-4a98-978b-fbaece5d16b6": {
-        "generation": 1,
-        "type": "Domain.Users.Managment.AcceptUserInvitation, Domain"
-      },
-      "ed02c805-e2a9-4a89-97b5-bd07e7c4ce48": {
-        "generation": 1,
-        "type": "Domain.Users.Managment.DenyUserInvitation, Domain"
-      }
-    },
-    "events": {
-      "dc265a93-5c5a-4d56-80e5-eb6f685e8e63": {
-        "generation": 1,
-        "type": "Events.Users.Managment.UserAcceptedInvitation, Events"
-      },
-      "a01b8607-b3d1-4ae8-a2d2-91af2b909154": {
-        "generation": 1,
-        "type": "Events.Users.Managment.UserDeniedInvitaition, Events"
-      }
-    },
-    "eventSources": {},
-    "readModels": {},
-    "queries": {}
-  },
-  "0591f7da-d6ad-4a2b-8c12-e4cbda99fee3": {
-    "commands": {},
-    "events": {},
-    "eventSources": {},
-    "readModels": {
-      "142c3f6c-1322-4973-89c4-571732f01ca8": {
-        "generation": 1,
-        "type": "Read.Users.Management.UserInvitaition, Read"
       }
     },
     "queries": {}

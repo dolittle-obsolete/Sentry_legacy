@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dolittle.SDK" Version="3.*" />
-    <PackageReference Include="IdentityServer4" Version="2.1.0" />
+    <PackageReference Include="IdentityServer4" Version="2.4.0" />
   </ItemGroup>
 
 </Project>

@@ -88,8 +88,6 @@ namespace Core
             app.UseMvc();
 
             app.UseDolittle();
-
-            app.RunAsSinglePageApplication();
         }
     }
 }

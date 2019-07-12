@@ -2,7 +2,6 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { OpenIdConnect } from "aurelia-open-id-connect";
 import { inject } from 'aurelia-framework';
 import { parseQueryString } from 'aurelia-path';
 import { ObserverLocator } from 'aurelia-framework';

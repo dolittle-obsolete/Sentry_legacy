@@ -1,0 +1,23 @@
+<template>
+    <require from="./Login.scss"></require>
+    <require from="./ExternalLoginValueConverter"></require>
+
+    <section class="login">
+        <div class="content-box">
+            <h1>Login</h1>
+            <h2>Choose preferred provider to login.</h2>
+            <ul class="option-list">
+                <li repeat.for="authority of authorities">
+                    <a href="${authority | externalLogin}">
+                        <figure>
+                            <img src="${authority.logoUrl}" alt="icon">
+                        </figure>
+                        <div>
+                            <strong class="provider-name">${authority.displayName}</strong>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</template>

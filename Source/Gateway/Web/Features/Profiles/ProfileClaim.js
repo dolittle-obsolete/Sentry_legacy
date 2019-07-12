@@ -9,13 +9,13 @@ export class ProfileClaim extends ReadModel
     constructor() {
         super();
         this.artifact = {
-           id: '05099ac2-1f7a-418e-8176-4a28625f839f',
+           id: 'df65dafc-3c92-4eec-b320-816a7d3e03ed',
            generation: '1'
         };
         this.name = '';
         this.displayName = '';
         this.description = '';
-        this.type = {};
+        this.type = 0;
         this.allowedValues = [];
         this.required = false;
     }
