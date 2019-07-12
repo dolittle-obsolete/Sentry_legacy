@@ -76,30 +76,28 @@ namespace Core
         /// <param name="context"><see cref="HttpContext"/> for the request</param>
         public async Task Invoke(HttpContext context)
         {
-            //var gatewayRequest = GatewayHttpRequest.ParseFromHttpContext(context);
+            var gatewayRequest = GatewayHttpRequest.ParseFromHttpContext(context);
             
-            //var handler = await _handlerProvider.GetHandlerAsync(context, gatewayRequest.Tenant.Value.ToString());
-            //if (handler != null) 
-            //{
-            //    await _next(context);
-            //    return;
-            //}
+            var handler = await _handlerProvider.GetHandlerAsync(context, gatewayRequest.Tenant.Value.ToString());
+            if (handler != null) 
+            {
+                await _next(context);
+                return;
+            }
 
-            //HandleIfTenantDoesNotExist(gatewayRequest.Tenant);
+            HandleIfTenantDoesNotExist(gatewayRequest.Tenant);
 
-            //var tenant = _tenantConfiguration.GetFor(gatewayRequest.Tenant);
-            
-            //HandleIfTenantHasNoApplication(tenant, gatewayRequest.Application);
+            var tenant = _tenantConfiguration.GetFor(gatewayRequest.Tenant);
+        
+            HandleIfTenantHasNoApplication(tenant, gatewayRequest.Application);
 
-            //gatewayRequest.SetEtag();
+            gatewayRequest.SetEtag();
 
-            //gatewayRequest.ModifyRequest(_hostingEnvironment.IsDevelopment());
-            
-            //AuthContextBindings.AuthContext = new Read.AuthContext(tenant, tenant.Applications[gatewayRequest.Application]);
-            
-            //await _next(gatewayRequest.Context);
-
-            await _next(context);
+            gatewayRequest.ModifyRequest(_hostingEnvironment.IsDevelopment());
+        
+            AuthContextBindings.AuthContext = new Read.AuthContext(tenant, tenant.Applications[gatewayRequest.Application]);
+        
+            await _next(gatewayRequest.Context);
         }
 
 

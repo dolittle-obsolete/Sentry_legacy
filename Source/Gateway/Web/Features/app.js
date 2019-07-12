@@ -6,11 +6,29 @@ import { PLATFORM } from 'aurelia-pal';
 import style from '../styles/style.scss';
 import { OpenIdConnect, OpenIdConnectRoles } from 'aurelia-open-id-connect';
 import { inject } from 'aurelia-dependency-injection';
+import { QueryCoordinator } from '@dolittle/queries';
+import { Router } from 'aurelia-router';
 
-@inject(OpenIdConnect)
+class TenantAndApplicationStep {
+    static tenant = '';
+    static application = '';
+
+    run(routingContext, next) {
+        TenantAndApplicationStep.tenant = routingContext.params.tenant;
+        TenantAndApplicationStep.application = routingContext.params.application;
+        return next();
+    }
+}
+
+@inject(OpenIdConnect, Router)
 export class app {
-    constructor(openIdConnect) {
-        this._openIdConnect = openIdConnect;
+    #openIdConnect;
+    #globalRouter;
+    
+
+    constructor(openIdConnect, router) {
+        this.#openIdConnect = openIdConnect;
+        this.#globalRouter = router;
     }
 
     configureRouter(config, router) {
@@ -20,8 +38,14 @@ export class app {
             { route: ':tenant/:application/Accounts/Login', name: 'Login', moduleId: PLATFORM.moduleName('Accounts/Login') },
             { route: ':tenant/:application/Accounts/Consent', name: 'Consent', moduleId: PLATFORM.moduleName('Accounts/Consent') }
         ]);
+        config.addPreActivateStep(TenantAndApplicationStep);
 
-        this._openIdConnect.configure(config);
+        this.#openIdConnect.configure(config);
+
+        QueryCoordinator.beforeExecute(options => {
+            options.headers['d-tenant'] = TenantAndApplicationStep.tenant;
+            options.headers['d-application'] = TenantAndApplicationStep.application;
+        });
 
         this.router = router;
     }

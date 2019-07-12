@@ -1,8 +1,8 @@
 using System.Linq;
 using Dolittle.Queries;
-using Read.Authorities;
 using Microsoft.AspNetCore.Authentication;
 using Read;
+using Read.Authorities;
 
 namespace Read.Authorities
 {
@@ -31,14 +31,13 @@ namespace Read.Authorities
             get
             {
                 var schemes = _schemeProvider.GetAllSchemesAsync().Result;
-                 return _authContext
-                        .Application
-                            .ExternalAuthorities
-                            .Where(
-                                authority => 
-                                    schemes.Any(scheme => scheme.Name == authority.Type.ToString()
-                                )
-                            ).AsQueryable();
+                return _authContext
+                    .Application
+                    .ExternalAuthorities
+                    .Where(
+                        authority =>
+                        schemes.Any(scheme => scheme.Name == authority.Type.ToString())
+                    ).AsQueryable();
             }
         }
 

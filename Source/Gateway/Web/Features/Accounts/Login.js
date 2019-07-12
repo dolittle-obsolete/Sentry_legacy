@@ -18,7 +18,7 @@ export class Login {
 
     /**
      * Initializes a new instance of {Login}
-     * @param {QueryCoordinator} queryCoordinator 
+     * @param {QueryCoordinator} queryCoordinator
      */
     constructor(queryCoordinator) {
         this.queryCoordinator = queryCoordinator;
@@ -31,8 +31,8 @@ export class Login {
         let self = this;
         this.tenant = params.tenant;
         this.application = params.application;
-        
-        this.queryCoordinator.execute(new ExternalAuthoritiesInScheme(), params.tenant, params.application)
+
+        this.queryCoordinator.execute(new ExternalAuthoritiesInScheme())
             .then((result) => {
               console.log(result.items);
                 let authorities = result.items;
@@ -41,8 +41,6 @@ export class Login {
                     authority.tenant = self.tenant;
                     authority.application = self.application;
                     authority.returnUrl = `${window.location.origin}/${authority.tenant}/${authority.application}/Accounts/Consent/?tenant=${authority.tenant}&application=${authority.application}&returnUrl=${window.location.origin}/${authority.tenant}/${authority.application}`
-                    //40x40 preferred SVG, but png should be accepted
-                    
                     if( !authority.logoUrl || authority.logoUrl == '' ) {
                         authority.logoUrl = 'https://azure.microsoft.com/svghandler/information-protection/?width=40&height=40';
                     }

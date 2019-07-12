@@ -81,8 +81,8 @@ namespace Core
                 .AllowAnyOrigin()
                 .AllowCredentials());
             
-            //app.UseMiddleware<AuthContextMiddleware>();
-            //app.UseMiddleware<OpenIdWellKnownConfigurationMiddleware>();
+            app.UseMiddleware<AuthContextMiddleware>();
+            app.UseMiddleware<OpenIdWellKnownConfigurationMiddleware>();
 
             //app.UseIdentityServer();
             app.UseMvc();
