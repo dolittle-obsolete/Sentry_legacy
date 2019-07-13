@@ -43,12 +43,17 @@ namespace Core
                         application = etagContent[1];
                     }
                 }
-                else
+                
+                if (string.IsNullOrEmpty(tenant) && string.IsNullOrEmpty(application))
                 {
                     segments = context.Request.Path.Value.Split('/').Skip(1).ToArray();
+                    if( segments.Length > 0 && segments[0] == "api") segments = segments.Skip(1).ToArray();
+                    
                     if (segments.Length <= 1) throw new InvalidRequest("No tenant or application name was present in the url or ETag");
+                    
                     tenant = segments[TENANT_SEGMENT];
                     application = segments[APPLICATION_SEGMENT];
+                    fromUrl = true;
                 }
             }
 
@@ -75,13 +80,16 @@ namespace Core
 
         public void ModifyRequest(bool isHostingEnvironment)
         {
-            Context.Request.PathBase = new PathString($"/{Tenant.Value.ToString()}/{Application.Value}");
+            Context.Request.PathBase = new PathString($"/api/{Tenant.Value.ToString()}/{Application.Value}");
             if (!isHostingEnvironment)
             {
                 Context.Request.Host = new HostString("dolittle.online");
                 Context.Request.Scheme = "https";
             }
-            if (FromUrl) Context.Request.Path = GeneratePath();
+            if (FromUrl) 
+            {
+                Context.Request.Path = GeneratePath();
+            }
         }
 
         public void SetEtag()

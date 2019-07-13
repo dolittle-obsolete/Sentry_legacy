@@ -98,7 +98,6 @@ namespace Core
                 options.ConfigurationManager = new CustomOpenIdConfigurationManager();
 
                 options.Events.OnRedirectToIdentityProvider = GetRedirectToIdentityProviderCallback(ServiceProvider, hostingEnvironment);
-                
                 options.TokenValidationParameters = _validationParameters;
             };
         }
