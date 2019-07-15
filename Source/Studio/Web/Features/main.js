@@ -8,9 +8,7 @@ Bluebird.config({ warnings: { wForgottenReturn: false } });
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .plugin(PLATFORM.moduleName('@dolittle/aurelia'))
-    .plugin(PLATFORM.moduleName('@dolittle/aurelia.components'), { iconBaseFolder: '~/assets/icons'})
-    .feature(PLATFORM.moduleName('components/index'));
+    .plugin(PLATFORM.moduleName('@dolittle/aurelia'));
 
   if (environment.debug) {
     aurelia.use.developmentLogging();

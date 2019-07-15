@@ -36,7 +36,8 @@ export class app {
         config.map([
             { route: ['', ':tenant/:application', ':tenant/:application/welcome'], name: 'welcome', moduleId: PLATFORM.moduleName('welcome'), layoutView: PLATFORM.moduleName('layout.html') },
             { route: ':tenant/:application/Accounts/Login', name: 'Login', moduleId: PLATFORM.moduleName('Accounts/Login') },
-            { route: ':tenant/:application/Accounts/Consent', name: 'Consent', moduleId: PLATFORM.moduleName('Accounts/Consent') }
+            { route: ':tenant/:application/Accounts/Consent', name: 'Consent', moduleId: PLATFORM.moduleName('Accounts/Consent') },
+            { route: ':tenant/:application/Device/Verify', name: 'Verify', moduleId: PLATFORM.moduleName('Devices/Verify') }
         ]);
         config.addPreActivateStep(TenantAndApplicationStep);
 

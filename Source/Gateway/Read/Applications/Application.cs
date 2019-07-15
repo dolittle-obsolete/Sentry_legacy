@@ -8,6 +8,7 @@ using Read.Authorities;
 using Read.Profiles;
 using Read.Clients;
 using Read.Resources;
+using IdentityServer4.Models;
 
 namespace Read.Applications
 {
@@ -19,12 +20,12 @@ namespace Read.Applications
         /// <summary>
         /// Gets or sets the <see cref="Resource">Api resources</see> available to be granted access to for the application
         /// </summary>
-        public IEnumerable<Resource> ApiResources { get; set; }
+        public IEnumerable<ApiResource> ApiResources { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Resource">identity resources</see> available to be granted access to for the application
         /// </summary>
-        public IEnumerable<Resource> IdentityResources { get; set; }
+        public IEnumerable<IdentityResource> IdentityResources { get; set; }
 
         /// <summary>
         /// Gets or sets the well known identity resources by name
@@ -35,7 +36,7 @@ namespace Read.Applications
         /// Gets or sets the <see cref="Client">clients</see> of the application
         /// //TODO: This can perhaps be simplified so that it only contains one client, 
         /// </summary>
-        public IEnumerable<Client> Clients { get; set; }
+        public IEnumerable<Clients.Client> Clients { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="ProfileClaim">profile claims</see> for the application

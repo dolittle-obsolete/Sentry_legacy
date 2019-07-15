@@ -18,5 +18,7 @@ export class Client extends ReadModel
         this.redirectUris = [];
         this.postLogoutRedirectUris = [];
         this.allowedScopes = [];
+        this.allowOfflineAccess = false;
+        this.requireClientSecret = false;
     }
 }

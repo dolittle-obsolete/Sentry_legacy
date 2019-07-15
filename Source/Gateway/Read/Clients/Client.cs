@@ -45,5 +45,15 @@ namespace Read.Clients
         /// Gets or sets the scopes that are allowed
         /// </summary>
         public IEnumerable<ScopeName> AllowedScopes { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether or not to allow offline access. Defaults to false.
+        /// </summary>
+        public bool AllowOfflineAccess { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether or not to require client secret for requesting tokens at the token endpoint
+        /// </summary>
+        public bool RequireClientSecret { get; set; }
     }
 }

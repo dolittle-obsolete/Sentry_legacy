@@ -46,21 +46,20 @@ namespace Read
                 // Todo: proper exception
             }
 
-            var idsrvClient = new IdentityServer4.Models.Client
-            {
-                ClientId = clientIdAsString,
-                AllowedGrantTypes = client.AllowedGrantTypes.Select(_ => _.Value).ToList(),
-                RedirectUris = client.RedirectUris.ToList(),
-                PostLogoutRedirectUris = client.PostLogoutRedirectUris.ToList(),
-                AllowedScopes = client.AllowedScopes.Select(_ => _.Value).ToList(),
-                AllowedCorsOrigins = client.RedirectUris.Select(url => {
+            var idsrvClient = new IdentityServer4.Models.Client();
+            idsrvClient.ClientId = clientIdAsString;
+            idsrvClient.AllowedGrantTypes = client.AllowedGrantTypes.Select(_ => _.Value).ToList();
+            idsrvClient.RedirectUris = client.RedirectUris.ToList();
+            idsrvClient.PostLogoutRedirectUris = client.PostLogoutRedirectUris.ToList();
+            idsrvClient.AllowedScopes = client.AllowedScopes.Select(_ => _.Value).ToList();
+            idsrvClient.AllowOfflineAccess = client.AllowOfflineAccess;
+            idsrvClient.RequireClientSecret = client.RequireClientSecret;
+            idsrvClient.AllowedCorsOrigins = client.RedirectUris.Select(url => {
                     var uri = new Uri(url);
                     var origin = uri.AbsoluteUri.Substring(0,uri.AbsoluteUri.Length-uri.AbsolutePath.Length);
                     if( origin.EndsWith("/")) origin = origin.Substring(origin.Length-1);
                     return origin;
-                }).ToList()
-            };
-
+                }).ToList();
             
             _logger.Information($"Client found - allowed CORS : [{string.Join(", ",idsrvClient.AllowedCorsOrigins)}]");
 

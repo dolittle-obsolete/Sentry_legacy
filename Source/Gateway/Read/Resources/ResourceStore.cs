@@ -32,14 +32,13 @@ namespace Read.Resources
         {
             var apiResource = _authContext.Application.ApiResources.SingleOrDefault(_ => _.Name == name);
             if( apiResource == null ) return Task.FromResult((ApiResource)null);
-            return Task.FromResult(ConvertToResource<ApiResource>(apiResource));
+            return Task.FromResult(apiResource);
         }
 
         /// <inheritdoc/>
         public Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var filtered = _authContext.Application.ApiResources?.Where(_ => scopeNames.Contains(_.Name.Value)) ?? new Resource[0];
-            var apiResources = filtered.Select(_ => ConvertToResource<ApiResource>(_));
+            var apiResources = _authContext.Application.ApiResources?.Where(_ => scopeNames.Contains(_.Name)) ?? new ApiResource[0];
             return Task.FromResult(apiResources);
         }
 
@@ -54,7 +53,7 @@ namespace Read.Resources
         /// <inheritdoc/>
         public Task<IdentityServer4.Models.Resources> GetAllResourcesAsync()
         {
-            var apiResources = _authContext.Application.ApiResources?.Select(_ => ConvertToResource<ApiResource>(_)) ?? new ApiResource[0];
+            var apiResources = _authContext.Application.ApiResources ?? new ApiResource[0];
             var identityResources = GetIdentityResourcesFrom(_authContext);
             var resources = new IdentityServer4.Models.Resources(identityResources, apiResources);
 
@@ -73,7 +72,7 @@ namespace Read.Resources
                 return Activator.CreateInstance(resourceType) as IdentityResource;
             }).ToList();
 
-            var resources = authContext.Application.IdentityResources?.Select(_ => ConvertToResource<IdentityResource>(_)) ?? new IdentityResource[0];
+            var resources = authContext.Application.IdentityResources ?? new IdentityResource[0];
             identityResources.AddRange(resources);
 
             return identityResources;

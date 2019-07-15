@@ -31,13 +31,15 @@ namespace Core
 
             // Todo: RSA Signing Key for Dolittle as Authority
 
-            services.AddCors();
-            
+            services.AddCors();            
             services.AddMvc();
+
+            // /api/508c1745-5f2a-4b4c-b7a5-2fbb1484346d/Studio/accounts/login
             
             services.AddIdentityServer(options => {
                     options.UserInteraction.LoginUrl = "/accounts/login";
                     options.UserInteraction.LogoutUrl = "/accounts/logout";
+                    options.UserInteraction.DeviceVerificationUrl = "/device/verify";
                     options.UserInteraction.ConsentUrl = "/accounts/consent";
                     //options.Authentication.CheckSessionCookieName = "sentry.session";
                 })

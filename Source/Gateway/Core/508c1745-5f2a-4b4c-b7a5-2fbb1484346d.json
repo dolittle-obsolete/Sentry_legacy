@@ -2,8 +2,35 @@
     "TenantId": "508c1745-5f2a-4b4c-b7a5-2fbb1484346d",
     "Name": "Dolittle",
     "Applications": {
-        "Studio": {
-            "ApiResources": null,
+        "studio": {
+            "ApiResources": [
+                {
+                    "Name": "api",
+                    "DisplayName": "API",
+                    "Description": "",
+                    "Enabled": true,
+                    "UserClaims": [],
+                    "Properties": {
+
+                    },
+                    "ApiSecrets": [
+
+                    ],
+                    "Scopes": [
+                        {
+                            "Name": "api",
+                            "DisplayName": "",
+                            "Description": "",
+                            "Required": true,
+                            "Emphasize": true,
+                            "ShowInDiscoveryDocument": true,
+                            "UserClaims": []
+                        }
+
+                    ]
+
+                }
+            ],
             "IdentityResources": [],
             "WellKnownIdentityResources": [
                 "openid",
@@ -14,6 +41,8 @@
                 {
                     "Id": "94526bfb-719c-44cd-ad33-cfba77a60c2e",
                     "Name": "Web",
+                    "RequireClientSecret": true,
+                    "AllowOfflineAccess": false,
                     "AllowedGrantTypes": [
                         "implicit"
                     ],
@@ -21,7 +50,7 @@
                         "http://localhost:5000/signin-oidc",
                         "https://dolittle.studio/signin-oidc"
                     ],
-                    "PostLogooutRedirectUris": [
+                    "PostLogoutRedirectUris": [
                         "http://localhost:5002/signout-callback-oidc",
                         "http://localhost:5000/signout-callback-oidc"
                     ],
@@ -30,7 +59,31 @@
                         "email",
                         "profile"
                     ]
+                },
+                {
+                    "Id": "fda65383-e32a-4694-9c6f-baffbe7bd9af",
+                    "Name": "device",
+                    "RequireClientSecret": false,
+                    "AllowOfflineAccess": true,
+                    "AllowedGrantTypes": [
+                        "urn:ietf:params:oauth:grant-type:device_code"
+                    ],
+                    "RedirectUris": [
+                        "http://localhost:5000/signin-oidc",
+                        "https://dolittle.studio/signin-oidc"
+                    ],
+                    "PostLogoutRedirectUris": [
+                        "http://localhost:5002/signout-callback-oidc",
+                        "http://localhost:5000/signout-callback-oidc"
+                    ],
+                    "AllowedScopes": [
+                        "openid",
+                        "email",
+                        "profile",
+                        "api"
+                    ]
                 }
+
             ],
             "ProfileClaims": [],
             "ExternalAuthorities": [
