@@ -1,5 +1,7 @@
 #!/bin/bash
-cd ../..
-docker build -t dolittle/sentry-gateway-backend -f Source/Gateway/Dockerfile.backend .
-docker build -t dolittle/sentry-gateway-frontend -f Source/Gateway/Dockerfile.frontend .
-cd Source/Gateway
+pushd
+cd ./Web
+docker build -t dolittle/sentry-gateway-web .
+cd ../../..
+docker build -t dolittle/sentry-gateway-core -f Source/Gateway/Core/Dockerfile .
+popd

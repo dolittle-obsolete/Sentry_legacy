@@ -1,46 +1,19 @@
 {
   "modules": {
-    "bab9b09f-e65f-402f-99c2-23ad7be96e98": {
-      "name": "Authentication",
-      "features": {
-        "70fc15c1-c9ac-4082-99ef-e86237d37863": {
-          "name": "Configuration",
-          "subFeatures": {}
-        }
-      }
-    },
-    "9a85fc55-4bbb-4ee8-88cb-96ddc07e6a38": {
-      "name": "Applications",
-      "features": {
-        "b37b8a54-8bfe-465a-afc3-ce7e8a9ffc79": {
-          "name": "Tenants",
-          "subFeatures": {}
-        }
-      }
-    },
-    "654a04a2-e7b2-451f-8a31-428fede975ae": {
-      "name": "Users",
-      "features": {
-        "e632f72f-5d93-4829-b13b-b8e898211409": {
-          "name": "Management",
-          "subFeatures": {}
-        }
-      }
-    },
-    "dfba10cc-dd15-4b6e-a1e6-b453cd18d1a7": {
-      "name": "Tenants",
-      "features": {
-        "d8f1a6e7-c7aa-4582-aac1-c86594d52a23": {
-          "name": "Registration",
-          "subFeatures": {}
-        }
-      }
-    },
-    "f5bebc5b-d8e0-4ea6-b1f4-13f525309773": {
+    "74f43883-d172-444d-b2f0-7bac6c474a6e": {
       "name": "Gateway",
       "features": {
-        "8f76cbe2-8ec8-4b91-b24d-7fab9bd75b34": {
+        "8e795e80-debc-436b-81b2-73c4f8dd5133": {
           "name": "SignUps",
+          "subFeatures": {}
+        }
+      }
+    },
+    "ae9eef90-e00e-4f13-a0a7-21a10dceb09d": {
+      "name": "Stuff",
+      "features": {
+        "8f2f935d-4a2e-46ff-95ef-8be0058474b7": {
+          "name": "Inner",
           "subFeatures": {}
         }
       }

@@ -14,40 +14,43 @@ class TenantAndApplicationStep {
     static application = '';
 
     run(routingContext, next) {
-        TenantAndApplicationStep.tenant = routingContext.params.tenant;
-        TenantAndApplicationStep.application = routingContext.params.application;
+        //TenantAndApplicationStep.tenant = routingContext.params.tenant;
+        //TenantAndApplicationStep.application = routingContext.params.application;
         return next();
     }
 }
 
-@inject(OpenIdConnect, Router)
+@inject(Router)
 export class app {
-    #openIdConnect;
+    //#openIdConnect;
     #globalRouter;
-    
 
-    constructor(openIdConnect, router) {
-        this.#openIdConnect = openIdConnect;
+    constructor(router) {
+        //this.#openIdConnect = openIdConnect;
         this.#globalRouter = router;
     }
 
+    
     configureRouter(config, router) {
         config.options.pushState = true;
+        config.options.root = '/sentry';
         config.map([
             { route: ['', ':tenant/:application', ':tenant/:application/welcome'], name: 'welcome', moduleId: PLATFORM.moduleName('welcome'), layoutView: PLATFORM.moduleName('layout.html') },
-            { route: ':tenant/:application/Accounts/Login', name: 'Login', moduleId: PLATFORM.moduleName('Accounts/Login') },
+            { route: 'Accounts/TenantSelector', name: 'TenantSelector', moduleId: PLATFORM.moduleName('Accounts/TenantSelector') }
+            /*{ route: ':tenant/:application/Accounts/Login', name: 'Login', moduleId: PLATFORM.moduleName('Accounts/Login') },
             { route: ':tenant/:application/Accounts/Consent', name: 'Consent', moduleId: PLATFORM.moduleName('Accounts/Consent') },
-            { route: ':tenant/:application/Device/Verify', name: 'Verify', moduleId: PLATFORM.moduleName('Devices/Verify') }
+            { route: ':tenant/:application/Device/Verify', name: 'Verify', moduleId: PLATFORM.moduleName('Devices/Verify') }*/
         ]);
+        
         config.addPreActivateStep(TenantAndApplicationStep);
-
+        /*
         this.#openIdConnect.configure(config);
 
         QueryCoordinator.beforeExecute(options => {
             options.headers['d-tenant'] = TenantAndApplicationStep.tenant;
             options.headers['d-application'] = TenantAndApplicationStep.application;
         });
-
+        */
         this.router = router;
     }
 }

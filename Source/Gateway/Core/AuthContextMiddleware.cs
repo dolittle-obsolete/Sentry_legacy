@@ -75,7 +75,7 @@ namespace Core
         /// </summary>
         /// <param name="context"><see cref="HttpContext"/> for the request</param>
         public async Task Invoke(HttpContext context)
-        {
+        {           
             var gatewayRequest = GatewayHttpRequest.ParseFromHttpContext(context);
             
             var handler = await _handlerProvider.GetHandlerAsync(context, gatewayRequest.Tenant.Value.ToString());

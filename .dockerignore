@@ -1,6 +1,9 @@
-**/node_modules
-**/bin
-**/obj
-.vscode
+node_modules
 yarn.lock
 package-lock.json
+bin
+obj
+Dockerfile
+wwwroot
+Source/Gateway/Web
+Source/Studio

@@ -6,6 +6,7 @@ process.env.DOLITTLE_WEBPACK_ROOT = path.resolve('.');
 process.env.DOLITTLE_WEBPACK_OUT = path.resolve('./public');
 process.env.DOLITTLE_FEATURES_DIR = path.resolve('./Features');
 process.env.DOLITTLE_COMPONENT_DIR = path.resolve('./Components');
+process.env.DOLITTLE_WEBPACK_BASE_URL = '/sentry/';
 
 const config = require('@dolittle/build.aurelia/webpack.config.js');
 
@@ -17,10 +18,18 @@ module.exports = (env) => {
         })
     );
     obj.devServer = {
-        historyApiFallback: true,
+        //contentBase: obj.output.path,
+        historyApiFallback: {
+            index: `${process.env.DOLITTLE_WEBPACK_BASE_URL}/index.html`
+        },
         port: 8080,
         proxy: {
-            '/api': 'http://localhost:5000'
+            '/.well-known': 'http://localhost:5050',
+            '/connect': 'http://localhost:5050',
+            '/auth': 'http://localhost:5050',
+            '/device': 'http://localhost:5050',
+            '/signin': 'http://localhost:5050',
+            '/signin-oidc': 'http://localhost:5050'
         }
     };
     obj.resolve.alias = {

@@ -4,8 +4,8 @@
   "boundedContextName": "Gateway",
   "resources": {
     "eventStore": {
-      "production": "MongoDB",
-      "development": "MongoDB"
+      "production": "InMemory",
+      "development": "InMemory"
     }
   },
   "core": {

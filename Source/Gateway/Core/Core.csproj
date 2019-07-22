@@ -37,12 +37,13 @@
     
     <PackageReference Include="Dolittle.SDK" Version="3.*" />
 
-    <PackageReference Include="Dolittle.Build.MSBuild" Version="3.*" />
-    <PackageReference Include="Dolittle.SDK.Build" Version="3.*" />   
+    <!--<PackageReference Include="Dolittle.Build.MSBuild" Version="3.*" />
+    <PackageReference Include="Dolittle.SDK.Build" Version="3.*" />   -->
 
     <PackageReference Include="Dolittle.DependencyInversion.Autofac" Version="3.*" />
     
     <PackageReference Include="Dolittle.Runtime.Events.MongoDB" Version="3.*" />   
+    <PackageReference Include="Dolittle.Runtime.Events.InMemory" Version="3.*" />   
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     
     <PackageReference Include="IdentityServer4" Version="2.4.0" />
